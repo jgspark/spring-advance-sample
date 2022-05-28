@@ -17,7 +17,6 @@ spring:
       username: sa
       password:
 
-
 logging:
   level:
     org:

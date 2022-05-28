@@ -20,6 +20,7 @@ public class Comment {
   @Column(nullable = false)
   private EvaluationType type;
 
+  // 특수 문자 불가
   private String comment;
 
   @ManyToOne(fetch = FetchType.LAZY)
