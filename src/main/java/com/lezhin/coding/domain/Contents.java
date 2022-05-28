@@ -1,5 +1,7 @@
 package com.lezhin.coding.domain;
 
+import com.lezhin.coding.constants.ContentsType;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -8,17 +10,22 @@ import javax.persistence.Id;
 @Entity
 public class Contents {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
-    private String name;
+  // 작품명
+  private String name;
 
-    private String author;
+  // 작가
+  private String author;
 
-    private String type;
+  // 작품 타입 (무료/유료)
+  private ContentsType type;
 
-    private String coin;
+  // 금액
+  private String coin;
 
-    private String openDate;
+  // 서비스 제공일
+  private String openDate;
 }
