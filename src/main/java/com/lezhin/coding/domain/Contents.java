@@ -1,6 +1,7 @@
 package com.lezhin.coding.domain;
 
 import com.lezhin.coding.constants.ContentsType;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,6 +9,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
+@Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Contents {
 
   @Id

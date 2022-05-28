@@ -2,10 +2,15 @@ package com.lezhin.coding.domain;
 
 import com.lezhin.coding.constants.AdultType;
 import com.lezhin.coding.constants.GenderType;
+import lombok.*;
 
 import javax.persistence.*;
 
+@Getter
 @Entity
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class User {
 
   @Id

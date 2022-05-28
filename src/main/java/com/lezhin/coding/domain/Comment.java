@@ -2,16 +2,23 @@ package com.lezhin.coding.domain;
 
 import com.lezhin.coding.constants.EvaluationType;
 import com.lezhin.coding.domain.support.CommentKey;
+import lombok.*;
 
 import javax.persistence.*;
 
+@Builder
 @Entity
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@EqualsAndHashCode(of = {"id"})
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"user_id", "contents_id"}))
 public class Comment {
 
   @EmbeddedId private CommentKey id;
 
   @Column(nullable = false)
-  private EvaluationType evaluation;
+  private EvaluationType type;
 
   private String comment;
 
