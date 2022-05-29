@@ -11,7 +11,4 @@ import java.util.List;
 
 @Repository
 public interface CommentRepository extends JpaRepository<Comment, CommentKey> {
-
-  @EntityGraph(attributePaths = {"contents"})
-  List<Comment> findTop3ByType(EvaluationType type);
 }
