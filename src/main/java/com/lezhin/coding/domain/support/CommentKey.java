@@ -1,17 +1,15 @@
 package com.lezhin.coding.domain.support;
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.Embeddable;
 import java.io.Serializable;
 
 @Getter
 @Embeddable
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
+@EqualsAndHashCode(of = {"userId", "contentsId"})
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class CommentKey implements Serializable {
 
   private Long userId;
