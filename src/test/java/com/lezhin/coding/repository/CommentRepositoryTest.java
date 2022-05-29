@@ -1,5 +1,6 @@
 package com.lezhin.coding.repository;
 
+import com.lezhin.coding.config.JPAConfiguration;
 import com.lezhin.coding.domain.Comment;
 import com.lezhin.coding.domain.Contents;
 import com.lezhin.coding.domain.User;
@@ -10,12 +11,14 @@ import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
 @ExtendWith(SpringExtension.class)
+@Import(JPAConfiguration.class)
 class CommentRepositoryTest {
 
   @Autowired private UserRepository userRepository;
