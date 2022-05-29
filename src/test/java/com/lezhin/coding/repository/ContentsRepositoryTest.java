@@ -3,6 +3,7 @@ package com.lezhin.coding.repository;
 import com.lezhin.coding.domain.Contents;
 import com.lezhin.coding.mock.ContentsMock;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -20,5 +21,11 @@ class ContentsRepositoryTest {
   void init() {
     contents = contentsRepository.saveAndFlush(ContentsMock.createdMock());
     contentsRepository.flush();
+  }
+
+  @Test
+  void findByCommentSet_Type() {
+
+
   }
 }
