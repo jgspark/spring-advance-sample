@@ -3,10 +3,9 @@ package com.lezhin.coding.domain;
 import com.lezhin.coding.constants.ContentsType;
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -33,4 +32,8 @@ public class Contents {
 
   // 서비스 제공일
   private String openDate;
+
+  @OneToMany(cascade = {CascadeType.REMOVE})
+  @Builder.Default
+  Set<Comment> commentSet = new HashSet<>();
 }
