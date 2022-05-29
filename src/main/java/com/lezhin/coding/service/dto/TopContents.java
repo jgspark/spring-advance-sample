@@ -2,17 +2,19 @@ package com.lezhin.coding.service.dto;
 
 import com.lezhin.coding.constants.ContentsType;
 
-public interface TopContents {
+public class TopContents {
 
-  Long getId();
+  private Long id;
 
-  String getName();
+  private Long name;
 
-  String getAuthor();
+  private String author;
 
-  ContentsType getType();
+  private ContentsType type;
 
-  String getCoin();
+  private String coin;
 
-  String getOpenDate();
+  private String openDate;
+
+  private Integer count;
 }
