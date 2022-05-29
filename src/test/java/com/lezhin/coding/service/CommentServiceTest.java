@@ -12,6 +12,7 @@ import com.lezhin.coding.repository.UserRepository;
 import com.lezhin.coding.service.dto.CommentStoreDTO;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.BDDMockito;
@@ -45,7 +46,8 @@ class CommentServiceTest {
   }
 
   @Test
-  void createdComment() {
+  @DisplayName("댓글 저장 테스트 케이스")
+  void createdComment_success() {
 
     Optional<User> userOptional = Optional.of(UserMock.createdMock());
 
