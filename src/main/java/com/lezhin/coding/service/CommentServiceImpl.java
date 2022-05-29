@@ -1,5 +1,7 @@
 package com.lezhin.coding.service;
 
+import com.lezhin.coding.config.exption.NoDataException;
+import com.lezhin.coding.constants.MsgType;
 import com.lezhin.coding.domain.Comment;
 import com.lezhin.coding.domain.Contents;
 import com.lezhin.coding.domain.User;
@@ -25,9 +27,15 @@ public class CommentServiceImpl implements CommentService {
   @Transactional
   public Comment createdComment(CommentStoreDTO dto) {
 
-    final User user = userRepository.findById(dto.getUserId()).orElseThrow();
+    final User user =
+        userRepository
+            .findById(dto.getUserId())
+            .orElseThrow(() -> new NoDataException(MsgType.NoUserData));
 
-    final Contents contents = contentsRepository.findById(dto.getContentsId()).orElseThrow();
+    final Contents contents =
+        contentsRepository
+            .findById(dto.getContentsId())
+            .orElseThrow(() -> new NoDataException(MsgType.NoContentsData));
 
     return commentRepository.save(dto.toEntity(user, contents));
   }
