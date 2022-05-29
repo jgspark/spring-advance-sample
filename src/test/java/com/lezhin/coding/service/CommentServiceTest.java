@@ -1,5 +1,6 @@
 package com.lezhin.coding.service;
 
+import com.lezhin.coding.config.exption.NoDataException;
 import com.lezhin.coding.domain.Comment;
 import com.lezhin.coding.domain.Contents;
 import com.lezhin.coding.domain.User;
@@ -78,5 +79,49 @@ class CommentServiceTest {
     org.junit.jupiter.api.Assertions.assertEquals(
         entity.getId().getContentsId(), mock.getId().getContentsId());
     org.junit.jupiter.api.Assertions.assertEquals(entity.getComment(), mock.getComment());
+  }
+
+  @Test
+  @DisplayName("no user data exception 테스트 케이스")
+  void createdComment_NoUserData() {
+
+    Optional<User> userOptional = Optional.ofNullable(null);
+
+    Optional<Contents> contentsOptional = Optional.of(ContentsMock.createdMock());
+
+    Comment mock = CommentMock.createdMock(User.builder().build(), contentsOptional.get());
+
+    BDDMockito.given(userRepository.findById(any())).willReturn(userOptional);
+
+    BDDMockito.given(contentsRepository.findById(any())).willReturn(contentsOptional);
+
+    BDDMockito.given(commentRepository.save(any())).willReturn(mock);
+
+    CommentStoreDTO dto = CommentMock.createdStoreDTO();
+
+    org.junit.jupiter.api.Assertions.assertThrows(
+        NoDataException.class, () -> commentService.createdComment(dto));
+  }
+
+  @Test
+  @DisplayName("no contents data exception 테스트 케이스")
+  void createdComment_NoContentsData() {
+
+    Optional<User> userOptional = Optional.of(UserMock.createdMock());
+
+    Optional<Contents> contentsOptional = Optional.ofNullable(null);
+
+    Comment mock = CommentMock.createdMock(User.builder().build(), Contents.builder().build());
+
+    BDDMockito.given(userRepository.findById(any())).willReturn(userOptional);
+
+    BDDMockito.given(contentsRepository.findById(any())).willReturn(contentsOptional);
+
+    BDDMockito.given(commentRepository.save(any())).willReturn(mock);
+
+    CommentStoreDTO dto = CommentMock.createdStoreDTO();
+
+    org.junit.jupiter.api.Assertions.assertThrows(
+        NoDataException.class, () -> commentService.createdComment(dto));
   }
 }
