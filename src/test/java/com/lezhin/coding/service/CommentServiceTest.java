@@ -11,7 +11,6 @@ import com.lezhin.coding.repository.CommentRepository;
 import com.lezhin.coding.repository.ContentsRepository;
 import com.lezhin.coding.repository.UserRepository;
 import com.lezhin.coding.service.dto.CommentStoreDTO;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -24,7 +23,6 @@ import org.mockito.quality.Strictness;
 
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 
 @ExtendWith(MockitoExtension.class)
