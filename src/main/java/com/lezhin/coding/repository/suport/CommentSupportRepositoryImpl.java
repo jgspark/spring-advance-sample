@@ -46,6 +46,7 @@ public class CommentSupportRepositoryImpl extends QuerydslRepositorySupport
             contents.type,
             contents.coin,
             contents.openDate)
+        .limit(limit)
         .fetch();
   }
 }
