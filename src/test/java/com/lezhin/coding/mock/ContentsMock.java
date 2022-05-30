@@ -18,8 +18,6 @@ public class ContentsMock {
 
   private static String DEFAULT_COIN = null;
 
-  private static String DEFAULT_OPENDATE = "2021/01/11";
-
   public static Contents createdMock() {
     return Contents.builder()
         .id(DEFAULT_ID)
@@ -27,7 +25,7 @@ public class ContentsMock {
         .author(DEFAULT_AUTHOR)
         .type(DEFAULT_TYPE)
         .coin(DEFAULT_COIN)
-        .openDate(DEFAULT_OPENDATE)
+        .openDate(DateMock.getMockDate())
         .build();
   }
 

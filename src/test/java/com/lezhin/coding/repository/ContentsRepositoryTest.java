@@ -8,6 +8,7 @@ import com.lezhin.coding.domain.Contents;
 import com.lezhin.coding.domain.User;
 import com.lezhin.coding.mock.CommentMock;
 import com.lezhin.coding.mock.ContentsMock;
+import com.lezhin.coding.mock.DateMock;
 import com.lezhin.coding.mock.UserMock;
 import com.lezhin.coding.service.dto.TopContents;
 import org.junit.jupiter.api.*;
@@ -82,7 +83,9 @@ class ContentsRepositoryTest {
       Assertions.assertEquals(entity.getAuthor(), mock.getAuthor());
       Assertions.assertEquals(entity.getType(), mock.getType());
       Assertions.assertEquals(entity.getCoin(), mock.getCoin());
-      Assertions.assertEquals(entity.getOpenDate(), mock.getOpenDate());
+      Assertions.assertEquals(
+          DateMock.changedFormatDate(entity.getOpenDate()),
+          DateMock.changedFormatDate(mock.getOpenDate()));
       Assertions.assertEquals(entity.getSum(), 1);
     }
 
@@ -101,7 +104,9 @@ class ContentsRepositoryTest {
       Assertions.assertEquals(entity.getAuthor(), mock.getAuthor());
       Assertions.assertEquals(entity.getType(), mock.getType());
       Assertions.assertEquals(entity.getCoin(), mock.getCoin());
-      Assertions.assertEquals(entity.getOpenDate(), mock.getOpenDate());
+      Assertions.assertEquals(
+          DateMock.changedFormatDate(entity.getOpenDate()),
+          DateMock.changedFormatDate(mock.getOpenDate()));
       Assertions.assertEquals(entity.getSum(), 0);
     }
   }

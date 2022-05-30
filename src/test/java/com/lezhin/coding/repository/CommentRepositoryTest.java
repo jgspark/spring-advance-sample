@@ -42,6 +42,8 @@ class CommentRepositoryTest {
 
     Comment entity = commentRepository.save(mock);
 
+    commentRepository.flush();
+
     org.assertj.core.api.Assertions.assertThat(entity).isEqualTo(mock);
 
     Assertions.assertEquals(entity.getId().getUserId(), mock.getUser().getId());
@@ -61,7 +63,8 @@ class CommentRepositoryTest {
 
     Comment mock2 = CommentMock.createdMock(user, contents);
 
-    commentRepository.saveAndFlush(mock2);
-  }
+    commentRepository.save(mock2);
 
+    commentRepository.flush();
+  }
 }

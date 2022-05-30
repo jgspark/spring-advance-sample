@@ -7,6 +7,7 @@ import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.Objects;
 
 @Entity
@@ -36,7 +37,7 @@ public class Contents {
   private String coin;
 
   // 서비스 제공일
-  private String openDate;
+  private Date openDate;
 
   @PrePersist
   void prePersist() {

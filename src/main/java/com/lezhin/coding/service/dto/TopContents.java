@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Date;
+
 @Setter
 @Getter
 @AllArgsConstructor
@@ -22,7 +24,7 @@ public class TopContents {
 
   private String coin;
 
-  private String openDate;
+  private Date openDate;
 
   private Integer sum;
 }

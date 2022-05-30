@@ -3,14 +3,18 @@ package com.lezhin.coding.domain;
 import com.lezhin.coding.constants.AdultType;
 import com.lezhin.coding.constants.GenderType;
 import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Getter
 @Entity
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@EntityListeners(AuditingEntityListener.class)
 public class User {
 
   @Id
@@ -30,5 +34,5 @@ public class User {
   private AdultType type;
 
   // 서비스 등록일
-  private String registerDate;
+  @CreatedDate private Date registerDate;
 }
