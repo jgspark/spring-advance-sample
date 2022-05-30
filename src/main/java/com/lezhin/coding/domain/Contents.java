@@ -1,12 +1,12 @@
 package com.lezhin.coding.domain;
 
+import com.lezhin.coding.config.exption.DomainException;
 import com.lezhin.coding.constants.ContentsType;
+import com.lezhin.coding.constants.MsgType;
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Getter
@@ -29,9 +29,43 @@ public class Contents {
   private ContentsType type;
 
   // 금액
+  @Column(nullable = false)
   private String coin;
 
   // 서비스 제공일
   private String openDate;
 
+  @PrePersist
+  void prePersist() {
+    checkedTypeAndCoin();
+  }
+
+  @PreUpdate
+  void preUpdate() {
+    checkedTypeAndCoin();
+  }
+
+  @Transient
+  public void changedFreeType() {
+    this.type = ContentsType.FREE;
+  }
+
+  @Transient
+  public void changedPagar() {
+    this.type = ContentsType.PAGAR;
+  }
+
+  @Transient
+  public void checkedTypeAndCoin() {
+    if (ContentsType.FREE.equals(this.type)) {
+      this.coin = "0";
+    } else if (ContentsType.PAGAR.equals(this.type) && !Objects.isNull(this.coin)) {
+
+      int coinNum = Integer.parseInt(this.coin);
+
+      if (100 > coinNum || 500 < coinNum) {
+        throw new DomainException(MsgType.CoinDataException);
+      }
+    }
+  }
 }
