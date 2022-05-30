@@ -2,6 +2,9 @@ package com.lezhin.coding.mock;
 
 import com.lezhin.coding.constants.ContentsType;
 import com.lezhin.coding.domain.Contents;
+import com.lezhin.coding.service.dto.TopContents;
+
+import java.util.List;
 
 public class ContentsMock {
 
@@ -26,5 +29,21 @@ public class ContentsMock {
         .coin(DEFAULT_COIN)
         .openDate(DEFAULT_OPENDATE)
         .build();
+  }
+
+  public static TopContents createdTopContents() {
+    Contents mock = createdMock();
+    return new TopContents(
+        mock.getId(),
+        mock.getName(),
+        mock.getAuthor(),
+        mock.getType(),
+        mock.getCoin(),
+        mock.getOpenDate(),
+        1);
+  }
+
+  public static List<TopContents> createdTopContentsList() {
+    return List.of(createdTopContents());
   }
 }
