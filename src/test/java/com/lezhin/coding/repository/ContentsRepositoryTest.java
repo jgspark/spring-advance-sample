@@ -27,13 +27,8 @@ class ContentsRepositoryTest {
   @Autowired private ContentsRepository contentsRepository;
   @Autowired private CommentRepository commentRepository;
 
-  private Contents contents;
-
   @BeforeEach
-  void init() {
-    contents = contentsRepository.saveAndFlush(ContentsMock.createdMock());
-    contentsRepository.flush();
-  }
+  void init() {}
 
   @Nested
   class Select {
@@ -48,7 +43,7 @@ class ContentsRepositoryTest {
     void init() {
       user = userRepository.saveAndFlush(UserMock.createdMock());
       mock = contentsRepository.saveAndFlush(ContentsMock.createdMock());
-      comment = commentRepository.save(CommentMock.createdMock(user, contents));
+      comment = commentRepository.save(CommentMock.createdMock(user, mock));
       commentRepository.flush();
     }
 

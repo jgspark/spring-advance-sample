@@ -1,7 +1,6 @@
 package com.lezhin.coding.service;
 
 import com.lezhin.coding.constants.EvaluationType;
-import com.lezhin.coding.domain.Contents;
 import com.lezhin.coding.mock.ContentsMock;
 import com.lezhin.coding.repository.ContentsRepository;
 import com.lezhin.coding.service.dto.TopContents;
@@ -18,7 +17,6 @@ import org.mockito.quality.Strictness;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 
 @ExtendWith(MockitoExtension.class)
