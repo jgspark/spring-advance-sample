@@ -1,9 +1,12 @@
 package com.lezhin.coding.service;
 
+import com.lezhin.coding.constants.ContentsType;
 import com.lezhin.coding.constants.EvaluationType;
+import com.lezhin.coding.domain.Contents;
 import com.lezhin.coding.mock.ContentsMock;
 import com.lezhin.coding.repository.ContentsRepository;
 import com.lezhin.coding.service.dto.TopContents;
+import com.lezhin.coding.service.dto.UpdatedContentsStoreDTO;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -16,6 +19,7 @@ import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
 
@@ -57,5 +61,31 @@ class ContentsServiceTest {
     Assertions.assertEquals(entity.getCoin(), mock.getCoin());
     Assertions.assertEquals(entity.getOpenDate(), mock.getOpenDate());
     Assertions.assertEquals(entity.getSum(), mock.getSum());
+  }
+
+  @Test
+  @DisplayName("컨텐츠 타입 테스트 케이스")
+  void updatedTypeAndCoin() {
+
+    Optional<Contents> mockOptional = Optional.of(ContentsMock.createdMock());
+
+    final Long id = 1L;
+
+    final UpdatedContentsStoreDTO dto = new UpdatedContentsStoreDTO(ContentsType.PAGAR, 100);
+
+    BDDMockito.given(contentsRepository.findById(any())).willReturn(mockOptional);
+
+    Optional<Contents> entityOptional = contentsService.updatedTypeAndCoin(id, dto);
+
+    Contents entity = entityOptional.get();
+
+    Contents mock = mockOptional.get();
+
+    Assertions.assertEquals(entity.getId(), mock.getId());
+    Assertions.assertEquals(entity.getName(), mock.getName());
+    Assertions.assertEquals(entity.getAuthor(), mock.getAuthor());
+    Assertions.assertEquals(entity.getType(), dto.getType());
+    Assertions.assertEquals(entity.getCoin(), dto.getCoin().toString());
+    Assertions.assertEquals(entity.getOpenDate(), mock.getOpenDate());
   }
 }
