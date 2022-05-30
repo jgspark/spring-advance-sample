@@ -4,6 +4,7 @@ import com.lezhin.coding.config.exption.DomainException;
 import com.lezhin.coding.constants.ContentsType;
 import com.lezhin.coding.constants.MsgType;
 import lombok.*;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -11,7 +12,9 @@ import java.util.Objects;
 @Entity
 @Getter
 @Builder
+@DynamicUpdate
 @AllArgsConstructor
+@EqualsAndHashCode(of = {"id"})
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Contents {
 
