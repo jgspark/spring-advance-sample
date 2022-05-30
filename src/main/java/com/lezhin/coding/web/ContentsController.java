@@ -53,4 +53,11 @@ public class ContentsController {
     }
     return ResponseEntity.ok(data);
   }
+
+  @GetMapping("contents/{id}")
+  public ResponseEntity<ContentsInfo> getContentsOne(@PathVariable Long id) {
+    Optional<ContentsInfo> data = contentsService.getContentsOne(id);
+    if (data.isEmpty()) return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    return ResponseEntity.ok(data.get());
+  }
 }

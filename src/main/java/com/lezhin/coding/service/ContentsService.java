@@ -18,4 +18,6 @@ public interface ContentsService {
   Optional<Contents> updatedTypeAndCoin(Long id, UpdatedContentsStoreDTO dto);
 
   Page<ContentsInfo> getContents(SelectContentsStoreDTO dto);
+
+  Optional<ContentsInfo> getContentsOne(Long id);
 }

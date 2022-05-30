@@ -62,4 +62,10 @@ public class ContentsServiceImpl implements ContentsService {
     }
     return contentsRepository.findByType(pageRequest, dto.getType(), ContentsInfo.class);
   }
+
+  @Override
+  @Transactional(readOnly = true)
+  public Optional<ContentsInfo> getContentsOne(Long id) {
+    return contentsRepository.findById(id, ContentsInfo.class);
+  }
 }
