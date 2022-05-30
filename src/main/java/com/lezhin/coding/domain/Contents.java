@@ -56,6 +56,11 @@ public class Contents {
   }
 
   @Transient
+  public void setCoin(String coin) {
+    this.coin = coin;
+  }
+
+  @Transient
   public void checkedTypeAndCoin() {
     if (ContentsType.FREE.equals(this.type)) {
       this.coin = "0";
