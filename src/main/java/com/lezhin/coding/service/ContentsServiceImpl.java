@@ -4,13 +4,18 @@ import com.lezhin.coding.constants.ContentsType;
 import com.lezhin.coding.constants.EvaluationType;
 import com.lezhin.coding.domain.Contents;
 import com.lezhin.coding.repository.ContentsRepository;
+import com.lezhin.coding.service.dto.ContentsInfo;
+import com.lezhin.coding.service.dto.SelectContentsStoreDTO;
 import com.lezhin.coding.service.dto.TopContents;
 import com.lezhin.coding.service.dto.UpdatedContentsStoreDTO;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -44,5 +49,17 @@ public class ContentsServiceImpl implements ContentsService {
     }
 
     return updatedEntity;
+  }
+
+  @Override
+  @Transactional(readOnly = true)
+  public Page<ContentsInfo> getContents(SelectContentsStoreDTO dto) {
+
+    PageRequest pageRequest = dto.getPageRequest();
+
+    if (Objects.isNull(dto.getType())) {
+      return contentsRepository.findAllProjectedBy(pageRequest, ContentsInfo.class);
+    }
+    return contentsRepository.findByType(pageRequest, dto.getType(), ContentsInfo.class);
   }
 }

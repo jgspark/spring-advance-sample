@@ -6,6 +6,5 @@ import com.lezhin.coding.service.dto.TopContents;
 import java.util.List;
 
 public interface ContentsSupport {
-
-    List<TopContents> findTopByLimitAndType(Integer limit, EvaluationType type);
+  List<TopContents> findTopByLimitAndType(Integer limit, EvaluationType type);
 }

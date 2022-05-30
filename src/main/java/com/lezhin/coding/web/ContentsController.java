@@ -3,9 +3,12 @@ package com.lezhin.coding.web;
 import com.lezhin.coding.constants.EvaluationType;
 import com.lezhin.coding.domain.Contents;
 import com.lezhin.coding.service.ContentsService;
+import com.lezhin.coding.service.dto.ContentsInfo;
+import com.lezhin.coding.service.dto.SelectContentsStoreDTO;
 import com.lezhin.coding.service.dto.TopContents;
 import com.lezhin.coding.service.dto.UpdatedContentsStoreDTO;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -40,5 +43,14 @@ public class ContentsController {
     }
 
     return ResponseEntity.ok().body(data.get());
+  }
+
+  @GetMapping("contents")
+  public ResponseEntity<Page<ContentsInfo>> getContents(SelectContentsStoreDTO dto) {
+    Page<ContentsInfo> data = contentsService.getContents(dto);
+    if (data.isEmpty()) {
+      return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
+    return ResponseEntity.ok(data);
   }
 }
