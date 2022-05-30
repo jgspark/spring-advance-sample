@@ -18,7 +18,6 @@ public class CommentStoreDTO {
   private Long userId;
 
   private Long contentsId;
-
   private EvaluationType type;
   private String comment;
 
