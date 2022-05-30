@@ -14,8 +14,6 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @DataJpaTest
 @ExtendWith(SpringExtension.class)
 @Import(JPAConfiguration.class)
@@ -65,4 +63,5 @@ class CommentRepositoryTest {
 
     commentRepository.saveAndFlush(mock2);
   }
+
 }
