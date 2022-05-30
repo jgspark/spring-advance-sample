@@ -1,12 +1,20 @@
 package com.lezhin.coding.service.dto;
 
 import com.lezhin.coding.constants.ContentsType;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Setter
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
 public class TopContents {
 
   private Long id;
 
-  private Long name;
+  private String name;
 
   private String author;
 
@@ -16,5 +24,5 @@ public class TopContents {
 
   private String openDate;
 
-  private Integer count;
+  private Integer sum;
 }
