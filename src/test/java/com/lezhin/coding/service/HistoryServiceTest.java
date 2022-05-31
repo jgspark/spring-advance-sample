@@ -6,6 +6,7 @@ import com.lezhin.coding.mock.HistoryMock;
 import com.lezhin.coding.mock.UserMock;
 import com.lezhin.coding.repository.HistoryRepository;
 import com.lezhin.coding.service.dto.HistoryInfo;
+import com.lezhin.coding.service.dto.HistoryUser;
 import com.lezhin.coding.service.dto.PageDTO;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -22,8 +23,7 @@ import org.springframework.data.domain.Page;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.ArgumentMatchers.*;
 
 @ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.LENIENT)
@@ -68,5 +68,43 @@ class HistoryServiceTest {
     Assertions.assertEquals(entity.getUserName(), mock.getUserName());
     Assertions.assertEquals(entity.getContentsName(), mock.getContentsName());
     Assertions.assertEquals(entity.getContentsType(), mock.getContentsType());
+  }
+
+  @Test
+  @DisplayName("최근 1주일 등록된 사용자 중 성인 조회 api 테스트 케이스")
+  void getHistoriesByAdultUser() {
+
+    Page<HistoryUser> mocks =
+        HistoryMock.createPageHistoryUser(UserMock.createdMock(), ContentsMock.createdMock());
+
+    BDDMockito.given(
+            historyRepository.findByCreatedDateBetweenAndContents_AdultType(
+                any(), any(), any(), any(), anyLong()))
+        .willReturn(mocks);
+
+    PageDTO dto = new PageDTO(0, 10);
+
+    Page<HistoryUser> entities = historyService.getHistoriesByAdultUser(dto);
+
+    BDDMockito.then(historyRepository)
+        .should()
+        .findByCreatedDateBetweenAndContents_AdultType(any(), any(), any(), any(), anyLong());
+
+    List<HistoryUser> mockContent = mocks.getContent();
+
+    List<HistoryUser> entitiesContent = entities.getContent();
+
+    Assertions.assertEquals(entitiesContent.size(), mockContent.size());
+
+    HistoryUser entity = entitiesContent.get(0);
+
+    HistoryUser mock = mockContent.get(0);
+
+    Assertions.assertEquals(entity.getId(), mock.getId());
+    Assertions.assertEquals(entity.getUserName(), mock.getUserName());
+    Assertions.assertEquals(entity.getUserEmail(), mock.getUserEmail());
+    Assertions.assertEquals(entity.getGender(), mock.getGender());
+    Assertions.assertEquals(entity.getType(), mock.getType());
+    Assertions.assertEquals(entity.getRegisterDate(), mock.getRegisterDate());
   }
 }

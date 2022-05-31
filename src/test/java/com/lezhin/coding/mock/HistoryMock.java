@@ -1,15 +1,14 @@
 package com.lezhin.coding.mock;
 
-import com.lezhin.coding.constants.ContentsType;
 import com.lezhin.coding.domain.Contents;
 import com.lezhin.coding.domain.History;
 import com.lezhin.coding.domain.User;
 import com.lezhin.coding.service.dto.HistoryInfo;
+import com.lezhin.coding.service.dto.HistoryUser;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 
-import java.util.Date;
 import java.util.List;
 
 public class HistoryMock {
@@ -29,37 +28,10 @@ public class HistoryMock {
     return new PageImpl<>(list, pageable, 1);
   }
 
-  static class HistoryInfoTemp implements HistoryInfo {
+  public static Page<HistoryUser> createPageHistoryUser(User user, Contents contents) {
 
-    private final History history;
-
-    HistoryInfoTemp(History history) {
-      this.history = history;
-    }
-
-    @Override
-    public Long getId() {
-      return history.getId();
-    }
-
-    @Override
-    public String getUserName() {
-      return history.getUser().getUserName();
-    }
-
-    @Override
-    public String getContentsName() {
-      return history.getContents().getName();
-    }
-
-    @Override
-    public ContentsType getContentsType() {
-      return history.getContents().getType();
-    }
-
-    @Override
-    public Date getCreatedDate() {
-      return history.getCreatedDate();
-    }
+    List<HistoryUser> list = List.of(new HistoryUserTemp(createdMock(user, contents).getUser()));
+    PageRequest pageable = PageRequest.of(0, 10);
+    return new PageImpl<>(list, pageable, list.size());
   }
 }
