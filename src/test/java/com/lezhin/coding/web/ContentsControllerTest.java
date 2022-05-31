@@ -1,12 +1,9 @@
 package com.lezhin.coding.web;
 
-import com.lezhin.coding.domain.Comment;
-import com.lezhin.coding.mock.CommentMock;
+import com.lezhin.coding.constants.EvaluationType;
 import com.lezhin.coding.mock.ContentsMock;
-import com.lezhin.coding.mock.UserMock;
-import com.lezhin.coding.service.CommentService;
-import com.lezhin.coding.service.dto.CommentStoreDTO;
-import com.lezhin.coding.utils.JsonUtil;
+import com.lezhin.coding.service.ContentsService;
+import com.lezhin.coding.service.dto.TopContents;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -22,53 +19,56 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.filter.CharacterEncodingFilter;
 
+import java.util.List;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(SpringExtension.class)
-@WebMvcTest(CommentController.class)
-class CommentControllerTest {
+@WebMvcTest(ContentsController.class)
+class ContentsControllerTest {
 
   private MockMvc mockMvc;
 
-  @MockBean private CommentService commentService;
+  @MockBean private ContentsService contentsService;
 
   @BeforeEach
   void init() {
-    mockMvc =
-        MockMvcBuilders.standaloneSetup(new CommentController(commentService))
+    this.mockMvc =
+        MockMvcBuilders.standaloneSetup(new ContentsController(contentsService))
             .addFilter(new CharacterEncodingFilter("UTF-8", true))
             .build();
   }
 
   @Test
-  @DisplayName("특정 사용자가 해댱 작품에 대한 평가를 할 수 있는 API 테스트 케이스")
-  void writeComment() throws Exception {
+  @DisplayName("좋아요가 가장 많은 작품 3개 API")
+  void getTopContents() throws Exception {
 
-    Comment mock = CommentMock.createdMock(UserMock.createdMock(), ContentsMock.createdMock());
+    List<TopContents> mocks = ContentsMock.createdTopContentsList();
 
-    BDDMockito.given(commentService.createdComment(any())).willReturn(mock);
-
-    CommentStoreDTO dto = CommentMock.createdStoreDTO();
+    BDDMockito.given(contentsService.getTopContents(any())).willReturn(mocks);
 
     ResultActions action =
         mockMvc
             .perform(
-                MockMvcRequestBuilders.post("/comment")
-                    .content(JsonUtil.convertObjectToJson(dto))
+                MockMvcRequestBuilders.get("/top-contents")
+                    .param("type", EvaluationType.GOOD.name())
                     .contentType(MediaType.APPLICATION_JSON)
                     .characterEncoding("UTF-8"))
             .andDo(print());
 
-    BDDMockito.then(commentService).should().createdComment(any());
+    BDDMockito.then(contentsService).should().getTopContents(any());
 
     action
-        .andExpect(status().isCreated())
-        .andExpect(jsonPath("$['id']['userId']").value(mock.getId().getUserId()))
-        .andExpect(jsonPath("$['id']['contentsId']").value(mock.getId().getContentsId()))
-        .andExpect(jsonPath("$['type']").value(mock.getType().name()))
-        .andExpect(jsonPath("$['comment']").value(mock.getComment()));
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$[0]['id']").value(mocks.get(0).getId()))
+        .andExpect(jsonPath("$[0]['name']").value(mocks.get(0).getName()))
+        .andExpect(jsonPath("$[0]['author']").value(mocks.get(0).getAuthor()))
+        .andExpect(jsonPath("$[0]['type']").value(mocks.get(0).getType().name()))
+        .andExpect(jsonPath("$[0]['coin']").value(mocks.get(0).getCoin()))
+        .andExpect(jsonPath("$[0]['openDate']").value(mocks.get(0).getOpenDate()))
+        .andExpect(jsonPath("$[0]['sum']").value(mocks.get(0).getSum()));
   }
 }
