@@ -2,14 +2,9 @@ package com.lezhin.coding.repository.suport;
 
 import com.lezhin.coding.constants.AdultType;
 import com.lezhin.coding.domain.History;
-import com.lezhin.coding.domain.QContents;
-import com.lezhin.coding.domain.QHistory;
-import com.lezhin.coding.domain.QUser;
 import com.lezhin.coding.service.dto.HistoryUser;
 import com.querydsl.core.QueryResults;
 import com.querydsl.core.types.Projections;
-import com.querydsl.core.types.dsl.CaseBuilder;
-import com.querydsl.core.types.dsl.NumberExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
