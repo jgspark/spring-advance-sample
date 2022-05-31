@@ -1,10 +1,14 @@
 package com.lezhin.coding.domain;
 
+import com.lezhin.coding.config.exption.DomainException;
 import com.lezhin.coding.constants.EvaluationType;
+import com.lezhin.coding.constants.MsgType;
 import com.lezhin.coding.domain.support.CommentKey;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Objects;
+import java.util.regex.Pattern;
 
 @Builder
 @Entity
@@ -32,4 +36,34 @@ public class Comment {
   @MapsId("contentsId")
   @JoinColumn(name = "contents_id", insertable = false, updatable = false)
   private Contents contents;
+
+  @PrePersist
+  void prePersist() {
+    checkedComment();
+  }
+
+  @PreUpdate
+  void preUpdate() {
+    checkedComment();
+  }
+
+  @Transient
+  public void checkedComment() {
+    if (isIncludeSymbol(this.comment)) {
+      throw new DomainException(MsgType.CommentDataException);
+    }
+  }
+
+  private boolean isIncludeSymbol(String comment) {
+
+    if (Objects.isNull(comment) || comment.isBlank()) {
+      return true;
+    }
+
+    Pattern pattern2 = Pattern.compile("[!@#$%^&*(),.?\":{}|<>]");
+
+    boolean isPattern = pattern2.matcher(comment).find();
+
+    return isPattern;
+  }
 }
