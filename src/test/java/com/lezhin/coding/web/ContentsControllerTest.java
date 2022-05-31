@@ -150,4 +150,33 @@ class ContentsControllerTest {
             jsonPath("$['content'][0]['author']").value(mocks.getContent().get(0).getAuthor()))
         .andExpect(jsonPath("$['content'][0]['coin']").value(mocks.getContent().get(0).getCoin()));
   }
+
+  @Test
+  @DisplayName("컨텐츠 하나만 조회 API")
+  void getContentsOne() throws Exception {
+
+    Optional<ContentsInfo> mockOptional = Optional.of(ContentsMock.getContentsInfo());
+
+    BDDMockito.given(contentsService.getContentsOne(any())).willReturn(mockOptional);
+
+    ResultActions action =
+        mockMvc
+            .perform(
+                MockMvcRequestBuilders.get("/contents/" + 1)
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .characterEncoding("UTF-8"))
+            .andDo(print());
+
+    BDDMockito.then(contentsService).should().getContentsOne(any());
+
+    ContentsInfo mock = mockOptional.get();
+
+    action
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$['id']").value(mock.getId()))
+        .andExpect(jsonPath("$['name']").value(mock.getName()))
+        .andExpect(jsonPath("$['author']").value(mock.getAuthor()))
+        .andExpect(jsonPath("$['type']").value(mock.getType().name()))
+        .andExpect(jsonPath("$['openDate']").value(mock.getOpenDate()));
+  }
 }
