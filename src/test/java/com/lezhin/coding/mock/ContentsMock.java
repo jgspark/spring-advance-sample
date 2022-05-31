@@ -49,8 +49,12 @@ public class ContentsMock {
     return List.of(createdTopContents());
   }
 
+  public static ContentsInfo getContentsInfo() {
+    return new ContentsInfoTemp(createdMock());
+  }
+
   public static Page<ContentsInfo> getPageContentsInfo() {
-    List<ContentsInfo> list = List.of(new ContentsInfoTemp(createdMock()));
+    List<ContentsInfo> list = List.of(getContentsInfo());
     return new PageImpl<>(list, DtoMock.getSelectContentsStoreDTO().getPageRequest(), list.size());
   }
 

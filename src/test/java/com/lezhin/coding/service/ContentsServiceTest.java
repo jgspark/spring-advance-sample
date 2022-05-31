@@ -4,7 +4,11 @@ import com.lezhin.coding.constants.ContentsType;
 import com.lezhin.coding.constants.EvaluationType;
 import com.lezhin.coding.domain.Contents;
 import com.lezhin.coding.mock.ContentsMock;
+import com.lezhin.coding.mock.DateMock;
+import com.lezhin.coding.mock.DtoMock;
 import com.lezhin.coding.repository.ContentsRepository;
+import com.lezhin.coding.service.dto.ContentsInfo;
+import com.lezhin.coding.service.dto.SelectContentsStoreDTO;
 import com.lezhin.coding.service.dto.TopContents;
 import com.lezhin.coding.service.dto.UpdatedContentsStoreDTO;
 import org.junit.jupiter.api.Assertions;
@@ -17,11 +21,13 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 
 @ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.LENIENT)
@@ -87,5 +93,67 @@ class ContentsServiceTest {
     Assertions.assertEquals(entity.getType(), dto.getType());
     Assertions.assertEquals(entity.getCoin(), dto.getCoin().toString());
     Assertions.assertEquals(entity.getOpenDate(), mock.getOpenDate());
+  }
+
+  @Test
+  @DisplayName("컨텐츠 목록 조회 테스트 케이스")
+  void getContents() {
+
+    SelectContentsStoreDTO dto = DtoMock.getSelectContentsStoreDTO();
+
+    Page<ContentsInfo> mocks = ContentsMock.getPageContentsInfo();
+
+    BDDMockito.given(contentsRepository.findByType(any(), any(), eq(ContentsInfo.class)))
+        .willReturn(mocks);
+
+    Page<ContentsInfo> entities = contentsService.getContents(dto);
+
+    BDDMockito.then(contentsRepository).should().findByType(any(), any(), eq(ContentsInfo.class));
+
+    List<ContentsInfo> mockContent = mocks.getContent();
+
+    List<ContentsInfo> entitiesContent = entities.getContent();
+
+    Assertions.assertEquals(entitiesContent.size(), mockContent.size());
+
+    ContentsInfo entity = entitiesContent.get(0);
+
+    ContentsInfo mock = mockContent.get(0);
+
+    Assertions.assertEquals(entity.getName(), mock.getName());
+    Assertions.assertEquals(entity.getAuthor(), mock.getAuthor());
+    Assertions.assertEquals(entity.getType(), mock.getType());
+    Assertions.assertEquals(entity.getCoin(), mock.getCoin());
+    Assertions.assertEquals(
+        DateMock.changedFormatDate(entity.getOpenDate()),
+        DateMock.changedFormatDate(mock.getOpenDate()));
+  }
+
+  @Test
+  @DisplayName("하나만 조회 테스트 케이스")
+  void getContentsOne() {
+
+    Optional<ContentsInfo> mockOptional = Optional.of(ContentsMock.getContentsInfo());
+
+    BDDMockito.given(contentsRepository.findById(any(), eq(ContentsInfo.class)))
+        .willReturn(mockOptional);
+
+    Optional<ContentsInfo> entityOptional = contentsService.getContentsOne(1L);
+
+    BDDMockito.then(contentsRepository).should().findById(any(), eq(ContentsInfo.class));
+
+    Assertions.assertEquals(entityOptional.isPresent(), mockOptional.isPresent());
+
+    ContentsInfo entity = entityOptional.get();
+
+    ContentsInfo mock = mockOptional.get();
+
+    Assertions.assertEquals(entity.getName(), mock.getName());
+    Assertions.assertEquals(entity.getAuthor(), mock.getAuthor());
+    Assertions.assertEquals(entity.getType(), mock.getType());
+    Assertions.assertEquals(entity.getCoin(), mock.getCoin());
+    Assertions.assertEquals(
+        DateMock.changedFormatDate(entity.getOpenDate()),
+        DateMock.changedFormatDate(mock.getOpenDate()));
   }
 }
