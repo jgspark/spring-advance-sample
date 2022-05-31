@@ -10,4 +10,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface HistoryRepository extends JpaRepository<History, Long>, HistorySupport {
   <T> Page<T> findAllProjectedBy(Pageable pageable, Class<T> classType);
+
+  void deleteByUser_Id(Long userId);
 }
