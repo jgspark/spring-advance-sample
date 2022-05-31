@@ -1,7 +1,6 @@
 package com.lezhin.coding.service;
 
 import com.lezhin.coding.repository.CommentRepository;
-import com.lezhin.coding.repository.ContentsRepository;
 import com.lezhin.coding.repository.HistoryRepository;
 import com.lezhin.coding.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,7 +13,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 
 @ExtendWith(MockitoExtension.class)
