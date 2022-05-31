@@ -1,9 +1,13 @@
 package com.lezhin.coding.web;
 
+import com.lezhin.coding.constants.ContentsType;
 import com.lezhin.coding.constants.EvaluationType;
+import com.lezhin.coding.domain.Contents;
 import com.lezhin.coding.mock.ContentsMock;
 import com.lezhin.coding.service.ContentsService;
 import com.lezhin.coding.service.dto.TopContents;
+import com.lezhin.coding.service.dto.UpdatedContentsStoreDTO;
+import com.lezhin.coding.utils.JsonUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -20,6 +24,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.filter.CharacterEncodingFilter;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -70,5 +75,39 @@ class ContentsControllerTest {
         .andExpect(jsonPath("$[0]['coin']").value(mocks.get(0).getCoin()))
         .andExpect(jsonPath("$[0]['openDate']").value(mocks.get(0).getOpenDate()))
         .andExpect(jsonPath("$[0]['sum']").value(mocks.get(0).getSum()));
+  }
+
+  @Test
+  @DisplayName("특정 작품을 유료, 무료로 변경 할 수 있는 API")
+  void patchContents() throws Exception {
+
+    final UpdatedContentsStoreDTO dto = new UpdatedContentsStoreDTO(ContentsType.PAGAR, 100);
+
+    Optional<Contents> mockOptional = Optional.of(ContentsMock.createdMock());
+
+    BDDMockito.given(contentsService.updatedTypeAndCoin(any(), any())).willReturn(mockOptional);
+
+    ResultActions action =
+        mockMvc
+            .perform(
+                MockMvcRequestBuilders.patch("/contents/" + 1)
+                    .content(JsonUtil.convertObjectToJson(dto))
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .characterEncoding("UTF-8"))
+            .andDo(print());
+
+    BDDMockito.then(contentsService).should().updatedTypeAndCoin(any(), any());
+
+    Contents mock = mockOptional.get();
+
+    action
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$['id']").value(mock.getId()))
+        .andExpect(jsonPath("$['name']").value(mock.getName()))
+        .andExpect(jsonPath("$['author']").value(mock.getAuthor()))
+        .andExpect(jsonPath("$['type']").value(mock.getType().name()))
+        .andExpect(jsonPath("$['adultType']").value(mock.getAdultType().name()))
+        .andExpect(jsonPath("$['coin']").value(mock.getCoin()))
+        .andExpect(jsonPath("$['openDate']").value(mock.getOpenDate()));
   }
 }
