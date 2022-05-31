@@ -44,14 +44,12 @@ public class HistorySupportImpl extends QuerydslRepositorySupport implements His
                     user.registerDate))
             .from(history)
             .where(
-                user.registerDate
-                    .between(startDate, endDate)
-                    .and(contents.adultType.eq(adultType))
-                    .and(user.id.count().goe(count)))
+                user.registerDate.between(startDate, endDate).and(contents.adultType.eq(adultType)))
             .join(history.user, user)
             .join(history.contents, contents)
             .groupBy(
                 user.id, user.userName, user.userEmail, user.gender, user.type, user.registerDate)
+            .having(contents.id.count().goe(count))
             .offset(pageable.getOffset())
             .limit(pageable.getPageSize())
             .fetchResults();

@@ -1,6 +1,9 @@
 package com.lezhin.coding.constants;
 
 public enum MsgType {
+  MinusNumberException("DU002", "minus number is upnuber"),
+
+  PlusNumberException("DU001", "plus number is negative"),
   CoinDataException("D001", "coin data does not meet the conditions"),
   CommentDataException("D002", "comment data is include special symbol"),
   NoUserData("D001", "user data not found"),

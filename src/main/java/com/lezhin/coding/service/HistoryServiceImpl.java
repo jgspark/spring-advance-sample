@@ -5,6 +5,7 @@ import com.lezhin.coding.repository.HistoryRepository;
 import com.lezhin.coding.service.dto.HistoryInfo;
 import com.lezhin.coding.service.dto.HistoryUser;
 import com.lezhin.coding.service.dto.PageDTO;
+import com.lezhin.coding.utils.DateUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
@@ -28,9 +29,9 @@ public class HistoryServiceImpl implements HistoryService {
   @Transactional(readOnly = true)
   public Page<HistoryUser> getHistoriesByAdultUser(PageDTO dto) {
 
-    Date startDate = new Date(System.currentTimeMillis() - 7L * 24 * 3600 * 1000);
+    Date startDate = DateUtil.minus(new Date(), -7);
 
-    Date endDate = new Date();
+    Date endDate = DateUtil.plus(new Date(), 1);
 
     return historyRepository.findByCreatedDateBetweenAndContents_AdultType(
         dto.getPageRequest(), startDate, endDate, AdultType.ADULT, 3L);

@@ -24,4 +24,5 @@ public class HistoryUser {
   private AdultType type;
 
   private Date registerDate;
+
 }
