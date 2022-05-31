@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 @RestController
 @RequiredArgsConstructor
 public class CommentController {
@@ -18,7 +20,7 @@ public class CommentController {
 
   @PostMapping("comment")
   @ResponseStatus(HttpStatus.CREATED)
-  public Comment writeComment(@RequestBody CommentStoreDTO dto) {
+  public Comment writeComment(@RequestBody @Valid CommentStoreDTO dto) {
     return commentService.createdComment(dto);
   }
 }

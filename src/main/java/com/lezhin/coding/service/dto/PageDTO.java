@@ -4,13 +4,15 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.data.domain.PageRequest;
 
+import javax.validation.constraints.NotNull;
+
 @Getter
 @AllArgsConstructor
 public class PageDTO {
 
-  private Integer page;
+  @NotNull private Integer page;
 
-  private Integer size;
+  @NotNull private Integer size;
 
   public PageRequest getPageRequest() {
     return PageRequest.of(this.page, this.size);

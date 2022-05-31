@@ -11,6 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 @RestController
 @RequiredArgsConstructor
 public class HistoryController {
@@ -18,7 +20,7 @@ public class HistoryController {
   private final HistoryService historyService;
 
   @GetMapping("histories")
-  public ResponseEntity<Page<HistoryInfo>> getHistories(PageDTO dto) {
+  public ResponseEntity<Page<HistoryInfo>> getHistories(@Valid PageDTO dto) {
     Page<HistoryInfo> data = historyService.getHistories(dto);
 
     if (data.isEmpty()) {
@@ -29,7 +31,7 @@ public class HistoryController {
   }
 
   @GetMapping("histories/adult-users")
-  public ResponseEntity<Page<HistoryUser>> getHistoriesByAdultUser(PageDTO dto) {
+  public ResponseEntity<Page<HistoryUser>> getHistoriesByAdultUser(@Valid PageDTO dto) {
 
     Page<HistoryUser> data = historyService.getHistoriesByAdultUser(dto);
 

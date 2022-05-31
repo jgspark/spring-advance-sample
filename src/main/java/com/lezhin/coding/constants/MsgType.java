@@ -1,8 +1,13 @@
 package com.lezhin.coding.constants;
 
-public enum MsgType {
-  MinusNumberException("DU002", "minus number is upnuber"),
+import lombok.Getter;
 
+@Getter
+public enum MsgType {
+  EmptyParameter("S003", "empty parameter"),
+  EmptyRequestBody("S002", "request body no data"),
+  ServerError("S001", "server error"),
+  MinusNumberException("DU002", "minus number is over number"),
   PlusNumberException("DU001", "plus number is negative"),
   CoinDataException("D001", "coin data does not meet the conditions"),
   CommentDataException("D002", "comment data is include special symbol"),
