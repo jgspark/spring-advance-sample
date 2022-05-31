@@ -145,6 +145,7 @@ class ContentsRepositoryTest {
     }
 
     @Test
+    @DisplayName("유료 타입 컨텐츠 업데이트")
     void updatedPagar() {
 
       final String mockCoin = "100";
