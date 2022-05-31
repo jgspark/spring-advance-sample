@@ -1,6 +1,5 @@
 package com.lezhin.coding.web;
 
-import com.lezhin.coding.constants.EvaluationType;
 import com.lezhin.coding.mock.ContentsMock;
 import com.lezhin.coding.mock.HistoryMock;
 import com.lezhin.coding.mock.UserMock;
