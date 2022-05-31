@@ -1,5 +1,6 @@
 package com.lezhin.coding.mock;
 
+import com.lezhin.coding.constants.AdultType;
 import com.lezhin.coding.constants.ContentsType;
 import com.lezhin.coding.domain.Contents;
 import com.lezhin.coding.service.dto.ContentsInfo;
@@ -20,6 +21,8 @@ public class ContentsMock {
 
   private static ContentsType DEFAULT_TYPE = ContentsType.FREE;
 
+  private static AdultType adultType = AdultType.ADULT;
+
   private static String DEFAULT_COIN = null;
 
   public static Contents createdMock() {
@@ -29,6 +32,7 @@ public class ContentsMock {
         .author(DEFAULT_AUTHOR)
         .type(DEFAULT_TYPE)
         .coin(DEFAULT_COIN)
+        .adultType(adultType)
         .openDate(DateMock.getMockDate())
         .build();
   }

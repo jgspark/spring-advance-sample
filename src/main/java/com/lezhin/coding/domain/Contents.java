@@ -1,6 +1,7 @@
 package com.lezhin.coding.domain;
 
 import com.lezhin.coding.config.exption.DomainException;
+import com.lezhin.coding.constants.AdultType;
 import com.lezhin.coding.constants.ContentsType;
 import com.lezhin.coding.constants.MsgType;
 import lombok.*;
@@ -31,6 +32,9 @@ public class Contents {
 
   // 작품 타입 (무료/유료)
   private ContentsType type;
+
+  // 성인 유무
+  private AdultType adultType;
 
   // 금액
   @Column(nullable = false)
