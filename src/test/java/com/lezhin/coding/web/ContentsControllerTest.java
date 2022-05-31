@@ -4,7 +4,10 @@ import com.lezhin.coding.constants.ContentsType;
 import com.lezhin.coding.constants.EvaluationType;
 import com.lezhin.coding.domain.Contents;
 import com.lezhin.coding.mock.ContentsMock;
+import com.lezhin.coding.mock.DtoMock;
 import com.lezhin.coding.service.ContentsService;
+import com.lezhin.coding.service.dto.ContentsInfo;
+import com.lezhin.coding.service.dto.SelectContentsStoreDTO;
 import com.lezhin.coding.service.dto.TopContents;
 import com.lezhin.coding.service.dto.UpdatedContentsStoreDTO;
 import com.lezhin.coding.utils.JsonUtil;
@@ -15,6 +18,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.BDDMockito;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
@@ -109,5 +113,41 @@ class ContentsControllerTest {
         .andExpect(jsonPath("$['adultType']").value(mock.getAdultType().name()))
         .andExpect(jsonPath("$['coin']").value(mock.getCoin()))
         .andExpect(jsonPath("$['openDate']").value(mock.getOpenDate()));
+  }
+
+  @Test
+  @DisplayName("작품 전체 조회 API")
+  void getContents() throws Exception {
+
+    SelectContentsStoreDTO dto = DtoMock.getSelectContentsStoreDTO();
+
+    Page<ContentsInfo> mocks = ContentsMock.getPageContentsInfo();
+
+    BDDMockito.given(contentsService.getContents(any())).willReturn(mocks);
+
+    ResultActions action =
+        mockMvc
+            .perform(
+                MockMvcRequestBuilders.get("/contents")
+                    .param("type", dto.getType().name())
+                    .param("page", dto.getPage().toString())
+                    .param("size", dto.getSize().toString())
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .characterEncoding("UTF-8"))
+            .andDo(print());
+
+    BDDMockito.then(contentsService).should().getContents(any());
+
+    action
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$['content'][0]['id']").value(mocks.getContent().get(0).getId()))
+        .andExpect(jsonPath("$['content'][0]['name']").value(mocks.getContent().get(0).getName()))
+        .andExpect(
+            jsonPath("$['content'][0]['type']").value(mocks.getContent().get(0).getType().name()))
+        .andExpect(
+            jsonPath("$['content'][0]['openDate']").value(mocks.getContent().get(0).getOpenDate()))
+        .andExpect(
+            jsonPath("$['content'][0]['author']").value(mocks.getContent().get(0).getAuthor()))
+        .andExpect(jsonPath("$['content'][0]['coin']").value(mocks.getContent().get(0).getCoin()));
   }
 }
