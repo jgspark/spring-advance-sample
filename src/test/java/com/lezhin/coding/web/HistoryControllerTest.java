@@ -6,6 +6,7 @@ import com.lezhin.coding.mock.HistoryMock;
 import com.lezhin.coding.mock.UserMock;
 import com.lezhin.coding.service.HistoryService;
 import com.lezhin.coding.service.dto.HistoryInfo;
+import com.lezhin.coding.service.dto.HistoryUser;
 import com.lezhin.coding.service.dto.PageDTO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -81,5 +82,46 @@ class HistoryControllerTest {
         .andExpect(
             jsonPath("$['content'][0]['createdDate']")
                 .value(mocks.getContent().get(0).getCreatedDate()));
+  }
+
+  @Test
+  @DisplayName("최근 1주일간 가입자 중 성인 작품 조회 3개 이상인 API")
+  void getHistoriesByAdultUser() throws Exception {
+
+    PageDTO pageDTO = new PageDTO(0, 10);
+
+    Page<HistoryUser> mocks =
+        HistoryMock.createPageHistoryUser(UserMock.createdMock(), ContentsMock.createdMock());
+
+    BDDMockito.given(historyService.getHistoriesByAdultUser(any())).willReturn(mocks);
+
+    ResultActions action =
+        mockMvc
+            .perform(
+                MockMvcRequestBuilders.get("/histories/adult-users")
+                    .param("page", pageDTO.getPage().toString())
+                    .param("size", pageDTO.getSize().toString())
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .characterEncoding("UTF-8"))
+            .andDo(print());
+
+    BDDMockito.then(historyService).should().getHistoriesByAdultUser(any());
+
+    action
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$['content'][0]['id']").value(mocks.getContent().get(0).getId()))
+        .andExpect(
+            jsonPath("$['content'][0]['userName']").value(mocks.getContent().get(0).getUserName()))
+        .andExpect(
+            jsonPath("$['content'][0]['userEmail']")
+                .value(mocks.getContent().get(0).getUserEmail()))
+        .andExpect(
+            jsonPath("$['content'][0]['gender']")
+                .value(mocks.getContent().get(0).getGender().name()))
+        .andExpect(
+            jsonPath("$['content'][0]['type']").value(mocks.getContent().get(0).getType().name()))
+        .andExpect(
+            jsonPath("$['content'][0]['registerDate']")
+                .value(mocks.getContent().get(0).getRegisterDate()));
   }
 }
