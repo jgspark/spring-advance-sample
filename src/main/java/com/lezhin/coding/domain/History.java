@@ -10,7 +10,9 @@ import javax.persistence.*;
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-@EqualsAndHashCode(of = {"id"})
+@EqualsAndHashCode(
+    of = {"id"},
+    callSuper = true)
 public class History extends AbstractBaseDate {
 
   @Id
