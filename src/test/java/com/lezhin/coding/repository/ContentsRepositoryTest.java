@@ -6,16 +6,16 @@ import com.lezhin.coding.constants.EvaluationType;
 import com.lezhin.coding.domain.Comment;
 import com.lezhin.coding.domain.Contents;
 import com.lezhin.coding.domain.User;
-import com.lezhin.coding.mock.CommentMock;
-import com.lezhin.coding.mock.ContentsMock;
-import com.lezhin.coding.mock.DateMock;
-import com.lezhin.coding.mock.UserMock;
+import com.lezhin.coding.mock.*;
+import com.lezhin.coding.service.dto.ContentsInfo;
+import com.lezhin.coding.service.dto.SelectContentsStoreDTO;
 import com.lezhin.coding.service.dto.TopContents;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
+import org.springframework.data.domain.Page;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.List;
@@ -109,6 +109,93 @@ class ContentsRepositoryTest {
           DateMock.changedFormatDate(mock.getOpenDate()));
       Assertions.assertEquals(entity.getSum(), 0);
     }
+
+    @Test
+    @DisplayName("타입별 조회 로직 free type")
+    void findByType_freeType() {
+
+      Page<ContentsInfo> mocks = ContentsMock.getPageContentsInfo();
+
+      SelectContentsStoreDTO dto = DtoMock.getSelectContentsStoreDTO();
+
+      Page<ContentsInfo> entities =
+          contentsRepository.findByType(
+              dto.getPageRequest(), ContentsType.FREE, ContentsInfo.class);
+
+      List<ContentsInfo> mockContent = mocks.getContent();
+
+      List<ContentsInfo> entitiesContent = entities.getContent();
+
+      Assertions.assertEquals(entitiesContent.size(), mockContent.size());
+
+      ContentsInfo entity = entitiesContent.get(0);
+
+      ContentsInfo mock = mockContent.get(0);
+
+      Assertions.assertEquals(entity.getName(), mock.getName());
+      Assertions.assertEquals(entity.getAuthor(), mock.getAuthor());
+      Assertions.assertEquals(entity.getType(), mock.getType());
+      Assertions.assertEquals(entity.getCoin(), "0");
+      Assertions.assertEquals(
+          DateMock.changedFormatDate(entity.getOpenDate()),
+          DateMock.changedFormatDate(mock.getOpenDate()));
+    }
+
+    @Test
+    @DisplayName("전체 조회 로직 테스트 케이스")
+    void findAllProjectedBy() {
+      Page<ContentsInfo> mocks = ContentsMock.getPageContentsInfo();
+
+      SelectContentsStoreDTO dto = DtoMock.getSelectContentsStoreDTO();
+
+      Page<ContentsInfo> entities =
+          contentsRepository.findAllProjectedBy(dto.getPageRequest(), ContentsInfo.class);
+
+      List<ContentsInfo> mockContent = mocks.getContent();
+
+      List<ContentsInfo> entitiesContent = entities.getContent();
+
+      Assertions.assertEquals(entitiesContent.size(), mockContent.size());
+
+      ContentsInfo entity = entitiesContent.get(0);
+
+      ContentsInfo mock = mockContent.get(0);
+
+      Assertions.assertEquals(entity.getName(), mock.getName());
+      Assertions.assertEquals(entity.getAuthor(), mock.getAuthor());
+      Assertions.assertEquals(entity.getType(), mock.getType());
+      Assertions.assertEquals(entity.getCoin(), "0");
+      Assertions.assertEquals(
+          DateMock.changedFormatDate(entity.getOpenDate()),
+          DateMock.changedFormatDate(mock.getOpenDate()));
+    }
+
+    @Test
+    @DisplayName("하나의 컨텐츠 조회")
+    void findById() {
+
+      Optional<ContentsInfo> entityOptional =
+          contentsRepository.findById(mock.getId(), ContentsInfo.class);
+
+      Assertions.assertTrue(entityOptional.isPresent());
+
+      ContentsInfo entity = entityOptional.get();
+
+      Assertions.assertEquals(entity.getName(), mock.getName());
+      Assertions.assertEquals(entity.getAuthor(), mock.getAuthor());
+      Assertions.assertEquals(entity.getType(), mock.getType());
+      Assertions.assertEquals(entity.getCoin(), "0");
+      Assertions.assertEquals(
+          DateMock.changedFormatDate(entity.getOpenDate()),
+          DateMock.changedFormatDate(mock.getOpenDate()));
+    }
+
+    @AfterEach
+    void clear() {
+      userRepository.delete(user);
+      contentsRepository.delete(mock);
+      commentRepository.delete(comment);
+    }
   }
 
   @Nested
@@ -136,7 +223,6 @@ class ContentsRepositoryTest {
 
       contentsRepository.flush();
 
-      Assertions.assertEquals(entity.getId(), mock.getId());
       Assertions.assertEquals(entity.getName(), mock.getName());
       Assertions.assertEquals(entity.getAuthor(), mock.getAuthor());
       Assertions.assertEquals(entity.getType(), mock.getType());
@@ -168,6 +254,11 @@ class ContentsRepositoryTest {
       Assertions.assertEquals(entity.getType(), ContentsType.PAGAR);
       Assertions.assertEquals(entity.getCoin(), mockCoin);
       Assertions.assertEquals(entity.getOpenDate(), mock.getOpenDate());
+    }
+
+    @AfterEach
+    void clear() {
+      contentsRepository.delete(mock);
     }
   }
 }

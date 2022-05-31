@@ -2,8 +2,12 @@ package com.lezhin.coding.mock;
 
 import com.lezhin.coding.constants.ContentsType;
 import com.lezhin.coding.domain.Contents;
+import com.lezhin.coding.service.dto.ContentsInfo;
 import com.lezhin.coding.service.dto.TopContents;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 
+import java.util.Date;
 import java.util.List;
 
 public class ContentsMock {
@@ -43,5 +47,49 @@ public class ContentsMock {
 
   public static List<TopContents> createdTopContentsList() {
     return List.of(createdTopContents());
+  }
+
+  public static Page<ContentsInfo> getPageContentsInfo() {
+    List<ContentsInfo> list = List.of(new ContentsInfoTemp(createdMock()));
+    return new PageImpl<>(list, DtoMock.getSelectContentsStoreDTO().getPageRequest(), list.size());
+  }
+
+  static class ContentsInfoTemp implements ContentsInfo {
+
+    private final Contents contents;
+
+    ContentsInfoTemp(Contents contents) {
+      this.contents = contents;
+    }
+
+    @Override
+    public Long getId() {
+      return contents.getId();
+    }
+
+    @Override
+    public String getName() {
+      return contents.getName();
+    }
+
+    @Override
+    public String getAuthor() {
+      return contents.getAuthor();
+    }
+
+    @Override
+    public ContentsType getType() {
+      return contents.getType();
+    }
+
+    @Override
+    public String getCoin() {
+      return contents.getCoin();
+    }
+
+    @Override
+    public Date getOpenDate() {
+      return contents.getOpenDate();
+    }
   }
 }
