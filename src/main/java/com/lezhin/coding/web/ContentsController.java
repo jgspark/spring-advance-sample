@@ -22,7 +22,7 @@ public class ContentsController {
 
   private final ContentsService contentsService;
 
-  @GetMapping("/top-contents")
+  @GetMapping("top-contents")
   public ResponseEntity<List<TopContents>> getTopContents(EvaluationType type) {
 
     List<TopContents> data = contentsService.getTopContents(type);
