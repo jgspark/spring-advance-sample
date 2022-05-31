@@ -67,4 +67,23 @@ class CommentRepositoryTest {
 
     commentRepository.flush();
   }
+
+  @Nested
+  class Delete {
+
+    private Comment mock;
+
+    @BeforeEach
+    void init() {
+      mock = commentRepository.save(CommentMock.createdMock(user, contents));
+      commentRepository.flush();
+    }
+
+    @Test
+    @DisplayName("평가 삭제 로직 테스트 케이스")
+    void deleteById_UserId() {
+      commentRepository.deleteById_UserId(user.getId());
+      commentRepository.flush();
+    }
+  }
 }

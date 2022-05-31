@@ -160,4 +160,22 @@ class HistoryRepositoryTest {
           });
     }
   }
+
+  @Nested
+  class Delete {
+
+    private History mock;
+
+    @Test
+    void init() {
+      mock = HistoryMock.createdMock(user, contents);
+    }
+
+    @Test
+    @DisplayName("히스토리 유저별 삭제")
+    void deleteByUser_Id() {
+      historyRepository.deleteByUser_Id(user.getId());
+      historyRepository.flush();
+    }
+  }
 }
