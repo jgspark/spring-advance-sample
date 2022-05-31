@@ -57,7 +57,7 @@ public class Comment {
   private boolean isIncludeSymbol(String comment) {
 
     if (Objects.isNull(comment) || comment.isBlank()) {
-      return true;
+      return false;
     }
 
     Pattern pattern2 = Pattern.compile("[!@#$%^&*(),.?\":{}|<>]");
