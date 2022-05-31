@@ -39,7 +39,7 @@ class HistoryServiceTest {
   }
 
   @Test
-  @DisplayName("조횔 이력 api")
+  @DisplayName("작품별 조회 이력 api")
   void getHistories() {
 
     Page<HistoryInfo> mocks =
