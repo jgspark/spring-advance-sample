@@ -2,9 +2,9 @@ package com.lezhin.coding.config.aspect;
 
 import com.lezhin.coding.config.exption.NoDataException;
 import com.lezhin.coding.constants.MsgType;
-import com.lezhin.coding.domain.Contents;
-import com.lezhin.coding.domain.History;
-import com.lezhin.coding.domain.User;
+import com.lezhin.coding.domain.content.Contents;
+import com.lezhin.coding.domain.content.History;
+import com.lezhin.coding.domain.user.User;
 import com.lezhin.coding.repository.ContentsRepository;
 import com.lezhin.coding.repository.HistoryRepository;
 import com.lezhin.coding.repository.UserRepository;

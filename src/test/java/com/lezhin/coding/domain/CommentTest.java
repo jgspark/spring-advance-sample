@@ -1,11 +1,10 @@
 package com.lezhin.coding.domain;
 
 import com.lezhin.coding.config.exption.DomainException;
+import com.lezhin.coding.domain.content.Comment;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class CommentTest {
 

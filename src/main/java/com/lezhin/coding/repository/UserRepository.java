@@ -1,6 +1,6 @@
 package com.lezhin.coding.repository;
 
-import com.lezhin.coding.domain.User;
+import com.lezhin.coding.domain.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

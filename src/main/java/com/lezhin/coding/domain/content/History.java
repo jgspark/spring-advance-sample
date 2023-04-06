@@ -1,5 +1,6 @@
-package com.lezhin.coding.domain;
+package com.lezhin.coding.domain.content;
 
+import com.lezhin.coding.domain.user.User;
 import com.lezhin.coding.domain.support.AbstractBaseDate;
 import lombok.*;
 

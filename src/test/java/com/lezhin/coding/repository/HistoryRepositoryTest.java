@@ -2,9 +2,9 @@ package com.lezhin.coding.repository;
 
 import com.lezhin.coding.config.JPAConfiguration;
 import com.lezhin.coding.constants.AdultType;
-import com.lezhin.coding.domain.Contents;
-import com.lezhin.coding.domain.History;
-import com.lezhin.coding.domain.User;
+import com.lezhin.coding.domain.content.Contents;
+import com.lezhin.coding.domain.content.History;
+import com.lezhin.coding.domain.user.User;
 import com.lezhin.coding.mock.ContentsMock;
 import com.lezhin.coding.mock.HistoryMock;
 import com.lezhin.coding.mock.UserMock;

@@ -1,8 +1,8 @@
 package com.lezhin.coding.mock;
 
-import com.lezhin.coding.domain.Contents;
-import com.lezhin.coding.domain.History;
-import com.lezhin.coding.domain.User;
+import com.lezhin.coding.domain.content.Contents;
+import com.lezhin.coding.domain.content.History;
+import com.lezhin.coding.domain.user.User;
 import com.lezhin.coding.service.dto.HistoryInfo;
 import com.lezhin.coding.service.dto.HistoryUser;
 import org.springframework.data.domain.Page;

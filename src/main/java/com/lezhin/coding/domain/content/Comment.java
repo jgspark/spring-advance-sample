@@ -1,8 +1,9 @@
-package com.lezhin.coding.domain;
+package com.lezhin.coding.domain.content;
 
 import com.lezhin.coding.config.exption.DomainException;
 import com.lezhin.coding.constants.EvaluationType;
 import com.lezhin.coding.constants.MsgType;
+import com.lezhin.coding.domain.user.User;
 import com.lezhin.coding.domain.support.CommentKey;
 import lombok.*;
 

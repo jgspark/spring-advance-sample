@@ -1,6 +1,5 @@
 package com.lezhin.coding.service;
 
-import com.lezhin.coding.domain.Contents;
 import com.lezhin.coding.mock.ContentsMock;
 import com.lezhin.coding.mock.HistoryMock;
 import com.lezhin.coding.mock.UserMock;
@@ -22,7 +21,6 @@ import org.springframework.data.domain.Page;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;
 
 @ExtendWith(MockitoExtension.class)

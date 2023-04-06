@@ -1,4 +1,4 @@
-package com.lezhin.coding.domain;
+package com.lezhin.coding.domain.content;
 
 import com.lezhin.coding.config.exption.DomainException;
 import com.lezhin.coding.constants.AdultType;

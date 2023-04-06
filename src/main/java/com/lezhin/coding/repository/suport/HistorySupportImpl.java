@@ -1,7 +1,7 @@
 package com.lezhin.coding.repository.suport;
 
 import com.lezhin.coding.constants.AdultType;
-import com.lezhin.coding.domain.History;
+import com.lezhin.coding.domain.content.History;
 import com.lezhin.coding.service.dto.HistoryUser;
 import com.querydsl.core.QueryResults;
 import com.querydsl.core.types.Projections;

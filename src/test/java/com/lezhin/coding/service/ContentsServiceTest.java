@@ -2,7 +2,7 @@ package com.lezhin.coding.service;
 
 import com.lezhin.coding.constants.ContentsType;
 import com.lezhin.coding.constants.EvaluationType;
-import com.lezhin.coding.domain.Contents;
+import com.lezhin.coding.domain.content.Contents;
 import com.lezhin.coding.mock.ContentsMock;
 import com.lezhin.coding.mock.DateMock;
 import com.lezhin.coding.mock.DtoMock;

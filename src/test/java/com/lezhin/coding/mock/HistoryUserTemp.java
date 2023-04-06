@@ -1,6 +1,6 @@
 package com.lezhin.coding.mock;
 
-import com.lezhin.coding.domain.User;
+import com.lezhin.coding.domain.user.User;
 import com.lezhin.coding.service.dto.HistoryUser;
 
 public class HistoryUserTemp extends HistoryUser {

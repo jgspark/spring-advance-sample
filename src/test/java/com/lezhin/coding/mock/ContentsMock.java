@@ -2,7 +2,7 @@ package com.lezhin.coding.mock;
 
 import com.lezhin.coding.constants.AdultType;
 import com.lezhin.coding.constants.ContentsType;
-import com.lezhin.coding.domain.Contents;
+import com.lezhin.coding.domain.content.Contents;
 import com.lezhin.coding.service.dto.ContentsInfo;
 import com.lezhin.coding.service.dto.TopContents;
 import org.springframework.data.domain.Page;

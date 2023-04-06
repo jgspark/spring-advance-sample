@@ -1,4 +1,4 @@
-package com.lezhin.coding.domain;
+package com.lezhin.coding.domain.user;
 
 import com.lezhin.coding.constants.AdultType;
 import com.lezhin.coding.constants.GenderType;

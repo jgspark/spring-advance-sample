@@ -1,6 +1,6 @@
 package com.lezhin.coding.web;
 
-import com.lezhin.coding.domain.Comment;
+import com.lezhin.coding.domain.content.Comment;
 import com.lezhin.coding.service.CommentService;
 import com.lezhin.coding.service.dto.CommentStoreDTO;
 import lombok.RequiredArgsConstructor;

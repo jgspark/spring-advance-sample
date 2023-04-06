@@ -1,6 +1,6 @@
 package com.lezhin.coding.web;
 
-import com.lezhin.coding.domain.Comment;
+import com.lezhin.coding.domain.content.Comment;
 import com.lezhin.coding.mock.CommentMock;
 import com.lezhin.coding.mock.ContentsMock;
 import com.lezhin.coding.mock.UserMock;

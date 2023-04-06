@@ -2,9 +2,7 @@ package com.lezhin.coding.mock;
 
 import com.lezhin.coding.constants.AdultType;
 import com.lezhin.coding.constants.GenderType;
-import com.lezhin.coding.domain.User;
-
-import java.util.Date;
+import com.lezhin.coding.domain.user.User;
 
 public class UserMock {
 

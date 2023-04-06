@@ -2,6 +2,7 @@ package com.lezhin.coding.domain;
 
 import com.lezhin.coding.config.exption.DomainException;
 import com.lezhin.coding.constants.ContentsType;
+import com.lezhin.coding.domain.content.Contents;
 import com.lezhin.coding.mock.ContentsMock;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;

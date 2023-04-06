@@ -1,9 +1,9 @@
 package com.lezhin.coding.mock;
 
 import com.lezhin.coding.constants.EvaluationType;
-import com.lezhin.coding.domain.Comment;
-import com.lezhin.coding.domain.Contents;
-import com.lezhin.coding.domain.User;
+import com.lezhin.coding.domain.content.Comment;
+import com.lezhin.coding.domain.content.Contents;
+import com.lezhin.coding.domain.user.User;
 import com.lezhin.coding.domain.support.CommentKey;
 import com.lezhin.coding.service.dto.CommentStoreDTO;
 

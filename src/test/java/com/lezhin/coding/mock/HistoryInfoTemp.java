@@ -1,7 +1,7 @@
 package com.lezhin.coding.mock;
 
 import com.lezhin.coding.constants.ContentsType;
-import com.lezhin.coding.domain.History;
+import com.lezhin.coding.domain.content.History;
 import com.lezhin.coding.service.dto.HistoryInfo;
 
 import java.util.Date;

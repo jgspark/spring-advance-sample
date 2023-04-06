@@ -1,7 +1,7 @@
 package com.lezhin.coding.repository;
 
 import com.lezhin.coding.config.JPAConfiguration;
-import com.lezhin.coding.domain.User;
+import com.lezhin.coding.domain.user.User;
 import com.lezhin.coding.mock.UserMock;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -11,8 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
 @ExtendWith(SpringExtension.class)

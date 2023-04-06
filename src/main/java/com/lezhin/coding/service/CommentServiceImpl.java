@@ -2,9 +2,9 @@ package com.lezhin.coding.service;
 
 import com.lezhin.coding.config.exption.NoDataException;
 import com.lezhin.coding.constants.MsgType;
-import com.lezhin.coding.domain.Comment;
-import com.lezhin.coding.domain.Contents;
-import com.lezhin.coding.domain.User;
+import com.lezhin.coding.domain.content.Comment;
+import com.lezhin.coding.domain.content.Contents;
+import com.lezhin.coding.domain.user.User;
 import com.lezhin.coding.repository.CommentRepository;
 import com.lezhin.coding.repository.ContentsRepository;
 import com.lezhin.coding.repository.UserRepository;

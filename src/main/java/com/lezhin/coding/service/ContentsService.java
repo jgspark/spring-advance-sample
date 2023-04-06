@@ -1,7 +1,7 @@
 package com.lezhin.coding.service;
 
 import com.lezhin.coding.constants.EvaluationType;
-import com.lezhin.coding.domain.Contents;
+import com.lezhin.coding.domain.content.Contents;
 import com.lezhin.coding.service.dto.ContentsInfo;
 import com.lezhin.coding.service.dto.SelectContentsStoreDTO;
 import com.lezhin.coding.service.dto.TopContents;
