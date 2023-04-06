@@ -14,6 +14,10 @@ import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport
 import java.util.Date;
 import java.util.List;
 
+import static com.webtoon.coding.domain.content.QContents.contents;
+import static com.webtoon.coding.domain.history.QHistory.history;
+import static com.webtoon.coding.domain.user.QUser.user;
+
 
 public class HistorySupportImpl extends QuerydslRepositorySupport implements HistorySupport {
 
@@ -41,7 +45,7 @@ public class HistorySupportImpl extends QuerydslRepositorySupport implements His
                     user.registerDate))
             .from(history)
             .where(
-                user.registerDate.between(startDate, endDate).and(contents.adultType.eq(adult)))
+                user.registerDate.between(startDate, endDate).and(contents.adult.eq(adult)))
             .join(history.user, user)
             .join(history.contents, contents)
             .groupBy(

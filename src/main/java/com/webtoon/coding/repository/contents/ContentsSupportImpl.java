@@ -11,6 +11,8 @@ import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport
 
 import java.util.List;
 
+import static com.webtoon.coding.domain.comment.QComment.comment1;
+import static com.webtoon.coding.domain.content.QContents.contents;
 
 
 public class ContentsSupportImpl extends QuerydslRepositorySupport implements ContentsSupport {
