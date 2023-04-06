@@ -40,11 +40,7 @@ public class ContentsController {
 
     Optional<Contents> data = contentsService.updatedTypeAndCoin(id, dto);
 
-    if (data.isEmpty()) {
-      return ResponseEntity.status(HttpStatus.ACCEPTED).build();
-    }
-
-    return ResponseEntity.ok().body(data.get());
+    return data.map(contents -> ResponseEntity.ok().body(contents)).orElseGet(() -> ResponseEntity.status(HttpStatus.ACCEPTED).build());
   }
 
   @GetMapping("contents")
@@ -59,7 +55,6 @@ public class ContentsController {
   @GetMapping("contents/{id}")
   public ResponseEntity<ContentsInfo> getContentsOne(@PathVariable Long id) {
     Optional<ContentsInfo> data = contentsService.getContentsOne(id);
-    if (data.isEmpty()) return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-    return ResponseEntity.ok(data.get());
+    return data.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.status(HttpStatus.NO_CONTENT).build());
   }
 }

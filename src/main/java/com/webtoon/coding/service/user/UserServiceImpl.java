@@ -20,6 +20,9 @@ public class UserServiceImpl implements UserService {
   @Override
   @Transactional
   public void removeUser(Long id) {
+
+
+
     commentRepository.deleteById_UserId(id);
     historyRepository.deleteByUser_Id(id);
     userRepository.deleteById(id);
