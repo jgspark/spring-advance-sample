@@ -2,7 +2,7 @@ package com.webtoon.coding.web.comment;
 
 import com.webtoon.coding.domain.comment.Comment;
 import com.webtoon.coding.service.comment.CommentService;
-import com.webtoon.coding.dto.CommentStoreDTO;
+import com.webtoon.coding.dto.request.ContentsCommentRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,7 +20,7 @@ public class CommentController {
 
   @PostMapping("comment")
   @ResponseStatus(HttpStatus.CREATED)
-  public Comment writeComment(@RequestBody @Valid CommentStoreDTO dto) {
-    return commentService.createdComment(dto);
+  public Comment writeComment(@RequestBody @Valid ContentsCommentRequest request) {
+    return commentService.created(request);
   }
 }

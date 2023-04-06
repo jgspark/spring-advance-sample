@@ -5,7 +5,7 @@ import com.webtoon.coding.domain.comment.Comment;
 import com.webtoon.coding.domain.content.Contents;
 import com.webtoon.coding.domain.user.User;
 import com.webtoon.coding.domain.comment.CommentKey;
-import com.webtoon.coding.dto.CommentStoreDTO;
+import com.webtoon.coding.dto.request.ContentsCommentRequest;
 
 public class CommentMock {
 
@@ -27,7 +27,7 @@ public class CommentMock {
         .build();
   }
 
-  public static CommentStoreDTO createdStoreDTO() {
-    return new CommentStoreDTO(userId, contentsId, type, DEFAULT_COMMENT);
+  public static ContentsCommentRequest createdStoreDTO() {
+    return new ContentsCommentRequest(userId, contentsId, type, DEFAULT_COMMENT);
   }
 }

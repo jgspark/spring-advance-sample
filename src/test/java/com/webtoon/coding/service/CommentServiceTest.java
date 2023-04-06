@@ -12,7 +12,7 @@ import com.webtoon.coding.repository.contents.ContentsRepository;
 import com.webtoon.coding.repository.user.UserRepository;
 import com.webtoon.coding.service.comment.CommentService;
 import com.webtoon.coding.service.comment.CommentServiceImpl;
-import com.webtoon.coding.dto.CommentStoreDTO;
+import com.webtoon.coding.dto.request.ContentsCommentRequest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -62,7 +62,7 @@ class CommentServiceTest {
 
     BDDMockito.given(commentRepository.save(any())).willReturn(mock);
 
-    CommentStoreDTO dto = CommentMock.createdStoreDTO();
+    ContentsCommentRequest dto = CommentMock.createdStoreDTO();
 
     Comment entity = commentService.createdComment(dto);
 
@@ -97,7 +97,7 @@ class CommentServiceTest {
 
     BDDMockito.given(commentRepository.save(any())).willReturn(mock);
 
-    CommentStoreDTO dto = CommentMock.createdStoreDTO();
+    ContentsCommentRequest dto = CommentMock.createdStoreDTO();
 
     org.junit.jupiter.api.Assertions.assertThrows(
         NoDataException.class, () -> commentService.createdComment(dto));
@@ -119,7 +119,7 @@ class CommentServiceTest {
 
     BDDMockito.given(commentRepository.save(any())).willReturn(mock);
 
-    CommentStoreDTO dto = CommentMock.createdStoreDTO();
+    ContentsCommentRequest dto = CommentMock.createdStoreDTO();
 
     org.junit.jupiter.api.Assertions.assertThrows(
         NoDataException.class, () -> commentService.createdComment(dto));
