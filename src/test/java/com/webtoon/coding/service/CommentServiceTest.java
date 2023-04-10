@@ -1,129 +1,145 @@
 package com.webtoon.coding.service;
 
-import com.webtoon.coding.exception.NoDataException;
 import com.webtoon.coding.domain.comment.Comment;
+import com.webtoon.coding.domain.comment.CommentVerifier;
 import com.webtoon.coding.domain.content.Contents;
+import com.webtoon.coding.domain.core.Reader;
 import com.webtoon.coding.domain.user.User;
+import com.webtoon.coding.dto.request.ContentsCommentRequest;
+import com.webtoon.coding.exception.MsgType;
+import com.webtoon.coding.exception.NoDataException;
+import com.webtoon.coding.infra.repository.comment.CommentRepository;
 import com.webtoon.coding.mock.CommentMock;
 import com.webtoon.coding.mock.ContentsMock;
 import com.webtoon.coding.mock.UserMock;
-import com.webtoon.coding.infra.repository.comment.CommentRepository;
-import com.webtoon.coding.infra.repository.contents.ContentsRepository;
-import com.webtoon.coding.infra.repository.user.UserRepository;
 import com.webtoon.coding.service.comment.CommentService;
 import com.webtoon.coding.service.comment.CommentServiceImpl;
-import com.webtoon.coding.dto.request.ContentsCommentRequest;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.BDDMockito;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
 
-import java.util.Optional;
-
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.LENIENT)
 class CommentServiceTest {
 
-  private CommentService commentService;
+    private CommentService commentService;
 
-  @Mock private CommentRepository commentRepository;
+    @Mock
+    private Reader<Contents> contentsReader;
 
-  @Mock private ContentsRepository contentsRepository;
+    @Mock
+    private Reader<User> userReader;
 
-  @Mock private UserRepository userRepository;
+    @Mock
+    private CommentRepository commentRepository;
 
-  @BeforeEach
-  void init() {
+    @Mock
+    private CommentVerifier commentVerifier;
 
-    this.commentService = null;
-//        new CommentServiceImpl(commentRepository, userRepository, contentsRepository);
-  }
+    @BeforeEach
+    void init() {
+        this.commentService = new CommentServiceImpl(
+                commentVerifier,
+                contentsReader,
+                userReader,
+                commentRepository
+        );
+    }
 
-  @Test
-  @DisplayName("댓글 저장 테스트 케이스")
-  void createdComment_success() {
+    @Nested
+    @DisplayName("생성 메소드는")
+    public class CreatedMethod {
 
-    Optional<User> userOptional = Optional.of(UserMock.createdMock());
+        @Test
+        @DisplayName("성공적으로 실행이 된다.")
+        void testCreatedSuccess() {
 
-    Optional<Contents> contentsOptional = Optional.of(ContentsMock.createdMock());
+            User user = UserMock.createdMock();
 
-    Comment mock = CommentMock.createdMock(userOptional.get(), contentsOptional.get());
+            Contents contents = ContentsMock.createdMock();
 
-    BDDMockito.given(userRepository.findById(any())).willReturn(userOptional);
+            Comment mock = CommentMock.createdMock(user, contents);
 
-    BDDMockito.given(contentsRepository.findById(any())).willReturn(contentsOptional);
+            when(userReader.get(any())).thenReturn(user);
 
-    BDDMockito.given(commentRepository.save(any())).willReturn(mock);
+            when(contentsReader.get(any())).thenReturn(contents);
 
-    ContentsCommentRequest dto = CommentMock.createdStoreDTO();
+            when(commentRepository.save(any())).thenReturn(mock);
 
-//    Comment entity = commentService.createdComment(dto);
+            ContentsCommentRequest dto = CommentMock.createdStoreDTO();
 
-    Comment entity = null;
+            Comment entity = commentService.created(dto);
 
-    BDDMockito.then(userRepository).should().findById(any());
+            verify(userReader, times(1)).get(any());
 
-    BDDMockito.then(contentsRepository).should().findById(any());
+            verify(contentsReader, times(1)).get(any());
 
-    BDDMockito.then(commentRepository).should().save(any());
+            verify(commentRepository, times(1)).save(any());
 
-    org.assertj.core.api.Assertions.assertThat(entity).isEqualTo(mock);
+            org.assertj.core.api.Assertions.assertThat(entity).isEqualTo(mock);
 
-    org.junit.jupiter.api.Assertions.assertEquals(
-        entity.getId().getUserId(), mock.getUser().getId());
-    org.junit.jupiter.api.Assertions.assertEquals(
-        entity.getId().getContentsId(), mock.getId().getContentsId());
-    org.junit.jupiter.api.Assertions.assertEquals(entity.getComment(), mock.getComment());
-  }
+            org.junit.jupiter.api.Assertions.assertEquals(
+                    entity.getId().getUserId(), mock.getUser().getId());
+            org.junit.jupiter.api.Assertions.assertEquals(
+                    entity.getId().getContentsId(), mock.getId().getContentsId());
+            org.junit.jupiter.api.Assertions.assertEquals(entity.getComment(), mock.getComment());
+        }
 
-  @Test
-  @DisplayName("no user data exception 테스트 케이스")
-  void createdComment_NoUserData() {
+        @Test
+        @DisplayName("유저 데이터가 없다면 실패를 한다.")
+        void testCreatedFailByNoUser() {
 
-    Optional<User> userOptional = Optional.ofNullable(null);
+            User user = User.builder().build();
 
-    Optional<Contents> contentsOptional = Optional.of(ContentsMock.createdMock());
+            Contents contents = ContentsMock.createdMock();
 
-    Comment mock = CommentMock.createdMock(User.builder().build(), contentsOptional.get());
+            Comment mock = CommentMock.createdMock(user, contents);
 
-    BDDMockito.given(userRepository.findById(any())).willReturn(userOptional);
+            when(userReader.get(any())).thenThrow(new NoDataException(MsgType.NoUserData));
 
-    BDDMockito.given(contentsRepository.findById(any())).willReturn(contentsOptional);
+            ContentsCommentRequest dto = CommentMock.createdStoreDTO();
 
-    BDDMockito.given(commentRepository.save(any())).willReturn(mock);
+            NoDataException e = Assertions.assertThrows(NoDataException.class, () -> commentService.created(dto));
 
-    ContentsCommentRequest dto = CommentMock.createdStoreDTO();
+            verify(userReader, times(1)).get(any());
 
-//    org.junit.jupiter.api.Assertions.assertThrows(
-//        NoDataException.class, () -> commentService.createdComment(dto));
-  }
+            Assertions.assertEquals(e.getMsgType(), MsgType.NoUserData);
+            Assertions.assertEquals(e.getMessage(), MsgType.NoUserData.getMessage());
+        }
 
-  @Test
-  @DisplayName("no contents data exception 테스트 케이스")
-  void createdComment_NoContentsData() {
+        @Test
+        @DisplayName("컨텐츠 데이터가 없다면 실패를 한다.")
+        void testCreatedFailByNoContents() {
 
-    Optional<User> userOptional = Optional.of(UserMock.createdMock());
+            User user = UserMock.createdMock();
 
-    Optional<Contents> contentsOptional = Optional.ofNullable(null);
+            Contents contents = ContentsMock.createdMock();
 
-    Comment mock = CommentMock.createdMock(User.builder().build(), Contents.builder().build());
+            Comment mock = CommentMock.createdMock(user, contents);
 
-    BDDMockito.given(userRepository.findById(any())).willReturn(userOptional);
+            when(userReader.get(any())).thenReturn(user);
 
-    BDDMockito.given(contentsRepository.findById(any())).willReturn(contentsOptional);
+            when(contentsReader.get(any())).thenThrow(new NoDataException(MsgType.NoContentsData));
 
-    BDDMockito.given(commentRepository.save(any())).willReturn(mock);
+            ContentsCommentRequest dto = CommentMock.createdStoreDTO();
 
-    ContentsCommentRequest dto = CommentMock.createdStoreDTO();
+            NoDataException e = Assertions.assertThrows(NoDataException.class, () -> commentService.created(dto));
 
-//    org.junit.jupiter.api.Assertions.assertThrows(
-//        NoDataException.class, () -> commentService.createdComment(dto));
-  }
+            verify(userReader, times(0)).get(any());
+
+            verify(contentsReader, times(1)).get(any());
+
+            Assertions.assertEquals(e.getMsgType(), MsgType.NoContentsData);
+            Assertions.assertEquals(e.getMessage(), MsgType.NoContentsData.getMessage());
+        }
+
+
+    }
+
 }
