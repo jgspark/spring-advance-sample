@@ -32,44 +32,45 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(CommentController.class)
 class CommentControllerTest {
 
-  private MockMvc mockMvc;
+    private MockMvc mockMvc;
 
-  @MockBean private CommentService commentService;
+    @MockBean
+    private CommentService commentService;
 
-  @BeforeEach
-  void init() {
-    mockMvc =
-        MockMvcBuilders.standaloneSetup(new CommentController(commentService))
-            .addFilter(new CharacterEncodingFilter("UTF-8", true))
-            .build();
-  }
+    @BeforeEach
+    void init() {
+        mockMvc =
+                MockMvcBuilders.standaloneSetup(new CommentController(commentService))
+                        .addFilter(new CharacterEncodingFilter("UTF-8", true))
+                        .build();
+    }
 
-  @Test
-  @DisplayName("특정 사용자가 해댱 작품에 대한 평가를 할 수 있는 API 테스트 케이스")
-  void writeComment() throws Exception {
+    @Test
+    @DisplayName("특정 사용자가 해댱 작품에 대한 평가를 할 수 있는 API 테스트 케이스")
+    void writeComment() throws Exception {
 
-    Comment mock = CommentMock.createdMock(UserMock.createdMock(), ContentsMock.createdMock());
+        Comment mock = CommentMock.createdMock(UserMock.createdMock(), ContentsMock.createdMock());
 
-//    BDDMockito.given(commentService.createdComment(any())).willReturn(mock);
+        BDDMockito.given(commentService.created(any())).willReturn(mock);
 
-    ContentsCommentRequest dto = CommentMock.createdStoreDTO();
+        ContentsCommentRequest dto = CommentMock.createdStoreDTO();
 
-    ResultActions action =
-        mockMvc
-            .perform(
-                MockMvcRequestBuilders.post("/comment")
-                    .content(JsonUtil.convertObjectToJson(dto))
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .characterEncoding("UTF-8"))
-            .andDo(print());
+        ResultActions action =
+                mockMvc
+                        .perform(
+                                MockMvcRequestBuilders.post("/comment")
+                                        .content(JsonUtil.convertObjectToJson(dto))
+                                        .contentType(MediaType.APPLICATION_JSON)
+                                        .characterEncoding("UTF-8"))
+                        .andDo(print());
 
-//    BDDMockito.then(commentService).should().createdComment(any());
+        BDDMockito.then(commentService).should().created(any());
 
-    action
-        .andExpect(status().isCreated())
-        .andExpect(jsonPath("$['id']['userId']").value(mock.getId().getUserId()))
-        .andExpect(jsonPath("$['id']['contentsId']").value(mock.getId().getContentsId()))
-        .andExpect(jsonPath("$['type']").value(mock.getType().name()))
-        .andExpect(jsonPath("$['comment']").value(mock.getComment()));
-  }
+        action
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$['id']['userId']").value(mock.getId().getUserId()))
+                .andExpect(jsonPath("$['id']['contentsId']").value(mock.getId().getContentsId()))
+                .andExpect(jsonPath("$['type']").value(mock.getType().name()))
+                .andExpect(jsonPath("$['comment']").value(mock.getComment()));
+    }
 }
