@@ -2,13 +2,13 @@ package com.webtoon.coding.service;
 
 import com.webtoon.coding.domain.comment.Comment;
 import com.webtoon.coding.domain.comment.CommentVerifier;
+import com.webtoon.coding.domain.comment.CommentWriter;
 import com.webtoon.coding.domain.content.Contents;
 import com.webtoon.coding.domain.core.Reader;
 import com.webtoon.coding.domain.user.User;
 import com.webtoon.coding.dto.request.ContentsCommentRequest;
 import com.webtoon.coding.exception.MsgType;
 import com.webtoon.coding.exception.NoDataException;
-import com.webtoon.coding.infra.repository.comment.CommentRepository;
 import com.webtoon.coding.mock.CommentMock;
 import com.webtoon.coding.mock.ContentsMock;
 import com.webtoon.coding.mock.UserMock;
@@ -37,7 +37,7 @@ class CommentServiceTest {
     private Reader<User> userReader;
 
     @Mock
-    private CommentRepository commentRepository;
+    private CommentWriter commentWriter;
 
     @Mock
     private CommentVerifier commentVerifier;
@@ -48,7 +48,7 @@ class CommentServiceTest {
                 commentVerifier,
                 contentsReader,
                 userReader,
-                commentRepository
+                commentWriter
         );
     }
 
@@ -70,7 +70,7 @@ class CommentServiceTest {
 
             when(contentsReader.get(any())).thenReturn(contents);
 
-            when(commentRepository.save(any())).thenReturn(mock);
+            when(commentWriter.write(any())).thenReturn(mock);
 
             ContentsCommentRequest dto = CommentMock.createdStoreDTO();
 
@@ -80,7 +80,7 @@ class CommentServiceTest {
 
             verify(contentsReader, times(1)).get(any());
 
-            verify(commentRepository, times(1)).save(any());
+            verify(commentWriter, times(1)).write(any());
 
             org.assertj.core.api.Assertions.assertThat(entity).isEqualTo(mock);
 

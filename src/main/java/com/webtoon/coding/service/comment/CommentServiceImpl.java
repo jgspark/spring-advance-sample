@@ -2,12 +2,12 @@ package com.webtoon.coding.service.comment;
 
 import com.webtoon.coding.domain.comment.Comment;
 import com.webtoon.coding.domain.comment.CommentVerifier;
+import com.webtoon.coding.domain.comment.CommentWriter;
+import com.webtoon.coding.domain.comment.ContentsComment;
 import com.webtoon.coding.domain.content.Contents;
 import com.webtoon.coding.domain.core.Reader;
 import com.webtoon.coding.domain.user.User;
-import com.webtoon.coding.domain.comment.ContentsComment;
 import com.webtoon.coding.dto.request.ContentsCommentRequest;
-import com.webtoon.coding.infra.repository.comment.CommentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,7 +22,7 @@ public class CommentServiceImpl implements CommentService {
 
     private final Reader<User> userReader;
 
-    private final CommentRepository commentRepository;
+    private final CommentWriter commentWriter;
 
     @Override
     @Transactional
@@ -38,6 +38,6 @@ public class CommentServiceImpl implements CommentService {
         // 컨텐츠 코멘트 객체는 생성을한다.
         Comment entity = contentsComment.created(verifier);
 
-        return commentRepository.save(entity);
+        return commentWriter.write(entity);
     }
 }
