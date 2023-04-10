@@ -6,7 +6,7 @@ import com.webtoon.coding.mock.ContentsMock;
 import com.webtoon.coding.mock.UserMock;
 import com.webtoon.coding.service.comment.CommentService;
 import com.webtoon.coding.dto.request.ContentsCommentRequest;
-import com.webtoon.coding.util.JsonUtil;
+import com.webtoon.coding.mock.JsonUtil;
 import com.webtoon.coding.web.comment.CommentController;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

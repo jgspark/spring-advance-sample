@@ -10,7 +10,7 @@ import com.webtoon.coding.dto.ContentsInfo;
 import com.webtoon.coding.dto.SelectContentsStoreDTO;
 import com.webtoon.coding.dto.TopContents;
 import com.webtoon.coding.dto.UpdatedContentsStoreDTO;
-import com.webtoon.coding.util.JsonUtil;
+import com.webtoon.coding.mock.JsonUtil;
 import com.webtoon.coding.web.contents.ContentsController;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

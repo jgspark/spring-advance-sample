@@ -1,4 +1,4 @@
-package com.webtoon.coding.util;
+package com.webtoon.coding.mock;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
