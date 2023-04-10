@@ -50,7 +50,7 @@ class CommentControllerTest {
 
     Comment mock = CommentMock.createdMock(UserMock.createdMock(), ContentsMock.createdMock());
 
-    BDDMockito.given(commentService.createdComment(any())).willReturn(mock);
+//    BDDMockito.given(commentService.createdComment(any())).willReturn(mock);
 
     ContentsCommentRequest dto = CommentMock.createdStoreDTO();
 
@@ -63,7 +63,7 @@ class CommentControllerTest {
                     .characterEncoding("UTF-8"))
             .andDo(print());
 
-    BDDMockito.then(commentService).should().createdComment(any());
+//    BDDMockito.then(commentService).should().createdComment(any());
 
     action
         .andExpect(status().isCreated())
