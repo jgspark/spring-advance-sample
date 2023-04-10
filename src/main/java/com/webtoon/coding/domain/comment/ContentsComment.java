@@ -48,11 +48,11 @@ public class ContentsComment {
                 .build();
     }
 
-    public String getComment() {
+    String getComment() {
         return comment;
     }
 
-    public Evaluation getType() {
+    Evaluation getType() {
         return type;
     }
 }
