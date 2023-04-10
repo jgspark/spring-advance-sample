@@ -3,7 +3,7 @@ package com.webtoon.coding.repository;
 import com.webtoon.coding.config.JPAConfiguration;
 import com.webtoon.coding.domain.user.User;
 import com.webtoon.coding.mock.UserMock;
-import com.webtoon.coding.repository.user.UserRepository;
+import com.webtoon.coding.infra.repository.user.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

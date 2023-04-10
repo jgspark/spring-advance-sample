@@ -1,4 +1,4 @@
-package com.webtoon.coding.repository.contents;
+package com.webtoon.coding.infra.repository.contents;
 
 import com.webtoon.coding.domain.content.Policy;
 import com.webtoon.coding.domain.content.Contents;

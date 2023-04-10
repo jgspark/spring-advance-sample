@@ -1,4 +1,4 @@
-package com.webtoon.coding.repository.history;
+package com.webtoon.coding.infra.repository.history;
 
 import com.webtoon.coding.domain.content.Adult;
 import com.webtoon.coding.domain.history.History;

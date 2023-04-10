@@ -1,4 +1,4 @@
-package com.webtoon.coding.repository.comment;
+package com.webtoon.coding.infra.repository.comment;
 
 import com.webtoon.coding.domain.comment.Comment;
 import com.webtoon.coding.domain.comment.CommentKey;

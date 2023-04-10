@@ -7,38 +7,42 @@ import com.webtoon.coding.domain.comment.Evaluation;
 import com.webtoon.coding.domain.content.Contents;
 import com.webtoon.coding.domain.user.User;
 
-import java.util.Optional;
-
+/**
+ * 협력 : Comment
+ * 의존 : User 와 Contents 에 의존적이다.
+ * 책임 : CommentVerifier (체크하라)
+ * 역할 : CommentVerifier (체크하라)
+ */
 public class ContentsComment {
-
-    private Optional<User> userOptional;
-
-    private Optional<Contents> contentsOptional;
 
     private final String comment;
 
     private final Evaluation type;
 
-    public static ContentsComment of(Optional<User> userOptional, Optional<Contents> contentsOptional, String comment, Evaluation type) {
-        return new ContentsComment(userOptional, contentsOptional, comment, type);
+    private final User user;
+
+    private final Contents contents;
+
+    public static ContentsComment of(
+            String comment,
+            Evaluation type,
+            User user,
+            Contents contents
+    ) {
+        return new ContentsComment(comment, type, user, contents);
     }
 
-    private ContentsComment(Optional<User> userOptional, Optional<Contents> contentsOptional, String comment, Evaluation type) {
-        this.userOptional = userOptional;
-        this.contentsOptional = contentsOptional;
+    private ContentsComment(String comment, Evaluation type, User user, Contents contents) {
         this.comment = comment;
         this.type = type;
+        this.user = user;
+        this.contents = contents;
     }
+
 
     public Comment created(CommentVerifier verifier) {
 
-        // 체크를 한다.
         verifier.verify(this);
-
-        // 체크가 끝나면 Comment 객체에 책임 위임?
-        User user = userOptional.get();
-
-        Contents contents = contentsOptional.get();
 
         return Comment.builder()
                 .id(new CommentKey(user.getId(), contents.getId()))
@@ -47,14 +51,6 @@ public class ContentsComment {
                 .user(user)
                 .contents(contents)
                 .build();
-    }
-
-    public Optional<User> getUserOptional() {
-        return userOptional;
-    }
-
-    public Optional<Contents> getContentsOptional() {
-        return contentsOptional;
     }
 
     public String getComment() {

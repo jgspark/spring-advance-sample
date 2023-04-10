@@ -6,7 +6,7 @@ import com.webtoon.coding.domain.content.Contents;
 import com.webtoon.coding.mock.ContentsMock;
 import com.webtoon.coding.mock.DateMock;
 import com.webtoon.coding.mock.DtoMock;
-import com.webtoon.coding.repository.contents.ContentsRepository;
+import com.webtoon.coding.infra.repository.contents.ContentsRepository;
 import com.webtoon.coding.service.contents.ContentsService;
 import com.webtoon.coding.service.contents.ContentsServiceImpl;
 import com.webtoon.coding.dto.ContentsInfo;

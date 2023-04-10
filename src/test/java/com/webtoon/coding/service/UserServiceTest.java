@@ -1,8 +1,8 @@
 package com.webtoon.coding.service;
 
-import com.webtoon.coding.repository.comment.CommentRepository;
-import com.webtoon.coding.repository.history.HistoryRepository;
-import com.webtoon.coding.repository.user.UserRepository;
+import com.webtoon.coding.infra.repository.comment.CommentRepository;
+import com.webtoon.coding.infra.repository.history.HistoryRepository;
+import com.webtoon.coding.infra.repository.user.UserRepository;
 import com.webtoon.coding.service.user.UserService;
 import com.webtoon.coding.service.user.UserServiceImpl;
 import org.junit.jupiter.api.BeforeEach;

@@ -1,7 +1,7 @@
 package com.webtoon.coding.service.history;
 
 import com.webtoon.coding.domain.content.Adult;
-import com.webtoon.coding.repository.history.HistoryRepository;
+import com.webtoon.coding.infra.repository.history.HistoryRepository;
 import com.webtoon.coding.dto.HistoryInfo;
 import com.webtoon.coding.dto.HistoryUser;
 import com.webtoon.coding.dto.PageDTO;

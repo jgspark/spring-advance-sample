@@ -3,7 +3,7 @@ package com.webtoon.coding.service;
 import com.webtoon.coding.mock.ContentsMock;
 import com.webtoon.coding.mock.HistoryMock;
 import com.webtoon.coding.mock.UserMock;
-import com.webtoon.coding.repository.history.HistoryRepository;
+import com.webtoon.coding.infra.repository.history.HistoryRepository;
 import com.webtoon.coding.dto.HistoryInfo;
 import com.webtoon.coding.dto.HistoryUser;
 import com.webtoon.coding.dto.PageDTO;

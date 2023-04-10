@@ -1,4 +1,4 @@
-package com.webtoon.coding.repository.contents;
+package com.webtoon.coding.infra.repository.contents;
 
 import com.webtoon.coding.domain.comment.Evaluation;
 import com.webtoon.coding.dto.TopContents;
