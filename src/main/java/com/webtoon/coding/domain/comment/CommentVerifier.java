@@ -1,27 +1,31 @@
 package com.webtoon.coding.domain.comment;
 
-import com.webtoon.coding.dto.model.comment.ContentsComment;
 import com.webtoon.coding.exception.DomainException;
 import com.webtoon.coding.exception.MsgType;
+import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
-import java.util.Objects;
 import java.util.regex.Pattern;
 
 @Component
 public class CommentVerifier {
 
-    public void verify(ContentsComment comment) {
+    void verify(ContentsComment comment) {
 
         if (isNotIncludeSymbol(comment.getComment())) {
             throw new DomainException(MsgType.CommentDataException);
+        }
+
+        if (ObjectUtils.isEmpty(comment.getType())) {
+            throw new DomainException(MsgType.EvaluationDataException);
         }
     }
 
     private boolean isNotIncludeSymbol(String comment) {
 
-        if (Objects.isNull(comment) || comment.isBlank()) {
-            return false;
+        if (StringUtils.isEmpty(comment) || StringUtils.isBlank(comment)) {
+            return true;
         }
 
         Pattern pattern2 = Pattern.compile("[!@#$%^&*(),.?\":{}|<>]");

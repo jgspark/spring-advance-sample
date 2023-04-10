@@ -5,7 +5,7 @@ import com.webtoon.coding.domain.comment.CommentVerifier;
 import com.webtoon.coding.domain.content.Contents;
 import com.webtoon.coding.domain.core.Reader;
 import com.webtoon.coding.domain.user.User;
-import com.webtoon.coding.dto.model.comment.ContentsComment;
+import com.webtoon.coding.domain.comment.ContentsComment;
 import com.webtoon.coding.dto.request.ContentsCommentRequest;
 import com.webtoon.coding.infra.repository.comment.CommentRepository;
 import lombok.RequiredArgsConstructor;

@@ -1,9 +1,5 @@
-package com.webtoon.coding.dto.model.comment;
+package com.webtoon.coding.domain.comment;
 
-import com.webtoon.coding.domain.comment.Comment;
-import com.webtoon.coding.domain.comment.CommentKey;
-import com.webtoon.coding.domain.comment.CommentVerifier;
-import com.webtoon.coding.domain.comment.Evaluation;
 import com.webtoon.coding.domain.content.Contents;
 import com.webtoon.coding.domain.user.User;
 
@@ -39,7 +35,6 @@ public class ContentsComment {
         this.contents = contents;
     }
 
-
     public Comment created(CommentVerifier verifier) {
 
         verifier.verify(this);
@@ -55,5 +50,9 @@ public class ContentsComment {
 
     public String getComment() {
         return comment;
+    }
+
+    public Evaluation getType() {
+        return type;
     }
 }

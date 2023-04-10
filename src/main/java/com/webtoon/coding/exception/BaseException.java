@@ -1,16 +1,23 @@
 package com.webtoon.coding.exception;
 
-import com.webtoon.coding.exception.MsgType;
-
 public class BaseException extends RuntimeException {
 
-  private final MsgType msgType;
+    private MsgType msgType;
 
-  public BaseException(MsgType msgType) {
-    this.msgType = msgType;
-  }
+    public BaseException(MsgType msgType) {
+        this.msgType = msgType;
+    }
 
-  public MsgType getMsgType() {
-    return msgType;
-  }
+    public BaseException(MsgType msgType, String message) {
+        super(message);
+        this.msgType = msgType;
+    }
+
+    public BaseException(String message) {
+        super(message);
+    }
+
+    public MsgType getMsgType() {
+        return msgType;
+    }
 }
