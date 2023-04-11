@@ -32,7 +32,7 @@ class CommentWriterTest {
 
     @Nested
     @DisplayName("저장 메소드는")
-    public class WriteMethod {
+    public class Save {
 
         @Test
         @DisplayName("성공적으로 실행이 된다.")
@@ -42,7 +42,7 @@ class CommentWriterTest {
 
             when(commentRepository.save(any())).thenReturn(mock);
 
-            Comment entity = commentWriter.write(mock);
+            Comment entity = commentWriter.save(mock);
 
             assertEquals(entity.getId(), mock.getId());
             assertEquals(entity.getType(), mock.getType());

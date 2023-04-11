@@ -70,7 +70,7 @@ class CommentServiceTest {
 
             when(contentsReader.get(any())).thenReturn(contents);
 
-            when(commentWriter.write(any())).thenReturn(mock);
+            when(commentWriter.save(any())).thenReturn(mock);
 
             ContentsCommentRequest dto = CommentMock.createdStoreDTO();
 
@@ -80,7 +80,7 @@ class CommentServiceTest {
 
             verify(contentsReader, times(1)).get(any());
 
-            verify(commentWriter, times(1)).write(any());
+            verify(commentWriter, times(1)).save(any());
 
             org.assertj.core.api.Assertions.assertThat(entity).isEqualTo(mock);
 

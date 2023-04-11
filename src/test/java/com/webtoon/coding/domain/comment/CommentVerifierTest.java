@@ -34,7 +34,7 @@ class CommentVerifierTest {
         @MethodSource("com.webtoon.coding.domain.comment.CommentVerifierTest#verifyFailByCommentCaseArgs")
         public void testVerifyFailByCommentCase(String comment) {
 
-            ContentsComment contentsComment = ContentsComment.of(
+            Comment contentsComment = Comment.of(
                     comment,
                     Evaluation.BAD,
                     User.builder().build(),
@@ -51,7 +51,7 @@ class CommentVerifierTest {
         @MethodSource("com.webtoon.coding.domain.comment.CommentVerifierTest#verifyFailByTypeCaseArgs")
         public void testVerifyFailByTypeCase(Evaluation type) {
 
-            ContentsComment contentsComment = ContentsComment.of(
+            Comment contentsComment = Comment.of(
                     "하하핳",
                     type,
                     User.builder().build(),
@@ -64,27 +64,33 @@ class CommentVerifierTest {
             assertEquals(e.getMessage(), MsgType.EvaluationDataException.getMessage());
         }
 
-        @Test
-        @DisplayName("성공을 하게 된다.")
-        public void testVerifySuccess() {
+        @ParameterizedTest(name = "댓글은 {0} 이기 때문에 성공를 한다.")
+        @MethodSource("com.webtoon.coding.domain.comment.CommentVerifierTest#testVerifySuccessArgs")
+        public void testVerifySuccess(String comment) {
 
-            ContentsComment comment = ContentsComment.of(
-                    "hello",
+            Comment contentsComment = Comment.of(
+                    comment,
                     Evaluation.GOOD,
                     User.builder().build(),
                     Contents.builder().build()
             );
 
-            assertDoesNotThrow(() -> commentVerifier.verify(comment));
+            assertDoesNotThrow(() -> commentVerifier.verify(contentsComment));
         }
 
+    }
+
+    private static Stream<Arguments> testVerifySuccessArgs() {
+        return Stream.of(
+                Arguments.of(" "),
+                Arguments.of("hello")
+        );
     }
 
     private static Stream<Arguments> verifyFailByCommentCaseArgs() {
         return Stream.of(
                 Arguments.of((Object) null),
                 Arguments.of(""),
-                Arguments.of("  "),
                 Arguments.of("hello^^"),
                 Arguments.of("he!!llo"),
                 Arguments.of("!!hello")
