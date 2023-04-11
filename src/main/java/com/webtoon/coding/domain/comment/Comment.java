@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Builder
 @Entity
 @Getter
-@AllArgsConstructor
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @EqualsAndHashCode(of = {"id"})
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = {"user_id", "contents_id"}))
@@ -33,4 +33,18 @@ public class Comment {
     @MapsId("contentsId")
     @JoinColumn(name = "contents_id", insertable = false, updatable = false)
     private Contents contents;
+
+    public void write(CommentVerifier verifier) {
+        verifier.verify(this);
+    }
+
+    public static Comment of(String comment, Evaluation type, User user, Contents contents) {
+        return Comment.builder()
+                .id(new CommentKey(user.getId(), contents.getId()))
+                .comment(comment)
+                .type(type)
+                .user(user)
+                .contents(contents)
+                .build();
+    }
 }

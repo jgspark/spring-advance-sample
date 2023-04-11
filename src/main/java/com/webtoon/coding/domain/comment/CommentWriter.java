@@ -12,7 +12,7 @@ public class CommentWriter {
     private final CommentRepository commentRepository;
 
     @Transactional
-    public Comment write(Comment comment) {
+    public Comment save(Comment comment) {
         return commentRepository.save(comment);
     }
 }

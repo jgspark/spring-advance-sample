@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
 @Component
 public class CommentVerifier {
 
-    void verify(ContentsComment comment) {
+    void verify(Comment comment) {
 
         if (isNotIncludeSymbol(comment.getComment())) {
             throw new DomainException(MsgType.CommentDataException);
@@ -24,8 +24,12 @@ public class CommentVerifier {
 
     private boolean isNotIncludeSymbol(String comment) {
 
-        if (StringUtils.isEmpty(comment) || StringUtils.isBlank(comment)) {
+        if (StringUtils.isEmpty(comment)) {
             return true;
+        }
+
+        if (StringUtils.isBlank(comment)) {
+            return false;
         }
 
         Pattern pattern2 = Pattern.compile("[!@#$%^&*(),.?\":{}|<>]");
