@@ -8,87 +8,93 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 class ContentsTest {
 
-  @Test
-  @DisplayName("free 타입으로 변경")
-  void changedFreeType() {
+    @Test
+    @DisplayName("free 타입으로 변경")
+    void changedFreeType() {
 
-    Contents mock = ContentsMock.createdMock();
+        Contents mock = ContentsMock.createdMock();
 
-    mock.changedFreeType();
+        mock.changeDetail(Policy.FREE, null);
 
-    Assertions.assertEquals(Policy.FREE, mock.getType());
-  }
+        assertEquals(Policy.FREE, mock.getType());
+    }
 
-  @Test
-  @DisplayName("유로 타입으로 변경")
-  void changedPagar() {
-    Contents mock = ContentsMock.createdMock();
+    @Test
+    @DisplayName("유로 타입으로 변경")
+    void changedPagar() {
 
-    mock.changedPagar();
+        final Integer coin = 1000;
 
-    Assertions.assertEquals(Policy.PAGAR, mock.getType());
-  }
+        Contents mock = ContentsMock.createdMock();
 
-  @Test
-  @DisplayName("free 타입 테스트 케이스")
-  void checkedTypeAndCoin_freeType() {
+        mock.changeDetail(Policy.PAGAR, coin.toString());
 
-    Contents mock = ContentsMock.createdMock();
+        assertEquals(Policy.PAGAR, mock.getType());
+        assertEquals(coin.toString(), mock.getCoin());
+    }
 
-    mock.checkedTypeAndCoin();
+    @Test
+    @DisplayName("free 타입 테스트 케이스")
+    void checkedTypeAndCoin_freeType() {
 
-    Assertions.assertEquals("0", mock.getCoin());
-  }
+        Contents mock = ContentsMock.createdMock();
 
-  @Test
-  @DisplayName("유료 타입 테스트 케이스")
-  void checkedTypeAndCoin_pagarType() {
+        mock.checkedTypeAndCoin();
 
-    Contents mock =
-        Contents.builder()
-            .id(1L)
-            .name("test1")
-            .author("test1")
-            .type(Policy.PAGAR)
-            .coin("100")
-            .build();
+        assertEquals("0", mock.getCoin());
+    }
 
-    mock.checkedTypeAndCoin();
+    @Test
+    @DisplayName("유료 타입 테스트 케이스")
+    void checkedTypeAndCoin_pagarType() {
 
-    Assertions.assertEquals("100", mock.getCoin());
-  }
+        Contents mock =
+                Contents.builder()
+                        .id(1L)
+                        .name("test1")
+                        .author("test1")
+                        .type(Policy.PAGAR)
+                        .coin("100")
+                        .build();
 
-  @Test
-  @DisplayName("유료 타입 이하 테스트 케이스")
-  void checkedTypeAndCoin_이하() {
+        mock.checkedTypeAndCoin();
 
-    Contents mock =
-        Contents.builder()
-            .id(1L)
-            .name("test1")
-            .author("test1")
-            .type(Policy.PAGAR)
-            .coin("99")
-            .build();
+        assertEquals("100", mock.getCoin());
+    }
 
-    Assertions.assertThrows(DomainException.class, () -> mock.checkedTypeAndCoin());
-  }
+    @Test
+    @DisplayName("유료 타입 이하 테스트 케이스")
+    void checkedTypeAndCoin_이하() {
 
-  @Test
-  @DisplayName("유료 타입 초과 테스트 케이스")
-  void checkedTypeAndCoin_초과() {
+        Contents mock =
+                Contents.builder()
+                        .id(1L)
+                        .name("test1")
+                        .author("test1")
+                        .type(Policy.PAGAR)
+                        .coin("99")
+                        .build();
 
-    Contents mock =
-        Contents.builder()
-            .id(1L)
-            .name("test1")
-            .author("test1")
-            .type(Policy.PAGAR)
-            .coin("501")
-            .build();
+        Assertions.assertThrows(DomainException.class, () -> mock.checkedTypeAndCoin());
+    }
 
-    Assertions.assertThrows(DomainException.class, () -> mock.checkedTypeAndCoin());
-  }
+    @Test
+    @DisplayName("유료 타입 초과 테스트 케이스")
+    void checkedTypeAndCoin_초과() {
+
+        Contents mock =
+                Contents.builder()
+                        .id(1L)
+                        .name("test1")
+                        .author("test1")
+                        .type(Policy.PAGAR)
+                        .coin("501")
+                        .build();
+
+        Assertions.assertThrows(DomainException.class, () -> mock.checkedTypeAndCoin());
+    }
 }

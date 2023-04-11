@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Component
 @RequiredArgsConstructor
 public class UserReader implements Reader<User> {
@@ -19,5 +21,10 @@ public class UserReader implements Reader<User> {
     public User get(Long id) {
         return userRepository.findById(id)
                 .orElseThrow(() -> new NoDataException(MsgType.NoUserData));
+    }
+
+    @Override
+    public <T> Optional<T> get(Long id, Class<T> type) {
+        return Optional.empty();
     }
 }

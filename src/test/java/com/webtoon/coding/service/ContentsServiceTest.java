@@ -1,5 +1,6 @@
 package com.webtoon.coding.service;
 
+import com.webtoon.coding.domain.contents.ContentReader;
 import com.webtoon.coding.domain.contents.Policy;
 import com.webtoon.coding.domain.comment.Evaluation;
 import com.webtoon.coding.domain.contents.Contents;
@@ -12,7 +13,7 @@ import com.webtoon.coding.service.contents.ContentsServiceImpl;
 import com.webtoon.coding.dto.ContentsInfo;
 import com.webtoon.coding.dto.SelectContentsStoreDTO;
 import com.webtoon.coding.dto.TopContents;
-import com.webtoon.coding.dto.UpdatedContentsStoreDTO;
+import com.webtoon.coding.dto.request.UpdatedContentsRequest;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -35,127 +36,131 @@ import static org.mockito.ArgumentMatchers.eq;
 @MockitoSettings(strictness = Strictness.LENIENT)
 class ContentsServiceTest {
 
-  private ContentsService contentsService;
+    private ContentsService contentsService;
 
-  @Mock private ContentsRepository contentsRepository;
+    @Mock
+    private ContentsRepository contentsRepository;
 
-  @BeforeEach
-  void init() {
-    contentsService = new ContentsServiceImpl(contentsRepository);
-  }
+    @Mock
+    private ContentReader contentReader;
 
-  @Test
-  @DisplayName("top3 로직 테스트 케이스")
-  void getTopContents() {
+    @BeforeEach
+    void init() {
+        contentsService = new ContentsServiceImpl(contentsRepository, contentReader);
+    }
 
-    List<TopContents> mocks = ContentsMock.createdTopContentsList();
+    @Test
+    @DisplayName("top3 로직 테스트 케이스")
+    void getTopContents() {
 
-    BDDMockito.given(contentsRepository.findTopByLimitAndType(any(), any())).willReturn(mocks);
+        List<TopContents> mocks = ContentsMock.createdTopContentsList();
 
-    List<TopContents> entities = contentsService.getTopContents(Evaluation.GOOD);
+        BDDMockito.given(contentsRepository.findTopByLimitAndType(any(), any())).willReturn(mocks);
 
-    Assertions.assertEquals(entities.size(), mocks.size());
+        List<TopContents> entities = contentsService.getTopContents(Evaluation.GOOD);
 
-    TopContents entity = entities.get(0);
+        Assertions.assertEquals(entities.size(), mocks.size());
 
-    TopContents mock = mocks.get(0);
+        TopContents entity = entities.get(0);
 
-    BDDMockito.then(contentsRepository).should().findTopByLimitAndType(any(), any());
+        TopContents mock = mocks.get(0);
 
-    Assertions.assertEquals(entity.getId(), mock.getId());
-    Assertions.assertEquals(entity.getName(), mock.getName());
-    Assertions.assertEquals(entity.getAuthor(), mock.getAuthor());
-    Assertions.assertEquals(entity.getType(), mock.getType());
-    Assertions.assertEquals(entity.getCoin(), mock.getCoin());
-    Assertions.assertEquals(entity.getOpenDate(), mock.getOpenDate());
-    Assertions.assertEquals(entity.getSum(), mock.getSum());
-  }
+        BDDMockito.then(contentsRepository).should().findTopByLimitAndType(any(), any());
 
-  @Test
-  @DisplayName("컨텐츠 타입 테스트 케이스")
-  void updatedTypeAndCoin() {
+        Assertions.assertEquals(entity.getId(), mock.getId());
+        Assertions.assertEquals(entity.getName(), mock.getName());
+        Assertions.assertEquals(entity.getAuthor(), mock.getAuthor());
+        Assertions.assertEquals(entity.getType(), mock.getType());
+        Assertions.assertEquals(entity.getCoin(), mock.getCoin());
+        Assertions.assertEquals(entity.getOpenDate(), mock.getOpenDate());
+        Assertions.assertEquals(entity.getSum(), mock.getSum());
+    }
 
-    Optional<Contents> mockOptional = Optional.of(ContentsMock.createdMock());
+    @Test
+    @DisplayName("컨텐츠 타입 테스트 케이스")
+    void updatedTypeAndCoin() {
 
-    final Long id = 1L;
+        Optional<Contents> mockOptional = Optional.of(ContentsMock.createdMock());
 
-    final UpdatedContentsStoreDTO dto = new UpdatedContentsStoreDTO(Policy.PAGAR, 100);
+        final Long id = 1L;
 
-    BDDMockito.given(contentsRepository.findById(any())).willReturn(mockOptional);
+        final UpdatedContentsRequest dto = new UpdatedContentsRequest(Policy.PAGAR, 100);
 
-    Optional<Contents> entityOptional = contentsService.updatedTypeAndCoin(id, dto);
+        BDDMockito.given(contentsRepository.findById(any())).willReturn(mockOptional);
 
-    Contents entity = entityOptional.get();
+        Optional<Contents> entityOptional = contentsService.updatedTypeAndCoin(id, dto);
 
-    Contents mock = mockOptional.get();
+        Contents entity = entityOptional.get();
 
-    Assertions.assertEquals(entity.getId(), mock.getId());
-    Assertions.assertEquals(entity.getName(), mock.getName());
-    Assertions.assertEquals(entity.getAuthor(), mock.getAuthor());
-    Assertions.assertEquals(entity.getType(), dto.getType());
-    Assertions.assertEquals(entity.getCoin(), dto.getCoin().toString());
-    Assertions.assertEquals(entity.getOpenDate(), mock.getOpenDate());
-  }
+        Contents mock = mockOptional.get();
 
-  @Test
-  @DisplayName("컨텐츠 목록 조회 테스트 케이스")
-  void getContents() {
+        Assertions.assertEquals(entity.getId(), mock.getId());
+        Assertions.assertEquals(entity.getName(), mock.getName());
+        Assertions.assertEquals(entity.getAuthor(), mock.getAuthor());
+        Assertions.assertEquals(entity.getType(), dto.getType());
+        Assertions.assertEquals(entity.getCoin(), dto.getCoin().toString());
+        Assertions.assertEquals(entity.getOpenDate(), mock.getOpenDate());
+    }
 
-    SelectContentsStoreDTO dto = DtoMock.getSelectContentsStoreDTO();
+    @Test
+    @DisplayName("컨텐츠 목록 조회 테스트 케이스")
+    void getContents() {
 
-    Page<ContentsInfo> mocks = ContentsMock.getPageContentsInfo();
+        SelectContentsStoreDTO dto = DtoMock.getSelectContentsStoreDTO();
 
-    BDDMockito.given(contentsRepository.findByType(any(), any(), eq(ContentsInfo.class)))
-        .willReturn(mocks);
+        Page<ContentsInfo> mocks = ContentsMock.getPageContentsInfo();
 
-    Page<ContentsInfo> entities = contentsService.getContents(dto);
+        BDDMockito.given(contentsRepository.findByType(any(), any(), eq(ContentsInfo.class)))
+                .willReturn(mocks);
 
-    BDDMockito.then(contentsRepository).should().findByType(any(), any(), eq(ContentsInfo.class));
+        Page<ContentsInfo> entities = contentsService.getContents(dto);
 
-    List<ContentsInfo> mockContent = mocks.getContent();
+        BDDMockito.then(contentsRepository).should().findByType(any(), any(), eq(ContentsInfo.class));
 
-    List<ContentsInfo> entitiesContent = entities.getContent();
+        List<ContentsInfo> mockContent = mocks.getContent();
 
-    Assertions.assertEquals(entitiesContent.size(), mockContent.size());
+        List<ContentsInfo> entitiesContent = entities.getContent();
 
-    ContentsInfo entity = entitiesContent.get(0);
+        Assertions.assertEquals(entitiesContent.size(), mockContent.size());
 
-    ContentsInfo mock = mockContent.get(0);
+        ContentsInfo entity = entitiesContent.get(0);
 
-    Assertions.assertEquals(entity.getName(), mock.getName());
-    Assertions.assertEquals(entity.getAuthor(), mock.getAuthor());
-    Assertions.assertEquals(entity.getType(), mock.getType());
-    Assertions.assertEquals(entity.getCoin(), mock.getCoin());
-    Assertions.assertEquals(
-        DateMock.changedFormatDate(entity.getOpenDate()),
-        DateMock.changedFormatDate(mock.getOpenDate()));
-  }
+        ContentsInfo mock = mockContent.get(0);
 
-  @Test
-  @DisplayName("하나만 조회 테스트 케이스")
-  void getContentsOne() {
+        Assertions.assertEquals(entity.getName(), mock.getName());
+        Assertions.assertEquals(entity.getAuthor(), mock.getAuthor());
+        Assertions.assertEquals(entity.getType(), mock.getType());
+        Assertions.assertEquals(entity.getCoin(), mock.getCoin());
+        Assertions.assertEquals(
+                DateMock.changedFormatDate(entity.getOpenDate()),
+                DateMock.changedFormatDate(mock.getOpenDate()));
+    }
 
-    Optional<ContentsInfo> mockOptional = Optional.of(ContentsMock.getContentsInfo());
+    @Test
+    @DisplayName("하나만 조회 테스트 케이스")
+    void getContentsOne() {
 
-    BDDMockito.given(contentsRepository.findById(any(), eq(ContentsInfo.class)))
-        .willReturn(mockOptional);
+        Optional<ContentsInfo> mockOptional = Optional.of(ContentsMock.getContentsInfo());
 
-    Optional<ContentsInfo> entityOptional = contentsService.getContentsOne(1L);
+        BDDMockito.given(contentsRepository.findById(any(), eq(ContentsInfo.class)))
+                .willReturn(mockOptional);
 
-    BDDMockito.then(contentsRepository).should().findById(any(), eq(ContentsInfo.class));
+        Optional<ContentsInfo> entityOptional = contentsService.getContentsOne(1L);
 
-    Assertions.assertEquals(entityOptional.isPresent(), mockOptional.isPresent());
+        BDDMockito.then(contentsRepository).should().findById(any(), eq(ContentsInfo.class));
 
-    ContentsInfo entity = entityOptional.get();
+        Assertions.assertEquals(entityOptional.isPresent(), mockOptional.isPresent());
 
-    ContentsInfo mock = mockOptional.get();
+        ContentsInfo entity = entityOptional.get();
 
-    Assertions.assertEquals(entity.getName(), mock.getName());
-    Assertions.assertEquals(entity.getAuthor(), mock.getAuthor());
-    Assertions.assertEquals(entity.getType(), mock.getType());
-    Assertions.assertEquals(entity.getCoin(), mock.getCoin());
-    Assertions.assertEquals(
-        DateMock.changedFormatDate(entity.getOpenDate()),
-        DateMock.changedFormatDate(mock.getOpenDate()));
-  }
+        ContentsInfo mock = mockOptional.get();
+
+        Assertions.assertEquals(entity.getName(), mock.getName());
+        Assertions.assertEquals(entity.getAuthor(), mock.getAuthor());
+        Assertions.assertEquals(entity.getType(), mock.getType());
+        Assertions.assertEquals(entity.getCoin(), mock.getCoin());
+        Assertions.assertEquals(
+                DateMock.changedFormatDate(entity.getOpenDate()),
+                DateMock.changedFormatDate(mock.getOpenDate()));
+    }
 }

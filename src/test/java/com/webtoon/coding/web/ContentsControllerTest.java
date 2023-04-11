@@ -9,7 +9,7 @@ import com.webtoon.coding.service.contents.ContentsService;
 import com.webtoon.coding.dto.ContentsInfo;
 import com.webtoon.coding.dto.SelectContentsStoreDTO;
 import com.webtoon.coding.dto.TopContents;
-import com.webtoon.coding.dto.UpdatedContentsStoreDTO;
+import com.webtoon.coding.dto.request.UpdatedContentsRequest;
 import com.webtoon.coding.mock.JsonUtil;
 import com.webtoon.coding.web.contents.ContentsController;
 import org.junit.jupiter.api.BeforeEach;
@@ -86,7 +86,7 @@ class ContentsControllerTest {
   @DisplayName("특정 작품을 유료, 무료로 변경 할 수 있는 API")
   void patchContents() throws Exception {
 
-    final UpdatedContentsStoreDTO dto = new UpdatedContentsStoreDTO(Policy.PAGAR, 100);
+    final UpdatedContentsRequest dto = new UpdatedContentsRequest(Policy.PAGAR, 100);
 
     Optional<Contents> mockOptional = Optional.of(ContentsMock.createdMock());
 

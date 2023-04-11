@@ -6,7 +6,7 @@ import com.webtoon.coding.service.contents.ContentsService;
 import com.webtoon.coding.dto.ContentsInfo;
 import com.webtoon.coding.dto.SelectContentsStoreDTO;
 import com.webtoon.coding.dto.TopContents;
-import com.webtoon.coding.dto.UpdatedContentsStoreDTO;
+import com.webtoon.coding.dto.request.UpdatedContentsRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -36,9 +36,9 @@ public class ContentsController {
 
   @PatchMapping("contents/{id}")
   public ResponseEntity<Contents> patchContents(
-      @PathVariable Long id, @RequestBody @Valid UpdatedContentsStoreDTO dto) {
+      @PathVariable Long id, @RequestBody @Valid UpdatedContentsRequest request) {
 
-    Optional<Contents> data = contentsService.updatedTypeAndCoin(id, dto);
+    Optional<Contents> data = contentsService.updatedTypeAndCoin(id, request);
 
     return data.map(contents -> ResponseEntity.ok().body(contents)).orElseGet(() -> ResponseEntity.status(HttpStatus.ACCEPTED).build());
   }

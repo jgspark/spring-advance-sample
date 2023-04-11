@@ -1,19 +1,21 @@
-package com.webtoon.coding.dto;
+package com.webtoon.coding.dto.request;
 
 import com.webtoon.coding.domain.contents.Policy;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.apache.commons.lang3.ObjectUtils;
 
 import javax.validation.constraints.NotNull;
 
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class UpdatedContentsStoreDTO {
+public class UpdatedContentsRequest {
 
-  @NotNull
-  private Policy type;
+    @NotNull
+    private Policy type;
 
-  private Integer coin;
+    private String coin;
+
 }

@@ -2,7 +2,9 @@ package com.webtoon.coding.domain.core;
 
 import java.util.Optional;
 
-public interface Reader<T> {
+public interface Reader<D> {
 
-    T get(Long id);
+    D get(Long id);
+
+    <T> Optional<T> get(Long id, Class<T> type);
 }
