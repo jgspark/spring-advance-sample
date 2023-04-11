@@ -1,4 +1,4 @@
-package com.webtoon.coding.domain.content;
+package com.webtoon.coding.domain.contents;
 
 import com.webtoon.coding.exception.DomainException;
 import com.webtoon.coding.exception.MsgType;

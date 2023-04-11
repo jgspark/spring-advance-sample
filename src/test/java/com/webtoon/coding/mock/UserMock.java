@@ -1,6 +1,6 @@
 package com.webtoon.coding.mock;
 
-import com.webtoon.coding.domain.content.Adult;
+import com.webtoon.coding.domain.contents.Adult;
 import com.webtoon.coding.domain.user.Gender;
 import com.webtoon.coding.domain.user.User;
 

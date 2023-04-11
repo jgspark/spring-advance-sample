@@ -1,6 +1,6 @@
 package com.webtoon.coding.domain.user;
 
-import com.webtoon.coding.domain.content.Adult;
+import com.webtoon.coding.domain.contents.Adult;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;

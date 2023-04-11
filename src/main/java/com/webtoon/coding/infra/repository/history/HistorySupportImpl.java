@@ -1,6 +1,6 @@
 package com.webtoon.coding.infra.repository.history;
 
-import com.webtoon.coding.domain.content.Adult;
+import com.webtoon.coding.domain.contents.Adult;
 import com.webtoon.coding.domain.history.History;
 import com.webtoon.coding.dto.HistoryUser;
 import com.querydsl.core.QueryResults;
@@ -14,7 +14,7 @@ import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport
 import java.util.Date;
 import java.util.List;
 
-import static com.webtoon.coding.domain.content.QContents.contents;
+import static com.webtoon.coding.domain.contents.QContents.contents;
 import static com.webtoon.coding.domain.history.QHistory.history;
 import static com.webtoon.coding.domain.user.QUser.user;
 

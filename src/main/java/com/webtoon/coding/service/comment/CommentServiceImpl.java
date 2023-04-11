@@ -3,7 +3,7 @@ package com.webtoon.coding.service.comment;
 import com.webtoon.coding.domain.comment.Comment;
 import com.webtoon.coding.domain.comment.CommentVerifier;
 import com.webtoon.coding.domain.comment.CommentWriter;
-import com.webtoon.coding.domain.content.Contents;
+import com.webtoon.coding.domain.contents.Contents;
 import com.webtoon.coding.domain.core.Reader;
 import com.webtoon.coding.domain.user.User;
 import com.webtoon.coding.dto.request.ContentsCommentRequest;

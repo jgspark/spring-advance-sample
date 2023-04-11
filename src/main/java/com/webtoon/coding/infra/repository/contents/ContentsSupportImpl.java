@@ -1,7 +1,7 @@
 package com.webtoon.coding.infra.repository.contents;
 
 import com.webtoon.coding.domain.comment.Evaluation;
-import com.webtoon.coding.domain.content.Contents;
+import com.webtoon.coding.domain.contents.Contents;
 import com.webtoon.coding.dto.TopContents;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.CaseBuilder;
@@ -12,7 +12,7 @@ import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport
 import java.util.List;
 
 import static com.webtoon.coding.domain.comment.QComment.comment1;
-import static com.webtoon.coding.domain.content.QContents.contents;
+import static com.webtoon.coding.domain.contents.QContents.contents;
 
 
 public class ContentsSupportImpl extends QuerydslRepositorySupport implements ContentsSupport {

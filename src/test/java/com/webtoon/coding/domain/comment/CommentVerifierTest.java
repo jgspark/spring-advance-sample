@@ -1,13 +1,12 @@
 package com.webtoon.coding.domain.comment;
 
-import com.webtoon.coding.domain.content.Contents;
+import com.webtoon.coding.domain.contents.Contents;
 import com.webtoon.coding.domain.user.User;
 import com.webtoon.coding.exception.DomainException;
 import com.webtoon.coding.exception.MsgType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;

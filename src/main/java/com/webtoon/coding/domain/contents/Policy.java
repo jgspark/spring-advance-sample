@@ -1,4 +1,4 @@
-package com.webtoon.coding.domain.content;
+package com.webtoon.coding.domain.contents;
 
 public enum Policy {
   // 유료

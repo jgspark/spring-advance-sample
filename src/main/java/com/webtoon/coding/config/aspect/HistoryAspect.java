@@ -2,7 +2,7 @@ package com.webtoon.coding.config.aspect;
 
 import com.webtoon.coding.exception.NoDataException;
 import com.webtoon.coding.exception.MsgType;
-import com.webtoon.coding.domain.content.Contents;
+import com.webtoon.coding.domain.contents.Contents;
 import com.webtoon.coding.domain.history.History;
 import com.webtoon.coding.domain.user.User;
 import com.webtoon.coding.infra.repository.contents.ContentsRepository;

@@ -1,6 +1,6 @@
 package com.webtoon.coding.mock;
 
-import com.webtoon.coding.domain.content.Policy;
+import com.webtoon.coding.domain.contents.Policy;
 import com.webtoon.coding.domain.history.History;
 import com.webtoon.coding.dto.HistoryInfo;
 

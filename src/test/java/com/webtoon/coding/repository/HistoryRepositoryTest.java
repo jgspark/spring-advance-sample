@@ -1,8 +1,8 @@
 package com.webtoon.coding.repository;
 
 import com.webtoon.coding.config.JPAConfiguration;
-import com.webtoon.coding.domain.content.Adult;
-import com.webtoon.coding.domain.content.Contents;
+import com.webtoon.coding.domain.contents.Adult;
+import com.webtoon.coding.domain.contents.Contents;
 import com.webtoon.coding.domain.history.History;
 import com.webtoon.coding.domain.user.User;
 import com.webtoon.coding.mock.ContentsMock;

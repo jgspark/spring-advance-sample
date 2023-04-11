@@ -1,6 +1,6 @@
 package com.webtoon.coding.dto;
 
-import com.webtoon.coding.domain.content.Policy;
+import com.webtoon.coding.domain.contents.Policy;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

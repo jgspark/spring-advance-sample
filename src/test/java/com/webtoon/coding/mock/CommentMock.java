@@ -2,7 +2,7 @@ package com.webtoon.coding.mock;
 
 import com.webtoon.coding.domain.comment.Evaluation;
 import com.webtoon.coding.domain.comment.Comment;
-import com.webtoon.coding.domain.content.Contents;
+import com.webtoon.coding.domain.contents.Contents;
 import com.webtoon.coding.domain.user.User;
 import com.webtoon.coding.domain.comment.CommentKey;
 import com.webtoon.coding.dto.request.ContentsCommentRequest;

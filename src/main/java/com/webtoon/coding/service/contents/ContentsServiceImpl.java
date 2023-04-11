@@ -1,8 +1,8 @@
 package com.webtoon.coding.service.contents;
 
-import com.webtoon.coding.domain.content.Policy;
+import com.webtoon.coding.domain.contents.Policy;
 import com.webtoon.coding.domain.comment.Evaluation;
-import com.webtoon.coding.domain.content.Contents;
+import com.webtoon.coding.domain.contents.Contents;
 import com.webtoon.coding.infra.repository.contents.ContentsRepository;
 import com.webtoon.coding.dto.ContentsInfo;
 import com.webtoon.coding.dto.SelectContentsStoreDTO;

@@ -1,6 +1,6 @@
 package com.webtoon.coding.domain.comment;
 
-import com.webtoon.coding.domain.content.Contents;
+import com.webtoon.coding.domain.contents.Contents;
 import com.webtoon.coding.domain.user.User;
 import lombok.*;
 

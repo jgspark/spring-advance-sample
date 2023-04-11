@@ -1,4 +1,4 @@
-package com.webtoon.coding.domain.content;
+package com.webtoon.coding.domain.contents;
 
 public enum Adult {
   // 성인

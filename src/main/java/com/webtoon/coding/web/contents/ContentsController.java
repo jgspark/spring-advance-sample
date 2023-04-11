@@ -1,7 +1,7 @@
 package com.webtoon.coding.web.contents;
 
 import com.webtoon.coding.domain.comment.Evaluation;
-import com.webtoon.coding.domain.content.Contents;
+import com.webtoon.coding.domain.contents.Contents;
 import com.webtoon.coding.service.contents.ContentsService;
 import com.webtoon.coding.dto.ContentsInfo;
 import com.webtoon.coding.dto.SelectContentsStoreDTO;

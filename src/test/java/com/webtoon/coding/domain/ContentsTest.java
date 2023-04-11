@@ -1,8 +1,8 @@
 package com.webtoon.coding.domain;
 
 import com.webtoon.coding.exception.DomainException;
-import com.webtoon.coding.domain.content.Policy;
-import com.webtoon.coding.domain.content.Contents;
+import com.webtoon.coding.domain.contents.Policy;
+import com.webtoon.coding.domain.contents.Contents;
 import com.webtoon.coding.mock.ContentsMock;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;

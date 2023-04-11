@@ -1,8 +1,7 @@
 package com.webtoon.coding.domain.history;
 
-import com.webtoon.coding.domain.content.Contents;
+import com.webtoon.coding.domain.contents.Contents;
 import com.webtoon.coding.domain.user.User;
-import com.webtoon.coding.domain.history.AbstractBaseDate;
 import lombok.*;
 
 import javax.persistence.*;

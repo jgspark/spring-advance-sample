@@ -1,6 +1,6 @@
 package com.webtoon.coding.infra.repository.history;
 
-import com.webtoon.coding.domain.content.Adult;
+import com.webtoon.coding.domain.contents.Adult;
 import com.webtoon.coding.dto.HistoryUser;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
