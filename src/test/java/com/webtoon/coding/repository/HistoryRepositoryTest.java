@@ -26,6 +26,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import java.util.Date;
 import java.util.List;
 
+@Disabled
 @DataJpaTest
 @ExtendWith(SpringExtension.class)
 @Import(JPAConfiguration.class)

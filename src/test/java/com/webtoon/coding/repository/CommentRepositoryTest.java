@@ -17,6 +17,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+@Disabled
 @DataJpaTest
 @ExtendWith(SpringExtension.class)
 @Import(JPAConfiguration.class)

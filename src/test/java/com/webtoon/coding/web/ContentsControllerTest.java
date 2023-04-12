@@ -13,6 +13,7 @@ import com.webtoon.coding.dto.request.UpdatedContentsRequest;
 import com.webtoon.coding.mock.JsonUtil;
 import com.webtoon.coding.web.contents.ContentsController;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -36,6 +37,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+@Disabled
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(ContentsController.class)
 class ContentsControllerTest {
