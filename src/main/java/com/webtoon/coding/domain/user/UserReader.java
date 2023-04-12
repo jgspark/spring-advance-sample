@@ -19,12 +19,7 @@ public class UserReader implements Reader<User> {
     @Override
     @Transactional(readOnly = true)
     public User get(Long id) {
-        return userRepository.findById(id)
-                .orElseThrow(() -> new NoDataException(MsgType.NoUserData));
+        return userRepository.findById(id).orElseThrow(() -> new NoDataException(MsgType.NoUserData));
     }
 
-    @Override
-    public <T> Optional<T> get(Long id, Class<T> type) {
-        return Optional.empty();
-    }
 }

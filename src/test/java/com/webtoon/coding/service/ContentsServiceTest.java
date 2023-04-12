@@ -1,6 +1,6 @@
 package com.webtoon.coding.service;
 
-import com.webtoon.coding.domain.contents.ContentReader;
+import com.webtoon.coding.domain.contents.ContentsReader;
 import com.webtoon.coding.domain.contents.Policy;
 import com.webtoon.coding.domain.comment.Evaluation;
 import com.webtoon.coding.domain.contents.Contents;
@@ -42,7 +42,7 @@ class ContentsServiceTest {
     private ContentsRepository contentsRepository;
 
     @Mock
-    private ContentReader contentReader;
+    private ContentsReader contentReader;
 
     @BeforeEach
     void init() {

@@ -21,7 +21,7 @@ import static org.mockito.Mockito.*;
 
 @DisplayName("컨텐츠 리더 클레스에서")
 @ExtendWith(MockitoExtension.class)
-class ContentReaderTest {
+class ContentsReaderTest {
 
     private Reader<Contents> contentsReader;
 
@@ -30,7 +30,7 @@ class ContentReaderTest {
 
     @BeforeEach
     public void init() {
-        contentsReader = new ContentReader(contentsRepository);
+        contentsReader = new ContentsReader(contentsRepository);
     }
 
     @Nested
