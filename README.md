@@ -1,4 +1,4 @@
-![Coveralls branch](https://img.shields.io/coverallsCoverage/github/jgspark/spring-advance-sample?branch=main)
+[![codecov](https://codecov.io/gh/jgspark/spring-advance-sample/branch/main/graph/badge.svg?token=OLRUTIC0CU)](https://codecov.io/gh/jgspark/spring-advance-sample)
 
-# spring-advance-sample
+# Spring Advance Sample
 Advanced Layer Architecture By Spring Boot 🍃
