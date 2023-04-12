@@ -1,5 +1,6 @@
 package com.webtoon.coding.domain.contents;
 
+import com.webtoon.coding.domain.core.Verifier;
 import com.webtoon.coding.exception.DomainException;
 import com.webtoon.coding.exception.MsgType;
 import org.apache.commons.lang3.ObjectUtils;
@@ -8,9 +9,10 @@ import org.springframework.stereotype.Component;
 import java.util.Objects;
 
 @Component
-public class ContentsVerifier {
+public class ContentsVerifier implements Verifier<Contents> {
 
-    void verify(Contents contents) {
+    @Override
+    public void verify(Contents contents) {
 
         String coin = contents.getCoin();
 

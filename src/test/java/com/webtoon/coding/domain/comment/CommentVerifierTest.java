@@ -1,6 +1,7 @@
 package com.webtoon.coding.domain.comment;
 
 import com.webtoon.coding.domain.contents.Contents;
+import com.webtoon.coding.domain.core.Verifier;
 import com.webtoon.coding.domain.user.User;
 import com.webtoon.coding.exception.DomainException;
 import com.webtoon.coding.exception.MsgType;
@@ -18,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @DisplayName("체크 클레스에서")
 class CommentVerifierTest {
 
-    private CommentVerifier commentVerifier;
+    private Verifier<Comment> commentVerifier;
 
     @BeforeEach
     public void init() {

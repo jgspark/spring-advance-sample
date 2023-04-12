@@ -1,10 +1,10 @@
 package com.webtoon.coding.service.comment;
 
 import com.webtoon.coding.domain.comment.Comment;
-import com.webtoon.coding.domain.comment.CommentVerifier;
 import com.webtoon.coding.domain.comment.CommentWriter;
 import com.webtoon.coding.domain.contents.Contents;
 import com.webtoon.coding.domain.core.Reader;
+import com.webtoon.coding.domain.core.Verifier;
 import com.webtoon.coding.domain.user.User;
 import com.webtoon.coding.dto.request.ContentsCommentRequest;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class CommentServiceImpl implements CommentService {
 
-    private final CommentVerifier verifier;
+    private final Verifier<Comment> verifier;
 
     private final Reader<Contents> contentReader;
 

@@ -1,5 +1,6 @@
 package com.webtoon.coding.domain.comment;
 
+import com.webtoon.coding.domain.core.Verifier;
 import com.webtoon.coding.exception.DomainException;
 import com.webtoon.coding.exception.MsgType;
 import org.apache.commons.lang3.ObjectUtils;
@@ -9,9 +10,10 @@ import org.springframework.stereotype.Component;
 import java.util.regex.Pattern;
 
 @Component
-public class CommentVerifier {
+public class CommentVerifier implements Verifier<Comment> {
 
-    void verify(Comment comment) {
+    @Override
+    public void verify(Comment comment) {
 
         if (isNotIncludeSymbol(comment.getComment())) {
             throw new DomainException(MsgType.CommentDataException);

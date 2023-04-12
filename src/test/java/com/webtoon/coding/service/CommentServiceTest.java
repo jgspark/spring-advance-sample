@@ -1,10 +1,10 @@
 package com.webtoon.coding.service;
 
 import com.webtoon.coding.domain.comment.Comment;
-import com.webtoon.coding.domain.comment.CommentVerifier;
 import com.webtoon.coding.domain.comment.CommentWriter;
 import com.webtoon.coding.domain.contents.Contents;
 import com.webtoon.coding.domain.core.Reader;
+import com.webtoon.coding.domain.core.Verifier;
 import com.webtoon.coding.domain.user.User;
 import com.webtoon.coding.dto.request.ContentsCommentRequest;
 import com.webtoon.coding.exception.MsgType;
@@ -40,7 +40,7 @@ class CommentServiceTest {
     private CommentWriter commentWriter;
 
     @Mock
-    private CommentVerifier commentVerifier;
+    private Verifier<Comment> commentVerifier;
 
     @BeforeEach
     void init() {

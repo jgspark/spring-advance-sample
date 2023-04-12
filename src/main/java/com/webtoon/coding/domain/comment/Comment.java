@@ -1,6 +1,7 @@
 package com.webtoon.coding.domain.comment;
 
 import com.webtoon.coding.domain.contents.Contents;
+import com.webtoon.coding.domain.core.Verifier;
 import com.webtoon.coding.domain.user.User;
 import lombok.*;
 
@@ -34,7 +35,7 @@ public class Comment {
     @JoinColumn(name = "contents_id", insertable = false, updatable = false)
     private Contents contents;
 
-    public void write(CommentVerifier verifier) {
+    public void write(Verifier<Comment> verifier) {
         verifier.verify(this);
     }
 
