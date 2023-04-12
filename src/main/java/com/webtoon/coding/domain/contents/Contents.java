@@ -1,5 +1,6 @@
 package com.webtoon.coding.domain.contents;
 
+import com.webtoon.coding.domain.core.Verifier;
 import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -38,7 +39,7 @@ public class Contents {
     // 서비스 제공일
     private Date openDate;
 
-    public void changeDetail(ContentsVerifier verifier, PolicyCoin policyCoin) {
+    public void changeDetail(Verifier<Contents> verifier, PolicyCoin policyCoin) {
 
         if (Policy.FREE.equals(policyCoin.getType())) {
             freeType();

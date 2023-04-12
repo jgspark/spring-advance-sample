@@ -18,7 +18,7 @@ public class ContentsVerifier implements Verifier<Contents> {
 
         Policy type = contents.getType();
 
-        if (ObjectUtils.isEmpty(type)) throw new RuntimeException("Policy Data Is Not Null");
+        if (ObjectUtils.isEmpty(type)) throw new DomainException(MsgType.CoinDataException);
 
         if (Policy.FREE.equals(type) && !"0".equals(coin)) {
             throw new DomainException(MsgType.CoinDataException);
@@ -30,8 +30,6 @@ public class ContentsVerifier implements Verifier<Contents> {
                 throw new DomainException(MsgType.CoinDataException);
             }
 
-        } else {
-            throw new RuntimeException("Not Free And Coin Data is Empty");
         }
 
     }
