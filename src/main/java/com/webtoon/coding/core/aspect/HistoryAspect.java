@@ -1,7 +1,7 @@
-package com.webtoon.coding.config.aspect;
+package com.webtoon.coding.core.aspect;
 
-import com.webtoon.coding.exception.NoDataException;
-import com.webtoon.coding.exception.MsgType;
+import com.webtoon.coding.core.exception.NoDataException;
+import com.webtoon.coding.core.exception.MsgType;
 import com.webtoon.coding.domain.contents.Contents;
 import com.webtoon.coding.domain.history.History;
 import com.webtoon.coding.domain.user.User;
@@ -35,7 +35,7 @@ public class HistoryAspect {
   @Pointcut("execution(* com.webtoon.coding.service.contents.ContentsService.getContentsOne(..))")
   public void onRequest() {}
 
-  @Around("com.webtoon.coding.config.aspect.HistoryAspect.onRequest()")
+  @Around("com.webtoon.coding.core.aspect.HistoryAspect.onRequest()")
   public Object doLogging(ProceedingJoinPoint pjp) throws Throwable {
 
     HttpServletRequest request =

@@ -1,14 +1,12 @@
 package com.webtoon.coding.domain.user;
 
-import com.webtoon.coding.domain.core.Reader;
-import com.webtoon.coding.exception.MsgType;
-import com.webtoon.coding.exception.NoDataException;
+import com.webtoon.coding.domain.common.Reader;
+import com.webtoon.coding.core.exception.MsgType;
+import com.webtoon.coding.core.exception.NoDataException;
 import com.webtoon.coding.infra.repository.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor

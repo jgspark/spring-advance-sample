@@ -1,4 +1,4 @@
-package com.webtoon.coding.config;
+package com.webtoon.coding.infra.config;
 
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;

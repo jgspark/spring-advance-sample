@@ -1,6 +1,7 @@
 package com.webtoon.coding.domain.contents;
 
-import com.webtoon.coding.domain.core.Verifier;
+import com.webtoon.coding.domain.common.Verifier;
+import com.webtoon.coding.dto.entity.PolicyCoin;
 import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;
 

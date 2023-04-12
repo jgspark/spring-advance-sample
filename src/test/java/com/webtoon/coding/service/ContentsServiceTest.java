@@ -1,32 +1,15 @@
 package com.webtoon.coding.service;
 
 import com.webtoon.coding.domain.contents.*;
-import com.webtoon.coding.domain.comment.Evaluation;
-import com.webtoon.coding.domain.core.Reader;
-import com.webtoon.coding.mock.ContentsMock;
-import com.webtoon.coding.mock.DateMock;
-import com.webtoon.coding.mock.DtoMock;
-import com.webtoon.coding.infra.repository.contents.ContentsRepository;
+import com.webtoon.coding.domain.common.Reader;
 import com.webtoon.coding.service.contents.ContentsService;
 import com.webtoon.coding.service.contents.ContentsServiceImpl;
-import com.webtoon.coding.dto.view.ContentsInfo;
-import com.webtoon.coding.dto.request.PageContentsRequest;
-import com.webtoon.coding.dto.view.TopContents;
-import com.webtoon.coding.dto.request.UpdatedContentsRequest;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.BDDMockito;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
-import org.springframework.data.domain.Page;
-
-import java.util.List;
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;

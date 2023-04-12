@@ -1,4 +1,4 @@
-package com.webtoon.coding.exception;
+package com.webtoon.coding.core.exception;
 
 import com.webtoon.coding.dto.response.ErrorResponse;
 import lombok.extern.slf4j.Slf4j;

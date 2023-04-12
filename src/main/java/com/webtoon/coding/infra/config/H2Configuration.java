@@ -1,4 +1,4 @@
-package com.webtoon.coding.config;
+package com.webtoon.coding.infra.config;
 
 import com.zaxxer.hikari.HikariDataSource;
 import org.h2.tools.Server;

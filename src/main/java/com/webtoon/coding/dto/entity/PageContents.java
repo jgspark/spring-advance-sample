@@ -1,4 +1,4 @@
-package com.webtoon.coding.dto.layer;
+package com.webtoon.coding.dto.entity;
 
 import com.webtoon.coding.domain.contents.Policy;
 import lombok.AccessLevel;

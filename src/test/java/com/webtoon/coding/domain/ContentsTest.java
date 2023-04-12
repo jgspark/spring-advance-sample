@@ -1,13 +1,5 @@
 package com.webtoon.coding.domain;
 
-import com.webtoon.coding.exception.DomainException;
-import com.webtoon.coding.domain.contents.Policy;
-import com.webtoon.coding.domain.contents.Contents;
-import com.webtoon.coding.mock.ContentsMock;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ContentsTest {

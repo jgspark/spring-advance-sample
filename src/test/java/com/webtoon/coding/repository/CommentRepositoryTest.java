@@ -1,6 +1,6 @@
 package com.webtoon.coding.repository;
 
-import com.webtoon.coding.config.JPAConfiguration;
+import com.webtoon.coding.infra.config.JPAConfiguration;
 import com.webtoon.coding.domain.comment.Comment;
 import com.webtoon.coding.domain.contents.Contents;
 import com.webtoon.coding.domain.user.User;

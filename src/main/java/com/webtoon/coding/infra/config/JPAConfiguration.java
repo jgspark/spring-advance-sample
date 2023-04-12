@@ -1,4 +1,4 @@
-package com.webtoon.coding.config;
+package com.webtoon.coding.infra.config;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.context.annotation.Bean;

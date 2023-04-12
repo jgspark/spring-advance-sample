@@ -1,7 +1,7 @@
-package com.webtoon.coding.util;
+package com.webtoon.coding.core.util;
 
-import com.webtoon.coding.exception.DateUtilException;
-import com.webtoon.coding.exception.MsgType;
+import com.webtoon.coding.core.exception.DateUtilException;
+import com.webtoon.coding.core.exception.MsgType;
 
 import java.util.Calendar;
 import java.util.Date;

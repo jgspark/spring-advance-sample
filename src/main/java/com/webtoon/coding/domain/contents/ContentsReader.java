@@ -1,11 +1,11 @@
 package com.webtoon.coding.domain.contents;
 
 import com.webtoon.coding.domain.comment.Evaluation;
-import com.webtoon.coding.domain.core.Reader;
-import com.webtoon.coding.dto.layer.PageContents;
+import com.webtoon.coding.domain.common.Reader;
+import com.webtoon.coding.dto.entity.PageContents;
 import com.webtoon.coding.dto.view.TopContents;
-import com.webtoon.coding.exception.MsgType;
-import com.webtoon.coding.exception.NoDataException;
+import com.webtoon.coding.core.exception.MsgType;
+import com.webtoon.coding.core.exception.NoDataException;
 import com.webtoon.coding.infra.repository.contents.ContentsRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;

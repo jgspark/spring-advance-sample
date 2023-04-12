@@ -5,7 +5,7 @@ import com.webtoon.coding.infra.repository.history.HistoryRepository;
 import com.webtoon.coding.dto.view.HistoryInfo;
 import com.webtoon.coding.dto.view.HistoryUser;
 import com.webtoon.coding.dto.request.PagingRequest;
-import com.webtoon.coding.util.DateUtil;
+import com.webtoon.coding.core.util.DateUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;

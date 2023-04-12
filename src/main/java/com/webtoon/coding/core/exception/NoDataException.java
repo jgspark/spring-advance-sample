@@ -1,4 +1,4 @@
-package com.webtoon.coding.exception;
+package com.webtoon.coding.core.exception;
 
 public class NoDataException extends BaseException {
     public NoDataException(MsgType msgType) {

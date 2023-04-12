@@ -1,8 +1,8 @@
 package com.webtoon.coding.domain.contents;
 
-import com.webtoon.coding.domain.core.Verifier;
-import com.webtoon.coding.exception.DomainException;
-import com.webtoon.coding.exception.MsgType;
+import com.webtoon.coding.domain.common.Verifier;
+import com.webtoon.coding.core.exception.DomainException;
+import com.webtoon.coding.core.exception.MsgType;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.stereotype.Component;
 

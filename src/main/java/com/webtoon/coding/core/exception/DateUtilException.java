@@ -1,4 +1,4 @@
-package com.webtoon.coding.exception;
+package com.webtoon.coding.core.exception;
 
 public class DateUtilException extends BaseException{
 

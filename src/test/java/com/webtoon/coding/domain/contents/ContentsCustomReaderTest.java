@@ -1,7 +1,7 @@
 package com.webtoon.coding.domain.contents;
 
 import com.webtoon.coding.domain.comment.Evaluation;
-import com.webtoon.coding.dto.layer.PageContents;
+import com.webtoon.coding.dto.entity.PageContents;
 import com.webtoon.coding.dto.view.ContentsInfo;
 import com.webtoon.coding.dto.view.TopContents;
 import com.webtoon.coding.infra.repository.contents.ContentsRepository;

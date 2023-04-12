@@ -1,4 +1,4 @@
-package com.webtoon.coding.domain.core;
+package com.webtoon.coding.domain.common;
 
 public interface Reader<D> {
 

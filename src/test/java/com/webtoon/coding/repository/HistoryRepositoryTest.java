@@ -1,6 +1,6 @@
 package com.webtoon.coding.repository;
 
-import com.webtoon.coding.config.JPAConfiguration;
+import com.webtoon.coding.infra.config.JPAConfiguration;
 import com.webtoon.coding.domain.contents.Adult;
 import com.webtoon.coding.domain.contents.Contents;
 import com.webtoon.coding.domain.history.History;
@@ -13,7 +13,7 @@ import com.webtoon.coding.dto.view.HistoryUser;
 import com.webtoon.coding.infra.repository.contents.ContentsRepository;
 import com.webtoon.coding.infra.repository.history.HistoryRepository;
 import com.webtoon.coding.infra.repository.user.UserRepository;
-import com.webtoon.coding.util.DateUtil;
+import com.webtoon.coding.core.util.DateUtil;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
