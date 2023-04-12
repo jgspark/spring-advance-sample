@@ -10,9 +10,9 @@ import com.webtoon.coding.mock.DtoMock;
 import com.webtoon.coding.infra.repository.contents.ContentsRepository;
 import com.webtoon.coding.service.contents.ContentsService;
 import com.webtoon.coding.service.contents.ContentsServiceImpl;
-import com.webtoon.coding.dto.ContentsInfo;
-import com.webtoon.coding.dto.SelectContentsStoreDTO;
-import com.webtoon.coding.dto.TopContents;
+import com.webtoon.coding.dto.view.ContentsInfo;
+import com.webtoon.coding.dto.request.PageContentsRequest;
+import com.webtoon.coding.dto.view.TopContents;
 import com.webtoon.coding.dto.request.UpdatedContentsRequest;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -106,7 +106,7 @@ class ContentsServiceTest {
     @DisplayName("컨텐츠 목록 조회 테스트 케이스")
     void getContents() {
 
-        SelectContentsStoreDTO dto = DtoMock.getSelectContentsStoreDTO();
+        PageContentsRequest dto = DtoMock.getSelectContentsStoreDTO();
 
         Page<ContentsInfo> mocks = ContentsMock.getPageContentsInfo();
 

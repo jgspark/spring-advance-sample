@@ -6,10 +6,10 @@ import com.webtoon.coding.domain.contents.Contents;
 import com.webtoon.coding.domain.contents.ContentsVerifier;
 import com.webtoon.coding.domain.contents.PolicyCoin;
 import com.webtoon.coding.domain.core.Reader;
-import com.webtoon.coding.dto.ContentsInfo;
-import com.webtoon.coding.dto.PageContents;
-import com.webtoon.coding.dto.SelectContentsStoreDTO;
-import com.webtoon.coding.dto.TopContents;
+import com.webtoon.coding.dto.view.ContentsInfo;
+import com.webtoon.coding.dto.layer.PageContents;
+import com.webtoon.coding.dto.request.PageContentsRequest;
+import com.webtoon.coding.dto.view.TopContents;
 import com.webtoon.coding.dto.request.UpdatedContentsRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -48,7 +48,7 @@ public class ContentsServiceImpl implements ContentsService {
 
     @Override
     @Transactional(readOnly = true)
-    public Page<ContentsInfo> getContents(SelectContentsStoreDTO dto) {
+    public Page<ContentsInfo> getContents(PageContentsRequest dto) {
         return contentsCustomReader.getAll(PageContents.of(dto.getType(), dto.getPageRequest()), ContentsInfo.class);
     }
 

@@ -2,9 +2,9 @@ package com.webtoon.coding.service.history;
 
 import com.webtoon.coding.domain.contents.Adult;
 import com.webtoon.coding.infra.repository.history.HistoryRepository;
-import com.webtoon.coding.dto.HistoryInfo;
-import com.webtoon.coding.dto.HistoryUser;
-import com.webtoon.coding.dto.PageDTO;
+import com.webtoon.coding.dto.view.HistoryInfo;
+import com.webtoon.coding.dto.view.HistoryUser;
+import com.webtoon.coding.dto.request.PagingRequest;
 import com.webtoon.coding.util.DateUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -21,13 +21,13 @@ public class HistoryServiceImpl implements HistoryService {
 
   @Override
   @Transactional(readOnly = true)
-  public Page<HistoryInfo> getHistories(PageDTO dto) {
+  public Page<HistoryInfo> getHistories(PagingRequest dto) {
     return historyRepository.findAllProjectedBy(dto.getPageRequest(), HistoryInfo.class);
   }
 
   @Override
   @Transactional(readOnly = true)
-  public Page<HistoryUser> getHistoriesByAdultUser(PageDTO dto) {
+  public Page<HistoryUser> getHistoriesByAdultUser(PagingRequest dto) {
 
     Date startDate = DateUtil.minus(new Date(), -7);
 

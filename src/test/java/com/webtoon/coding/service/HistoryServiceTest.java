@@ -4,9 +4,9 @@ import com.webtoon.coding.mock.ContentsMock;
 import com.webtoon.coding.mock.HistoryMock;
 import com.webtoon.coding.mock.UserMock;
 import com.webtoon.coding.infra.repository.history.HistoryRepository;
-import com.webtoon.coding.dto.HistoryInfo;
-import com.webtoon.coding.dto.HistoryUser;
-import com.webtoon.coding.dto.PageDTO;
+import com.webtoon.coding.dto.view.HistoryInfo;
+import com.webtoon.coding.dto.view.HistoryUser;
+import com.webtoon.coding.dto.request.PagingRequest;
 import com.webtoon.coding.service.history.HistoryService;
 import com.webtoon.coding.service.history.HistoryServiceImpl;
 import org.junit.jupiter.api.Assertions;
@@ -48,7 +48,7 @@ class HistoryServiceTest {
     BDDMockito.given(historyRepository.findAllProjectedBy(any(), eq(HistoryInfo.class)))
         .willReturn(mocks);
 
-    PageDTO dto = new PageDTO(0, 10);
+    PagingRequest dto = new PagingRequest(0, 10);
 
     Page<HistoryInfo> entities = historyService.getHistories(dto);
 
@@ -82,7 +82,7 @@ class HistoryServiceTest {
                 any(), any(), any(), any(), anyLong()))
         .willReturn(mocks);
 
-    PageDTO dto = new PageDTO(0, 10);
+    PagingRequest dto = new PagingRequest(0, 10);
 
     Page<HistoryUser> entities = historyService.getHistoriesByAdultUser(dto);
 

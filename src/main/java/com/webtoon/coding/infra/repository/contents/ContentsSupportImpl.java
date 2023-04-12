@@ -2,7 +2,7 @@ package com.webtoon.coding.infra.repository.contents;
 
 import com.webtoon.coding.domain.comment.Evaluation;
 import com.webtoon.coding.domain.contents.Contents;
-import com.webtoon.coding.dto.TopContents;
+import com.webtoon.coding.dto.view.TopContents;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.CaseBuilder;
 import com.querydsl.core.types.dsl.NumberExpression;

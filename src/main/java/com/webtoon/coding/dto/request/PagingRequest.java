@@ -1,4 +1,4 @@
-package com.webtoon.coding.dto;
+package com.webtoon.coding.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 
 @Getter
 @AllArgsConstructor
-public class PageDTO {
+public class PagingRequest {
 
   @NotNull private Integer page;
 

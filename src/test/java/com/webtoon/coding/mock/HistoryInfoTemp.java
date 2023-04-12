@@ -2,7 +2,7 @@ package com.webtoon.coding.mock;
 
 import com.webtoon.coding.domain.contents.Policy;
 import com.webtoon.coding.domain.history.History;
-import com.webtoon.coding.dto.HistoryInfo;
+import com.webtoon.coding.dto.view.HistoryInfo;
 
 import java.util.Date;
 

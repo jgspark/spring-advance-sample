@@ -7,9 +7,9 @@ import com.webtoon.coding.domain.comment.Comment;
 import com.webtoon.coding.domain.contents.Contents;
 import com.webtoon.coding.domain.user.User;
 import com.webtoon.coding.mock.*;
-import com.webtoon.coding.dto.ContentsInfo;
-import com.webtoon.coding.dto.SelectContentsStoreDTO;
-import com.webtoon.coding.dto.TopContents;
+import com.webtoon.coding.dto.view.ContentsInfo;
+import com.webtoon.coding.dto.request.PageContentsRequest;
+import com.webtoon.coding.dto.view.TopContents;
 import com.webtoon.coding.infra.repository.comment.CommentRepository;
 import com.webtoon.coding.infra.repository.contents.ContentsRepository;
 import com.webtoon.coding.infra.repository.user.UserRepository;
@@ -119,7 +119,7 @@ class ContentsRepositoryTest {
 
       Page<ContentsInfo> mocks = ContentsMock.getPageContentsInfo();
 
-      SelectContentsStoreDTO dto = DtoMock.getSelectContentsStoreDTO();
+      PageContentsRequest dto = DtoMock.getSelectContentsStoreDTO();
 
       Page<ContentsInfo> entities =
           contentsRepository.findByType(
@@ -149,7 +149,7 @@ class ContentsRepositoryTest {
     void findAllProjectedBy() {
       Page<ContentsInfo> mocks = ContentsMock.getPageContentsInfo();
 
-      SelectContentsStoreDTO dto = DtoMock.getSelectContentsStoreDTO();
+      PageContentsRequest dto = DtoMock.getSelectContentsStoreDTO();
 
       Page<ContentsInfo> entities =
           contentsRepository.findAllProjectedBy(dto.getPageRequest(), ContentsInfo.class);

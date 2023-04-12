@@ -1,7 +1,7 @@
 package com.webtoon.coding.mock;
 
 import com.webtoon.coding.domain.user.User;
-import com.webtoon.coding.dto.HistoryUser;
+import com.webtoon.coding.dto.view.HistoryUser;
 
 public class HistoryUserTemp extends HistoryUser {
 

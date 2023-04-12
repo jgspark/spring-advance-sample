@@ -2,8 +2,8 @@ package com.webtoon.coding.domain.contents;
 
 import com.webtoon.coding.domain.comment.Evaluation;
 import com.webtoon.coding.domain.core.Reader;
-import com.webtoon.coding.dto.PageContents;
-import com.webtoon.coding.dto.TopContents;
+import com.webtoon.coding.dto.layer.PageContents;
+import com.webtoon.coding.dto.view.TopContents;
 import com.webtoon.coding.exception.MsgType;
 import com.webtoon.coding.exception.NoDataException;
 import com.webtoon.coding.infra.repository.contents.ContentsRepository;

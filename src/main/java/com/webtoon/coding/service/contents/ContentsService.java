@@ -2,9 +2,9 @@ package com.webtoon.coding.service.contents;
 
 import com.webtoon.coding.domain.comment.Evaluation;
 import com.webtoon.coding.domain.contents.Contents;
-import com.webtoon.coding.dto.ContentsInfo;
-import com.webtoon.coding.dto.SelectContentsStoreDTO;
-import com.webtoon.coding.dto.TopContents;
+import com.webtoon.coding.dto.view.ContentsInfo;
+import com.webtoon.coding.dto.request.PageContentsRequest;
+import com.webtoon.coding.dto.view.TopContents;
 import com.webtoon.coding.dto.request.UpdatedContentsRequest;
 import org.springframework.data.domain.Page;
 
@@ -17,7 +17,7 @@ public interface ContentsService {
 
   Optional<Contents> updatedTypeAndCoin(Long id, UpdatedContentsRequest dto);
 
-  Page<ContentsInfo> getContents(SelectContentsStoreDTO dto);
+  Page<ContentsInfo> getContents(PageContentsRequest dto);
 
   Optional<ContentsInfo> getContentsOne(Long id);
 }

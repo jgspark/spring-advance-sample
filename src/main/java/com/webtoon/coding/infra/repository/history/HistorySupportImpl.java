@@ -2,7 +2,7 @@ package com.webtoon.coding.infra.repository.history;
 
 import com.webtoon.coding.domain.contents.Adult;
 import com.webtoon.coding.domain.history.History;
-import com.webtoon.coding.dto.HistoryUser;
+import com.webtoon.coding.dto.view.HistoryUser;
 import com.querydsl.core.QueryResults;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;

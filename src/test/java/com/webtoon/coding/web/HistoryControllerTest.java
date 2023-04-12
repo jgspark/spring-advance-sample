@@ -4,9 +4,9 @@ import com.webtoon.coding.mock.ContentsMock;
 import com.webtoon.coding.mock.HistoryMock;
 import com.webtoon.coding.mock.UserMock;
 import com.webtoon.coding.service.history.HistoryService;
-import com.webtoon.coding.dto.HistoryInfo;
-import com.webtoon.coding.dto.HistoryUser;
-import com.webtoon.coding.dto.PageDTO;
+import com.webtoon.coding.dto.view.HistoryInfo;
+import com.webtoon.coding.dto.view.HistoryUser;
+import com.webtoon.coding.dto.request.PagingRequest;
 import com.webtoon.coding.web.history.HistoryController;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -54,14 +54,14 @@ class HistoryControllerTest {
 
     BDDMockito.given(historyService.getHistories(any())).willReturn(mocks);
 
-    PageDTO pageDTO = new PageDTO(0, 10);
+    PagingRequest pagingRequest = new PagingRequest(0, 10);
 
     ResultActions action =
         mockMvc
             .perform(
                 MockMvcRequestBuilders.get("/histories")
-                    .param("page", pageDTO.getPage().toString())
-                    .param("size", pageDTO.getSize().toString())
+                    .param("page", pagingRequest.getPage().toString())
+                    .param("size", pagingRequest.getSize().toString())
                     .contentType(MediaType.APPLICATION_JSON)
                     .characterEncoding("UTF-8"))
             .andDo(print());
@@ -88,7 +88,7 @@ class HistoryControllerTest {
   @DisplayName("최근 1주일간 가입자 중 성인 작품 조회 3개 이상인 API")
   void getHistoriesByAdultUser() throws Exception {
 
-    PageDTO pageDTO = new PageDTO(0, 10);
+    PagingRequest pagingRequest = new PagingRequest(0, 10);
 
     Page<HistoryUser> mocks =
         HistoryMock.createPageHistoryUser(UserMock.createdMock(), ContentsMock.createdMock());
@@ -99,8 +99,8 @@ class HistoryControllerTest {
         mockMvc
             .perform(
                 MockMvcRequestBuilders.get("/histories/adult-users")
-                    .param("page", pageDTO.getPage().toString())
-                    .param("size", pageDTO.getSize().toString())
+                    .param("page", pagingRequest.getPage().toString())
+                    .param("size", pagingRequest.getSize().toString())
                     .contentType(MediaType.APPLICATION_JSON)
                     .characterEncoding("UTF-8"))
             .andDo(print());

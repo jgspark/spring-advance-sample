@@ -3,8 +3,8 @@ package com.webtoon.coding.mock;
 import com.webtoon.coding.domain.contents.Adult;
 import com.webtoon.coding.domain.contents.Policy;
 import com.webtoon.coding.domain.contents.Contents;
-import com.webtoon.coding.dto.ContentsInfo;
-import com.webtoon.coding.dto.TopContents;
+import com.webtoon.coding.dto.view.ContentsInfo;
+import com.webtoon.coding.dto.view.TopContents;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 

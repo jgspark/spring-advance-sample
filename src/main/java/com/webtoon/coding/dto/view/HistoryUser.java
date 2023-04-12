@@ -1,4 +1,4 @@
-package com.webtoon.coding.dto;
+package com.webtoon.coding.dto.view;
 
 import com.webtoon.coding.domain.contents.Adult;
 import com.webtoon.coding.domain.user.Gender;

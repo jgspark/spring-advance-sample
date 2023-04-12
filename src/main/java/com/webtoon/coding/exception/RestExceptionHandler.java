@@ -1,6 +1,6 @@
 package com.webtoon.coding.exception;
 
-import com.webtoon.coding.dto.MsgDTO;
+import com.webtoon.coding.dto.response.ErrorResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -15,32 +15,32 @@ import java.net.BindException;
 public class RestExceptionHandler {
 
     @ExceptionHandler(Exception.class)
-    public MsgDTO handler(Exception e) {
+    public ErrorResponse handler(Exception e) {
         MsgType msgType = MsgType.ServerError;
         log.error(e.getMessage(), e.getCause(), e);
-        return MsgDTO.builder().code(msgType.getCode()).message(msgType.getMessage()).build();
+        return ErrorResponse.builder().code(msgType.getCode()).message(msgType.getMessage()).build();
     }
 
     @ExceptionHandler(BaseException.class)
-    public MsgDTO handler(BaseException e) {
+    public ErrorResponse handler(BaseException e) {
         MsgType msgType = e.getMsgType();
         log.error(e.getMessage(), e.getCause(), e);
-        return MsgDTO.builder().code(msgType.getCode()).message(msgType.getMessage()).build();
+        return ErrorResponse.builder().code(msgType.getCode()).message(msgType.getMessage()).build();
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(HttpMessageNotReadableException.class)
-    public MsgDTO handler(HttpMessageNotReadableException e) {
+    public ErrorResponse handler(HttpMessageNotReadableException e) {
         MsgType msgType = MsgType.EmptyRequestBody;
         log.error(e.getMessage(), e.getCause(), e);
-        return MsgDTO.builder().code(msgType.getCode()).message(msgType.getMessage()).build();
+        return ErrorResponse.builder().code(msgType.getCode()).message(msgType.getMessage()).build();
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(BindException.class)
-    public MsgDTO handler(BindException e) {
+    public ErrorResponse handler(BindException e) {
         MsgType msgType = MsgType.EmptyRequestBody;
         log.error(e.getMessage(), e.getCause(), e);
-        return MsgDTO.builder().code(msgType.getCode()).message(msgType.getMessage()).build();
+        return ErrorResponse.builder().code(msgType.getCode()).message(msgType.getMessage()).build();
     }
 }

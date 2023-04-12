@@ -3,9 +3,9 @@ package com.webtoon.coding.web.contents;
 import com.webtoon.coding.domain.comment.Evaluation;
 import com.webtoon.coding.domain.contents.Contents;
 import com.webtoon.coding.service.contents.ContentsService;
-import com.webtoon.coding.dto.ContentsInfo;
-import com.webtoon.coding.dto.SelectContentsStoreDTO;
-import com.webtoon.coding.dto.TopContents;
+import com.webtoon.coding.dto.view.ContentsInfo;
+import com.webtoon.coding.dto.request.PageContentsRequest;
+import com.webtoon.coding.dto.view.TopContents;
 import com.webtoon.coding.dto.request.UpdatedContentsRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -44,7 +44,7 @@ public class ContentsController {
   }
 
   @GetMapping("contents")
-  public ResponseEntity<Page<ContentsInfo>> getContents(@Valid SelectContentsStoreDTO dto) {
+  public ResponseEntity<Page<ContentsInfo>> getContents(@Valid PageContentsRequest dto) {
     Page<ContentsInfo> data = contentsService.getContents(dto);
     if (data.isEmpty()) {
       return ResponseEntity.status(HttpStatus.NO_CONTENT).build();

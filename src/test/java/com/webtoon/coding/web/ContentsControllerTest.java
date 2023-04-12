@@ -6,9 +6,9 @@ import com.webtoon.coding.domain.contents.Contents;
 import com.webtoon.coding.mock.ContentsMock;
 import com.webtoon.coding.mock.DtoMock;
 import com.webtoon.coding.service.contents.ContentsService;
-import com.webtoon.coding.dto.ContentsInfo;
-import com.webtoon.coding.dto.SelectContentsStoreDTO;
-import com.webtoon.coding.dto.TopContents;
+import com.webtoon.coding.dto.view.ContentsInfo;
+import com.webtoon.coding.dto.request.PageContentsRequest;
+import com.webtoon.coding.dto.view.TopContents;
 import com.webtoon.coding.dto.request.UpdatedContentsRequest;
 import com.webtoon.coding.mock.JsonUtil;
 import com.webtoon.coding.web.contents.ContentsController;
@@ -120,7 +120,7 @@ class ContentsControllerTest {
   @DisplayName("작품 전체 조회 API")
   void getContents() throws Exception {
 
-    SelectContentsStoreDTO dto = DtoMock.getSelectContentsStoreDTO();
+    PageContentsRequest dto = DtoMock.getSelectContentsStoreDTO();
 
     Page<ContentsInfo> mocks = ContentsMock.getPageContentsInfo();
 

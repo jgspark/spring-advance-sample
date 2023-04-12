@@ -1,4 +1,4 @@
-package com.webtoon.coding.dto;
+package com.webtoon.coding.dto.response;
 
 import lombok.*;
 
@@ -6,7 +6,7 @@ import lombok.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class MsgDTO {
+public class ErrorResponse {
   private String code;
 
   private String message;

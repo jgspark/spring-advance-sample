@@ -1,9 +1,9 @@
 package com.webtoon.coding.web.history;
 
 import com.webtoon.coding.service.history.HistoryService;
-import com.webtoon.coding.dto.HistoryInfo;
-import com.webtoon.coding.dto.HistoryUser;
-import com.webtoon.coding.dto.PageDTO;
+import com.webtoon.coding.dto.view.HistoryInfo;
+import com.webtoon.coding.dto.view.HistoryUser;
+import com.webtoon.coding.dto.request.PagingRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -20,7 +20,7 @@ public class HistoryController {
   private final HistoryService historyService;
 
   @GetMapping("histories")
-  public ResponseEntity<Page<HistoryInfo>> getHistories(@Valid PageDTO dto) {
+  public ResponseEntity<Page<HistoryInfo>> getHistories(@Valid PagingRequest dto) {
     Page<HistoryInfo> data = historyService.getHistories(dto);
 
     if (data.isEmpty()) {
@@ -31,7 +31,7 @@ public class HistoryController {
   }
 
   @GetMapping("histories/adult-users")
-  public ResponseEntity<Page<HistoryUser>> getHistoriesByAdultUser(@Valid PageDTO dto) {
+  public ResponseEntity<Page<HistoryUser>> getHistoriesByAdultUser(@Valid PagingRequest dto) {
 
     Page<HistoryUser> data = historyService.getHistoriesByAdultUser(dto);
 
