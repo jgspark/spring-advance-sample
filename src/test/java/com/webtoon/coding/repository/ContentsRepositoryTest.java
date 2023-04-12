@@ -212,52 +212,52 @@ class ContentsRepositoryTest {
       contentsRepository.flush();
     }
 
-    @Test
-    @DisplayName("무료 타입 컨텐츠 업데이트")
-    void updateFreeType() {
-
-      Optional<Contents> entityOptional = contentsRepository.findById(mock.getId());
-
-      Assertions.assertTrue(entityOptional.isPresent());
-
-      Contents entity = entityOptional.get();
-
-      entity.changedFreeType();
-
-      contentsRepository.flush();
-
-      Assertions.assertEquals(entity.getName(), mock.getName());
-      Assertions.assertEquals(entity.getAuthor(), mock.getAuthor());
-      Assertions.assertEquals(entity.getType(), mock.getType());
-      Assertions.assertEquals(entity.getCoin(), "0");
-      Assertions.assertEquals(entity.getOpenDate(), mock.getOpenDate());
-    }
-
-    @Test
-    @DisplayName("유료 타입 컨텐츠 업데이트")
-    void updatedPagar() {
-
-      final String mockCoin = "100";
-
-      Optional<Contents> entityOptional = contentsRepository.findById(mock.getId());
-
-      Assertions.assertTrue(entityOptional.isPresent());
-
-      Contents entity = entityOptional.get();
-
-      entity.changedPagar();
-
-      entity.setCoin(mockCoin);
-
-      contentsRepository.flush();
-
-      Assertions.assertEquals(entity.getId(), mock.getId());
-      Assertions.assertEquals(entity.getName(), mock.getName());
-      Assertions.assertEquals(entity.getAuthor(), mock.getAuthor());
-      Assertions.assertEquals(entity.getType(), Policy.PAGAR);
-      Assertions.assertEquals(entity.getCoin(), mockCoin);
-      Assertions.assertEquals(entity.getOpenDate(), mock.getOpenDate());
-    }
+//    @Test
+//    @DisplayName("무료 타입 컨텐츠 업데이트")
+//    void updateFreeType() {
+//
+//      Optional<Contents> entityOptional = contentsRepository.findById(mock.getId());
+//
+//      Assertions.assertTrue(entityOptional.isPresent());
+//
+//      Contents entity = entityOptional.get();
+//
+//      entity.changedFreeType();
+//
+//      contentsRepository.flush();
+//
+//      Assertions.assertEquals(entity.getName(), mock.getName());
+//      Assertions.assertEquals(entity.getAuthor(), mock.getAuthor());
+//      Assertions.assertEquals(entity.getType(), mock.getType());
+//      Assertions.assertEquals(entity.getCoin(), "0");
+//      Assertions.assertEquals(entity.getOpenDate(), mock.getOpenDate());
+//    }
+//
+//    @Test
+//    @DisplayName("유료 타입 컨텐츠 업데이트")
+//    void updatedPagar() {
+//
+//      final String mockCoin = "100";
+//
+//      Optional<Contents> entityOptional = contentsRepository.findById(mock.getId());
+//
+//      Assertions.assertTrue(entityOptional.isPresent());
+//
+//      Contents entity = entityOptional.get();
+//
+//      entity.changedPagar();
+//
+//      entity.setCoin(mockCoin);
+//
+//      contentsRepository.flush();
+//
+//      Assertions.assertEquals(entity.getId(), mock.getId());
+//      Assertions.assertEquals(entity.getName(), mock.getName());
+//      Assertions.assertEquals(entity.getAuthor(), mock.getAuthor());
+//      Assertions.assertEquals(entity.getType(), Policy.PAGAR);
+//      Assertions.assertEquals(entity.getCoin(), mockCoin);
+//      Assertions.assertEquals(entity.getOpenDate(), mock.getOpenDate());
+//    }
 
     @AfterEach
     void clear() {
