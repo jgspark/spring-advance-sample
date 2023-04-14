@@ -1,19 +1,17 @@
-package com.webtoon.coding.service;
+package com.webtoon.coding.service.comment;
 
-import com.webtoon.coding.domain.comment.Comment;
-import com.webtoon.coding.domain.comment.CommentWriter;
-import com.webtoon.coding.domain.contents.Contents;
-import com.webtoon.coding.domain.common.Reader;
-import com.webtoon.coding.domain.common.Verifier;
-import com.webtoon.coding.domain.user.User;
-import com.webtoon.coding.dto.request.ContentsCommentRequest;
 import com.webtoon.coding.core.exception.MsgType;
 import com.webtoon.coding.core.exception.NoDataException;
+import com.webtoon.coding.domain.comment.Comment;
+import com.webtoon.coding.domain.comment.CommentWriter;
+import com.webtoon.coding.domain.common.Reader;
+import com.webtoon.coding.domain.common.Verifier;
+import com.webtoon.coding.domain.contents.Contents;
+import com.webtoon.coding.domain.user.User;
+import com.webtoon.coding.dto.request.ContentsCommentRequest;
 import com.webtoon.coding.mock.CommentMock;
 import com.webtoon.coding.mock.ContentsMock;
 import com.webtoon.coding.mock.UserMock;
-import com.webtoon.coding.service.comment.CommentService;
-import com.webtoon.coding.service.comment.CommentServiceImpl;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -21,12 +19,14 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.LENIENT)
-class CommentServiceTest {
+class CommentServiceImplTest {
 
     private CommentService commentService;
 
@@ -84,11 +84,11 @@ class CommentServiceTest {
 
             org.assertj.core.api.Assertions.assertThat(entity).isEqualTo(mock);
 
-            org.junit.jupiter.api.Assertions.assertEquals(
+            assertEquals(
                     entity.getId().getUserId(), mock.getUser().getId());
-            org.junit.jupiter.api.Assertions.assertEquals(
+            assertEquals(
                     entity.getId().getContentsId(), mock.getId().getContentsId());
-            org.junit.jupiter.api.Assertions.assertEquals(entity.getComment(), mock.getComment());
+            assertEquals(entity.getComment(), mock.getComment());
         }
 
         @Test
@@ -105,12 +105,12 @@ class CommentServiceTest {
 
             ContentsCommentRequest dto = CommentMock.createdStoreDTO();
 
-            NoDataException e = Assertions.assertThrows(NoDataException.class, () -> commentService.created(dto));
+            NoDataException e = assertThrows(NoDataException.class, () -> commentService.created(dto));
 
             verify(userReader, times(1)).get(any());
 
-            Assertions.assertEquals(e.getMsgType(), MsgType.NoUserData);
-            Assertions.assertEquals(e.getMessage(), MsgType.NoUserData.getMessage());
+            assertEquals(e.getMsgType(), MsgType.NoUserData);
+            assertEquals(e.getMessage(), MsgType.NoUserData.getMessage());
         }
 
         @Test
@@ -129,17 +129,18 @@ class CommentServiceTest {
 
             ContentsCommentRequest dto = CommentMock.createdStoreDTO();
 
-            NoDataException e = Assertions.assertThrows(NoDataException.class, () -> commentService.created(dto));
+            NoDataException e = assertThrows(NoDataException.class, () -> commentService.created(dto));
 
             verify(userReader, times(0)).get(any());
 
             verify(contentsReader, times(1)).get(any());
 
-            Assertions.assertEquals(e.getMsgType(), MsgType.NoContentsData);
-            Assertions.assertEquals(e.getMessage(), MsgType.NoContentsData.getMessage());
+            assertEquals(e.getMsgType(), MsgType.NoContentsData);
+            assertEquals(e.getMessage(), MsgType.NoContentsData.getMessage());
         }
 
 
     }
 
 }
+
