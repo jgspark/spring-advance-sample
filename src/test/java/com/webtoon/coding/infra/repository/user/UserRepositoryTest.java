@@ -1,9 +1,8 @@
-package com.webtoon.coding.repository;
+package com.webtoon.coding.infra.repository.user;
 
-import com.webtoon.coding.infra.config.JPAConfiguration;
 import com.webtoon.coding.domain.user.User;
+import com.webtoon.coding.infra.config.JPAConfiguration;
 import com.webtoon.coding.mock.UserMock;
-import com.webtoon.coding.infra.repository.user.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -13,25 +12,29 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 @DataJpaTest
 @ExtendWith(SpringExtension.class)
 @Import(JPAConfiguration.class)
 class UserRepositoryTest {
 
-  @Autowired private UserRepository userRepository;
+    @Autowired
+    private UserRepository userRepository;
 
-  private User mock;
+    private User mock;
 
-  @BeforeEach
-  void init() {
-    mock = userRepository.save(UserMock.createdMock());
-    userRepository.flush();
-  }
+    @BeforeEach
+    void init() {
+        mock = userRepository.save(UserMock.createdMock());
+        userRepository.flush();
+    }
 
-  @Test
-  @DisplayName("유저 삭제")
-  void deleteById() {
-    userRepository.deleteById(mock.getId());
-    userRepository.flush();
-  }
+    @Test
+    @DisplayName("유저 삭제")
+    void deleteById() {
+        userRepository.deleteById(mock.getId());
+        userRepository.flush();
+    }
 }
+
