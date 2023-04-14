@@ -65,6 +65,7 @@ configurations {
 test {
     finalizedBy jacocoTestReport
 }
+
 jacocoTestReport {
     dependsOn test
     reports {
