@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.net.BindException;
 
+
 @Slf4j
 @RestControllerAdvice
 public class RestExceptionHandler {
@@ -18,14 +19,14 @@ public class RestExceptionHandler {
     public ErrorResponse handler(Exception e) {
         MsgType msgType = MsgType.ServerError;
         log.error(e.getMessage(), e.getCause(), e);
-        return ErrorResponse.builder().code(msgType.getCode()).message(msgType.getMessage()).build();
+        return ErrorResponse.of(msgType.getCode(), msgType.getMessage());
     }
 
     @ExceptionHandler(BaseException.class)
     public ErrorResponse handler(BaseException e) {
         MsgType msgType = e.getMsgType();
         log.error(e.getMessage(), e.getCause(), e);
-        return ErrorResponse.builder().code(msgType.getCode()).message(msgType.getMessage()).build();
+        return ErrorResponse.of(msgType.getCode(), msgType.getMessage());
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
@@ -33,7 +34,7 @@ public class RestExceptionHandler {
     public ErrorResponse handler(HttpMessageNotReadableException e) {
         MsgType msgType = MsgType.EmptyRequestBody;
         log.error(e.getMessage(), e.getCause(), e);
-        return ErrorResponse.builder().code(msgType.getCode()).message(msgType.getMessage()).build();
+        return ErrorResponse.of(msgType.getCode(), msgType.getMessage());
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
@@ -41,6 +42,6 @@ public class RestExceptionHandler {
     public ErrorResponse handler(BindException e) {
         MsgType msgType = MsgType.EmptyRequestBody;
         log.error(e.getMessage(), e.getCause(), e);
-        return ErrorResponse.builder().code(msgType.getCode()).message(msgType.getMessage()).build();
+        return ErrorResponse.of(msgType.getCode(), msgType.getMessage());
     }
 }
