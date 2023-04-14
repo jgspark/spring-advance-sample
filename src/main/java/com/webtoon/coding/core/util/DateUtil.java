@@ -20,7 +20,7 @@ public final class DateUtil {
 
     public static Date minus(Date date, int minusNum) {
 
-        if (minusNum > 0) throw new DateUtilException(MsgType.MinusNumberException);
+        if (minusNum > -1) throw new DateUtilException(MsgType.MinusNumberException);
 
         return getTime(date, minusNum);
     }
