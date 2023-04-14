@@ -1,13 +1,23 @@
 package com.webtoon.coding.dto.response;
 
-import lombok.*;
+import com.mysema.commons.lang.Assert;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 @Getter
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class ErrorResponse {
-  private String code;
 
-  private String message;
+    private final String code;
+
+    private final String message;
+
+    public static ErrorResponse of(String code, String message) {
+
+        Assert.notNull(code, "code is null");
+        Assert.notNull(message, "message is null");
+
+        return new ErrorResponse(code, message);
+    }
 }
