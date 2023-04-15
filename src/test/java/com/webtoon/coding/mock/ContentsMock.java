@@ -25,6 +25,10 @@ public class ContentsMock {
 
     private static String DEFAULT_COIN = null;
 
+    public static Contents emptyOf() {
+        return Contents.builder().build();
+    }
+
     public static Contents createdMock() {
         return Contents.builder()
                 .id(DEFAULT_ID)

@@ -1,18 +1,18 @@
 package com.webtoon.coding.domain.comment;
 
-import com.webtoon.coding.domain.contents.Contents;
-import com.webtoon.coding.domain.common.Verifier;
-import com.webtoon.coding.domain.user.User;
 import com.webtoon.coding.core.exception.DomainException;
 import com.webtoon.coding.core.exception.MsgType;
+import com.webtoon.coding.domain.common.Verifier;
+import com.webtoon.coding.domain.contents.Contents;
+import com.webtoon.coding.domain.user.User;
+import com.webtoon.coding.mock.args.comment.CommentVerifyFailCommentArgs;
+import com.webtoon.coding.mock.args.comment.CommentVerifyFailTypeArgs;
+import com.webtoon.coding.mock.args.comment.CommentVerifySuccessArgs;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
-
-import java.util.stream.Stream;
+import org.junit.jupiter.params.provider.ArgumentsSource;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -30,8 +30,9 @@ class CommentVerifierTest {
     @DisplayName("체크 메소드는")
     public class Verify {
 
-        @ParameterizedTest(name = "댓글은 {0} 이기 때문에 실패를 한다.")
-        @MethodSource("com.webtoon.coding.domain.comment.CommentVerifierTest#verifyFailByCommentCaseArgs")
+        @DisplayName("실패를 한다.")
+        @ParameterizedTest(name = "댓글은 {0} 이다.")
+        @ArgumentsSource(CommentVerifyFailCommentArgs.class)
         public void testVerifyFailByCommentCase(String comment) {
 
             Comment contentsComment = Comment.of(
@@ -47,8 +48,9 @@ class CommentVerifierTest {
             assertEquals(e.getMessage(), MsgType.CommentDataException.getMessage());
         }
 
-        @ParameterizedTest(name = "평가는 {0} 이기 때문에 실패를 하게 된다.")
-        @MethodSource("com.webtoon.coding.domain.comment.CommentVerifierTest#verifyFailByTypeCaseArgs")
+        @DisplayName("실패를 한다.")
+        @ParameterizedTest(name = "평가는 {0} 이다.")
+        @ArgumentsSource(CommentVerifyFailTypeArgs.class)
         public void testVerifyFailByTypeCase(Evaluation type) {
 
             Comment contentsComment = Comment.of(
@@ -64,8 +66,9 @@ class CommentVerifierTest {
             assertEquals(e.getMessage(), MsgType.EvaluationDataException.getMessage());
         }
 
-        @ParameterizedTest(name = "댓글은 {0} 이기 때문에 성공를 한다.")
-        @MethodSource("com.webtoon.coding.domain.comment.CommentVerifierTest#testVerifySuccessArgs")
+        @DisplayName("성공를 한다.")
+        @ParameterizedTest(name = "댓글은 {0} 이다.")
+        @ArgumentsSource(CommentVerifySuccessArgs.class)
         public void testVerifySuccess(String comment) {
 
             Comment contentsComment = Comment.of(
@@ -77,29 +80,6 @@ class CommentVerifierTest {
 
             assertDoesNotThrow(() -> commentVerifier.verify(contentsComment));
         }
-
     }
 
-    private static Stream<Arguments> testVerifySuccessArgs() {
-        return Stream.of(
-                Arguments.of(" "),
-                Arguments.of("hello")
-        );
-    }
-
-    private static Stream<Arguments> verifyFailByCommentCaseArgs() {
-        return Stream.of(
-                Arguments.of((Object) null),
-                Arguments.of(""),
-                Arguments.of("hello^^"),
-                Arguments.of("he!!llo"),
-                Arguments.of("!!hello")
-        );
-    }
-
-    private static Stream<Arguments> verifyFailByTypeCaseArgs() {
-        return Stream.of(
-                Arguments.of((Object) null)
-        );
-    }
 }

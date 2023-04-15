@@ -1,10 +1,10 @@
 package com.webtoon.coding.service.comment;
 
 import com.webtoon.coding.domain.comment.Comment;
-import com.webtoon.coding.domain.comment.CommentWriter;
-import com.webtoon.coding.domain.contents.Contents;
 import com.webtoon.coding.domain.common.Reader;
 import com.webtoon.coding.domain.common.Verifier;
+import com.webtoon.coding.domain.common.Writer;
+import com.webtoon.coding.domain.contents.Contents;
 import com.webtoon.coding.domain.user.User;
 import com.webtoon.coding.dto.request.ContentsCommentRequest;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +21,7 @@ public class CommentServiceImpl implements CommentService {
 
     private final Reader<User> userReader;
 
-    private final CommentWriter commentWriter;
+    private final Writer<Comment> commentWriter;
 
     @Override
     @Transactional
