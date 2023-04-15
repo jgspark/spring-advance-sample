@@ -1,4 +1,4 @@
-package com.webtoon.coding.domain.history;
+package com.webtoon.coding.domain.common;
 
 import lombok.Getter;
 import org.springframework.data.annotation.CreatedDate;
