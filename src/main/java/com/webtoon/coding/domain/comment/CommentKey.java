@@ -7,12 +7,15 @@ import java.io.Serializable;
 
 @Getter
 @Embeddable
-@AllArgsConstructor
-@EqualsAndHashCode(of = {"userId", "contentsId"})
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class CommentKey implements Serializable {
 
-  private Long userId;
+    private Long userId;
 
-  private Long contentsId;
+    private Long contentsId;
+
+    public static CommentKey of(Long userId, Long contentsId) {
+        return new CommentKey(userId, contentsId);
+    }
 }

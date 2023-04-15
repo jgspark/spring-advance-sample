@@ -5,11 +5,14 @@ import com.webtoon.coding.core.exception.MsgType;
 import com.webtoon.coding.domain.common.Verifier;
 import com.webtoon.coding.domain.contents.Contents;
 import com.webtoon.coding.domain.user.User;
+import com.webtoon.coding.mock.ContentsMock;
+import com.webtoon.coding.mock.UserMock;
 import com.webtoon.coding.mock.args.comment.CommentVerifyFailCommentArgs;
 import com.webtoon.coding.mock.args.comment.CommentVerifyFailTypeArgs;
 import com.webtoon.coding.mock.args.comment.CommentVerifySuccessArgs;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ArgumentsSource;
@@ -26,6 +29,31 @@ class CommentTest {
 
     @Mock
     private Verifier<Comment> verifier;
+
+    @Nested
+    @DisplayName("생성 메소드는")
+    public class Of {
+
+        @Test
+        public void testOfSuccess() {
+
+            String comment = "hello";
+
+            Evaluation type = Evaluation.GOOD;
+
+            User user = UserMock.createdMock();
+
+            Contents contents = ContentsMock.createdMock();
+
+            Comment entity = Comment.of(comment, type, user, contents);
+
+            assertEquals(entity.getComment(), comment);
+            assertEquals(entity.getType(), type);
+            assertEquals(entity.getUser(), user);
+            assertEquals(entity.getContents(), contents);
+        }
+
+    }
 
     @Nested
     @DisplayName("작성 메소드는")

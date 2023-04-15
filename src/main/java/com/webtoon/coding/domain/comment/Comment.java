@@ -1,13 +1,12 @@
 package com.webtoon.coding.domain.comment;
 
-import com.webtoon.coding.domain.contents.Contents;
 import com.webtoon.coding.domain.common.Verifier;
+import com.webtoon.coding.domain.contents.Contents;
 import com.webtoon.coding.domain.user.User;
 import lombok.*;
 
 import javax.persistence.*;
 
-@Builder
 @Entity
 @Getter
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
@@ -40,12 +39,7 @@ public class Comment {
     }
 
     public static Comment of(String comment, Evaluation type, User user, Contents contents) {
-        return Comment.builder()
-                .id(new CommentKey(user.getId(), contents.getId()))
-                .comment(comment)
-                .type(type)
-                .user(user)
-                .contents(contents)
-                .build();
+        CommentKey id = CommentKey.of(user.getId(), contents.getId());
+        return new Comment(id, type, comment, user, contents);
     }
 }
