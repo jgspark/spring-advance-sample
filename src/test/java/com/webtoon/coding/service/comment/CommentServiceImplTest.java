@@ -3,16 +3,19 @@ package com.webtoon.coding.service.comment;
 import com.webtoon.coding.core.exception.MsgType;
 import com.webtoon.coding.core.exception.NoDataException;
 import com.webtoon.coding.domain.comment.Comment;
-import com.webtoon.coding.domain.comment.CommentWriter;
 import com.webtoon.coding.domain.common.Reader;
 import com.webtoon.coding.domain.common.Verifier;
+import com.webtoon.coding.domain.common.Writer;
 import com.webtoon.coding.domain.contents.Contents;
 import com.webtoon.coding.domain.user.User;
 import com.webtoon.coding.dto.request.ContentsCommentRequest;
 import com.webtoon.coding.mock.CommentMock;
 import com.webtoon.coding.mock.ContentsMock;
 import com.webtoon.coding.mock.UserMock;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -37,7 +40,7 @@ class CommentServiceImplTest {
     private Reader<User> userReader;
 
     @Mock
-    private CommentWriter commentWriter;
+    private Writer<Comment> commentWriter;
 
     @Mock
     private Verifier<Comment> commentVerifier;

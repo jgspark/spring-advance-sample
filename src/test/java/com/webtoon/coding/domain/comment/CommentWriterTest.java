@@ -1,5 +1,6 @@
 package com.webtoon.coding.domain.comment;
 
+import com.webtoon.coding.domain.common.Writer;
 import com.webtoon.coding.infra.repository.comment.CommentRepository;
 import com.webtoon.coding.mock.CommentMock;
 import com.webtoon.coding.mock.ContentsMock;
@@ -23,7 +24,7 @@ class CommentWriterTest {
     @Mock
     private CommentRepository commentRepository;
 
-    private CommentWriter commentWriter;
+    private Writer<Comment> commentWriter;
 
     @BeforeEach
     public void init() {
