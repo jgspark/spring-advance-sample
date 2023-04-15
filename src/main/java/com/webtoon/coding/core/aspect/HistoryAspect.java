@@ -1,13 +1,10 @@
 package com.webtoon.coding.core.aspect;
 
-import com.webtoon.coding.core.exception.NoDataException;
-import com.webtoon.coding.core.exception.MsgType;
+import com.webtoon.coding.domain.common.Reader;
+import com.webtoon.coding.domain.common.Writer;
 import com.webtoon.coding.domain.contents.Contents;
 import com.webtoon.coding.domain.history.History;
 import com.webtoon.coding.domain.user.User;
-import com.webtoon.coding.infra.repository.contents.ContentsRepository;
-import com.webtoon.coding.infra.repository.history.HistoryRepository;
-import com.webtoon.coding.infra.repository.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -24,43 +21,50 @@ import javax.servlet.http.HttpServletRequest;
 @RequiredArgsConstructor
 public class HistoryAspect {
 
-  private final HistoryRepository historyRepository;
+    private final Writer<History> historyWriter;
 
-  private final UserRepository userRepository;
+    private final Reader<User> userReader;
 
-  private final ContentsRepository contentsRepository;
+    private final Reader<Contents> contentsReader;
 
-  private final String USER_ID = "X-USER-ID";
+    private final String USER_ID = "X-USER-ID";
 
-  @Pointcut("execution(* com.webtoon.coding.service.contents.ContentsService.getContentsOne(..))")
-  public void onRequest() {}
+    @Pointcut("execution(* com.webtoon.coding.web.contents.ContentsController.getContentsOne(..))")
+//    @Pointcut("execution(* com.webtoon.coding.service.contents.ContentsService.getContentsOne(..))")
+    public void onRequest() {
+    }
 
-  @Around("com.webtoon.coding.core.aspect.HistoryAspect.onRequest()")
-  public Object doLogging(ProceedingJoinPoint pjp) throws Throwable {
+    @Around("com.webtoon.coding.core.aspect.HistoryAspect.onRequest()")
+    public Object doLogging(ProceedingJoinPoint pjp) throws Throwable {
 
-    HttpServletRequest request =
-        ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
 
-    String uri = request.getRequestURI();
+        String uri = request.getRequestURI();
 
-    String[] uriArray = uri.split("/");
+        Long userId;
 
-    long contentsId = Long.parseLong(uriArray[uriArray.length - 1]);
+        Long contentsId;
 
-    long userId = Long.parseLong(request.getHeader(USER_ID));
+        try {
 
-    User user =
-        userRepository.findById(userId).orElseThrow(() -> new NoDataException(MsgType.NoUserData));
+            String[] uriArray = uri.split("/");
 
-    Contents contents =
-        contentsRepository
-            .findById(contentsId)
-            .orElseThrow(() -> new NoDataException(MsgType.NoContentsData));
+            contentsId = Long.parseLong(uriArray[uriArray.length - 1]);
 
-    History entity = History.builder().user(user).contents(contents).build();
+            userId = Long.parseLong(request.getHeader(USER_ID));
 
-    historyRepository.save(entity);
+        } catch (Exception e) {
+            throw new RuntimeException("Error To Passer");
+        }
 
-    return pjp.proceed(pjp.getArgs());
-  }
+        User user = userReader.get(userId);
+
+        Contents contents = contentsReader.get(contentsId);
+
+        History entity = History.of(null, contents);
+
+        historyWriter.save(entity);
+
+        return pjp.proceed(pjp.getArgs());
+    }
 }

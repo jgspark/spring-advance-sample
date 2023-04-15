@@ -16,7 +16,7 @@ public class HistoryMock {
   private static final Long id = 1L;
 
   public static History createdMock(User user, Contents contents) {
-    return History.builder().id(id).user(user).contents(contents).build();
+    return History.of(user, contents);
   }
 
   public static Page<HistoryInfo> createdPageList(User user, Contents contents) {

@@ -1,30 +1,36 @@
 package com.webtoon.coding.domain.history;
 
+import com.webtoon.coding.domain.common.AbstractBaseDate;
 import com.webtoon.coding.domain.contents.Contents;
 import com.webtoon.coding.domain.user.User;
 import lombok.*;
 
 import javax.persistence.*;
 
-@Builder
 @Getter
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor
-@EqualsAndHashCode(
-    of = {"id"},
-    callSuper = true)
+@EqualsAndHashCode(of = {"id"}, callSuper = true)
 public class History extends AbstractBaseDate {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-  @OneToOne
-  @JoinColumn(name = "user_id")
-  private User user;
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
-  @OneToOne
-  @JoinColumn(name = "contents_id")
-  private Contents contents;
+    @OneToOne
+    @JoinColumn(name = "contents_id")
+    private Contents contents;
+
+    public static History of(User user, Contents contents) {
+        return new History(user, contents);
+    }
+
+    private History(User user, Contents contents) {
+        this.user = user;
+        this.contents = contents;
+    }
 }
