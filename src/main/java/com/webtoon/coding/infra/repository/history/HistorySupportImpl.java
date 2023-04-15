@@ -21,44 +21,49 @@ import static com.webtoon.coding.domain.user.QUser.user;
 
 public class HistorySupportImpl extends QuerydslRepositorySupport implements HistorySupport {
 
-  private final JPAQueryFactory jpaQueryFactory;
+    private final JPAQueryFactory jpaQueryFactory;
 
-  public HistorySupportImpl(JPAQueryFactory jpaQueryFactory) {
-    super(History.class);
-    this.jpaQueryFactory = jpaQueryFactory;
-  }
+    public HistorySupportImpl(JPAQueryFactory jpaQueryFactory) {
+        super(History.class);
+        this.jpaQueryFactory = jpaQueryFactory;
+    }
 
-  @Override
-  public Page<HistoryUser> findByCreatedDateBetweenAndContents_AdultType(
-          Pageable pageable, Date startDate, Date endDate, Adult adult, Long count) {
+    @Override
+    public Page<HistoryUser> findByCreatedDateBetweenAndContents_AdultType(
+            Pageable pageable,
+            Date startDate,
+            Date endDate,
+            Adult adult,
+            Long count
+    ) {
 
-    QueryResults<HistoryUser> query =
-        jpaQueryFactory
-            .select(
-                Projections.fields(
-                    HistoryUser.class,
-                    user.id,
-                    user.userName,
-                    user.userEmail,
-                    user.gender,
-                    user.type,
-                    user.registerDate))
-            .from(history)
-            .where(
-                user.registerDate.between(startDate, endDate).and(contents.adult.eq(adult)))
-            .join(history.user, user)
-            .join(history.contents, contents)
-            .groupBy(
-                user.id, user.userName, user.userEmail, user.gender, user.type, user.registerDate)
-            .having(contents.id.count().goe(count))
-            .offset(pageable.getOffset())
-            .limit(pageable.getPageSize())
-            .fetchResults();
+        QueryResults<HistoryUser> query =
+                jpaQueryFactory
+                        .select(
+                                Projections.fields(
+                                        HistoryUser.class,
+                                        user.id,
+                                        user.userName,
+                                        user.userEmail,
+                                        user.gender,
+                                        user.type,
+                                        user.registerDate))
+                        .from(history)
+                        .where(
+                                user.registerDate.between(startDate, endDate).and(contents.adult.eq(adult)))
+                        .join(history.user, user)
+                        .join(history.contents, contents)
+                        .groupBy(
+                                user.id, user.userName, user.userEmail, user.gender, user.type, user.registerDate)
+                        .having(contents.id.count().goe(count))
+                        .offset(pageable.getOffset())
+                        .limit(pageable.getPageSize())
+                        .fetchResults();
 
-    long total = query.getTotal();
+        long total = query.getTotal();
 
-    List<HistoryUser> results = query.getResults();
+        List<HistoryUser> results = query.getResults();
 
-    return new PageImpl<>(results, pageable, total);
-  }
+        return new PageImpl<>(results, pageable, total);
+    }
 }
