@@ -1,6 +1,8 @@
 package com.webtoon.coding.service.history;
 
 import com.webtoon.coding.domain.contents.Adult;
+import com.webtoon.coding.domain.history.HistoryCustomReader;
+import com.webtoon.coding.dto.entity.PageHistoryUser;
 import com.webtoon.coding.infra.repository.history.HistoryRepository;
 import com.webtoon.coding.dto.view.HistoryInfo;
 import com.webtoon.coding.dto.view.HistoryUser;
@@ -17,23 +19,19 @@ import java.util.Date;
 @RequiredArgsConstructor
 public class HistoryServiceImpl implements HistoryService {
 
-  private final HistoryRepository historyRepository;
+    private final HistoryCustomReader historyCustomReader;
 
-  @Override
-  @Transactional(readOnly = true)
-  public Page<HistoryInfo> getHistories(PagingRequest dto) {
-    return historyRepository.findAllProjectedBy(dto.getPageRequest(), HistoryInfo.class);
-  }
+    @Override
+    @Transactional(readOnly = true)
+    public Page<HistoryInfo> getHistories(PagingRequest dto) {
+        return historyCustomReader.getAll(dto.getPageRequest(), HistoryInfo.class);
+    }
 
-  @Override
-  @Transactional(readOnly = true)
-  public Page<HistoryUser> getHistoriesByAdultUser(PagingRequest dto) {
-
-    Date startDate = DateUtil.minus(new Date(), -7);
-
-    Date endDate = DateUtil.plus(new Date(), 1);
-
-    return historyRepository.findByCreatedDateBetweenAndContents_AdultType(
-        dto.getPageRequest(), startDate, endDate, Adult.ADULT, 3L);
-  }
+    @Override
+    @Transactional(readOnly = true)
+    public Page<HistoryUser> getHistoriesByAdultUser(PagingRequest dto) {
+        Date startDate = DateUtil.minus(new Date(), -7);
+        Date endDate = DateUtil.plus(new Date(), 1);
+        return historyCustomReader.getHistories(PageHistoryUser.of(dto.getPageRequest(), startDate, endDate, Adult.ADULT, 3L));
+    }
 }
