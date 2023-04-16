@@ -9,6 +9,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Objects;
+
 @Component
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
@@ -18,6 +20,11 @@ public class HistoryReader implements HistoryCustomReader {
 
     @Override
     public <T> Page<T> getAll(Pageable pageable, Class<T> type) {
+
+        if (Objects.isNull(type)) {
+            throw new RuntimeException("type is not null");
+        }
+
         return historyRepository.findAllProjectedBy(pageable, type);
     }
 

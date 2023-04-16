@@ -30,7 +30,6 @@ public class HistoryAspect {
     private final String USER_ID = "X-USER-ID";
 
     @Pointcut("execution(* com.webtoon.coding.web.contents.ContentsController.getContentsOne(..))")
-//    @Pointcut("execution(* com.webtoon.coding.service.contents.ContentsService.getContentsOne(..))")
     public void onRequest() {
     }
 
