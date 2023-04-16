@@ -1,19 +1,18 @@
-package com.webtoon.coding.web;
+package com.webtoon.coding.web.contents;
 
-import com.webtoon.coding.domain.contents.Policy;
+import com.webtoon.coding.core.exception.RestExceptionHandler;
 import com.webtoon.coding.domain.comment.Evaluation;
 import com.webtoon.coding.domain.contents.Contents;
+import com.webtoon.coding.domain.contents.Policy;
+import com.webtoon.coding.dto.request.PageContentsRequest;
+import com.webtoon.coding.dto.request.UpdatedContentsRequest;
+import com.webtoon.coding.dto.view.ContentsInfo;
+import com.webtoon.coding.dto.view.TopContents;
 import com.webtoon.coding.mock.ContentsMock;
 import com.webtoon.coding.mock.DtoMock;
-import com.webtoon.coding.service.contents.ContentsService;
-import com.webtoon.coding.dto.view.ContentsInfo;
-import com.webtoon.coding.dto.request.PageContentsRequest;
-import com.webtoon.coding.dto.view.TopContents;
-import com.webtoon.coding.dto.request.UpdatedContentsRequest;
 import com.webtoon.coding.mock.JsonUtil;
-import com.webtoon.coding.web.contents.ContentsController;
+import com.webtoon.coding.service.contents.ContentsService;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -37,7 +36,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@Disabled
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(ContentsController.class)
 class ContentsControllerTest {
@@ -51,6 +49,7 @@ class ContentsControllerTest {
     void init() {
         this.mockMvc =
                 MockMvcBuilders.standaloneSetup(new ContentsController(contentsService))
+                        .setControllerAdvice(new RestExceptionHandler())
                         .addFilter(new CharacterEncodingFilter("UTF-8", true))
                         .build();
     }
@@ -114,7 +113,7 @@ class ContentsControllerTest {
                 .andExpect(jsonPath("$['name']").value(mock.getName()))
                 .andExpect(jsonPath("$['author']").value(mock.getAuthor()))
                 .andExpect(jsonPath("$['type']").value(mock.getType().name()))
-                .andExpect(jsonPath("$['adultType']").value(mock.getAdult().name()))
+                .andExpect(jsonPath("$['adult']").value(mock.getAdult().name()))
                 .andExpect(jsonPath("$['coin']").value(mock.getCoin()))
                 .andExpect(jsonPath("$['openDate']").value(mock.getOpenDate()));
     }

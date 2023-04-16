@@ -1,13 +1,13 @@
-package com.webtoon.coding.web;
+package com.webtoon.coding.web.comment;
 
+import com.webtoon.coding.core.exception.RestExceptionHandler;
 import com.webtoon.coding.domain.comment.Comment;
+import com.webtoon.coding.dto.request.ContentsCommentRequest;
 import com.webtoon.coding.mock.CommentMock;
 import com.webtoon.coding.mock.ContentsMock;
+import com.webtoon.coding.mock.JsonUtil;
 import com.webtoon.coding.mock.UserMock;
 import com.webtoon.coding.service.comment.CommentService;
-import com.webtoon.coding.dto.request.ContentsCommentRequest;
-import com.webtoon.coding.mock.JsonUtil;
-import com.webtoon.coding.web.comment.CommentController;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -41,6 +41,7 @@ class CommentControllerTest {
     void init() {
         mockMvc =
                 MockMvcBuilders.standaloneSetup(new CommentController(commentService))
+                        .setControllerAdvice(new RestExceptionHandler())
                         .addFilter(new CharacterEncodingFilter("UTF-8", true))
                         .build();
     }
