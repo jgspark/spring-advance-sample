@@ -78,7 +78,7 @@ jacocoTestReport {
             fileTree(dir: it, exclude: [
                     "com/webtoon/coding/infra/config/*",
                     "com/webtoon/coding/core/exception/*",
-                    "com/webtoon/WebtoonApplication.class",
+                    "com/webtoon/coding/WebtoonApplication.class",
             ])
         }))
     }
