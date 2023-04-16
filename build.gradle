@@ -72,4 +72,12 @@ jacocoTestReport {
         xml.enabled true
         html.enabled false
     }
+
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: [
+                    "com/webtoon/coding/infra/config/*",
+            ])
+        }))
+    }
 }
