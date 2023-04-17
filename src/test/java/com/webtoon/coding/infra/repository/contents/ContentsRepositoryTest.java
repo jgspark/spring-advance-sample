@@ -2,9 +2,12 @@ package com.webtoon.coding.infra.repository.contents;
 
 import com.webtoon.coding.domain.comment.Comment;
 import com.webtoon.coding.domain.comment.Evaluation;
+import com.webtoon.coding.domain.common.Verifier;
 import com.webtoon.coding.domain.contents.Contents;
+import com.webtoon.coding.domain.contents.ContentsVerifier;
 import com.webtoon.coding.domain.contents.Policy;
 import com.webtoon.coding.domain.user.User;
+import com.webtoon.coding.dto.entity.PolicyCoin;
 import com.webtoon.coding.dto.request.PageContentsRequest;
 import com.webtoon.coding.dto.view.ContentsInfo;
 import com.webtoon.coding.dto.view.TopContents;
@@ -23,6 +26,9 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import java.util.List;
 import java.util.Optional;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 @DataJpaTest
 @ExtendWith(SpringExtension.class)
 @Import(JPAConfiguration.class)
@@ -34,13 +40,14 @@ class ContentsRepositoryTest {
     private ContentsRepository contentsRepository;
     @Autowired
     private CommentRepository commentRepository;
+    private Verifier<Contents> contentsVerifier;
 
     @BeforeEach
     void init() {
+        contentsVerifier = new ContentsVerifier();
     }
 
     @Test
-    @Disabled
     @DisplayName("컨텐츠 저장 로직 테스트 케이스")
     void save() {
 
@@ -48,14 +55,12 @@ class ContentsRepositoryTest {
 
         Contents entity = contentsRepository.save(mock);
 
-//        org.assertj.core.api.Assertions.assertThat(entity).isEqualTo(mock);
-
-        Assertions.assertEquals(entity.getId(), mock.getId());
-        Assertions.assertEquals(entity.getName(), mock.getName());
-        Assertions.assertEquals(entity.getAuthor(), mock.getAuthor());
-        Assertions.assertEquals(entity.getType(), mock.getType());
-        Assertions.assertEquals(entity.getCoin(), "0");
-        Assertions.assertEquals(entity.getOpenDate(), mock.getOpenDate());
+        assertEquals(entity.getId(), mock.getId());
+        assertEquals(entity.getName(), mock.getName());
+        assertEquals(entity.getAuthor(), mock.getAuthor());
+        assertEquals(entity.getType(), mock.getType());
+        assertEquals(entity.getCoin(), "0");
+        assertEquals(entity.getOpenDate(), mock.getOpenDate());
     }
 
     @Nested
@@ -81,19 +86,19 @@ class ContentsRepositoryTest {
 
             List<TopContents> entities = contentsRepository.findTopByLimitAndType(3, Evaluation.GOOD);
 
-            Assertions.assertEquals(entities.size(), 1);
+            assertEquals(entities.size(), 1);
 
             TopContents entity = entities.get(0);
 
-            Assertions.assertEquals(entity.getId(), mock.getId());
-            Assertions.assertEquals(entity.getName(), mock.getName());
-            Assertions.assertEquals(entity.getAuthor(), mock.getAuthor());
-            Assertions.assertEquals(entity.getType(), mock.getType());
-            Assertions.assertEquals(entity.getCoin(), mock.getCoin());
-            Assertions.assertEquals(
+            assertEquals(entity.getId(), mock.getId());
+            assertEquals(entity.getName(), mock.getName());
+            assertEquals(entity.getAuthor(), mock.getAuthor());
+            assertEquals(entity.getType(), mock.getType());
+            assertEquals(entity.getCoin(), mock.getCoin());
+            assertEquals(
                     DateMock.changedFormatDate(entity.getOpenDate()),
                     DateMock.changedFormatDate(mock.getOpenDate()));
-            Assertions.assertEquals(entity.getSum(), 1);
+            assertEquals(entity.getSum(), 1);
         }
 
         @Test
@@ -102,19 +107,19 @@ class ContentsRepositoryTest {
 
             List<TopContents> entities = contentsRepository.findTopByLimitAndType(3, Evaluation.BAD);
 
-            Assertions.assertEquals(entities.size(), 1);
+            assertEquals(entities.size(), 1);
 
             TopContents entity = entities.get(0);
 
-            Assertions.assertEquals(entity.getId(), mock.getId());
-            Assertions.assertEquals(entity.getName(), mock.getName());
-            Assertions.assertEquals(entity.getAuthor(), mock.getAuthor());
-            Assertions.assertEquals(entity.getType(), mock.getType());
-            Assertions.assertEquals(entity.getCoin(), mock.getCoin());
-            Assertions.assertEquals(
+            assertEquals(entity.getId(), mock.getId());
+            assertEquals(entity.getName(), mock.getName());
+            assertEquals(entity.getAuthor(), mock.getAuthor());
+            assertEquals(entity.getType(), mock.getType());
+            assertEquals(entity.getCoin(), mock.getCoin());
+            assertEquals(
                     DateMock.changedFormatDate(entity.getOpenDate()),
                     DateMock.changedFormatDate(mock.getOpenDate()));
-            Assertions.assertEquals(entity.getSum(), 0);
+            assertEquals(entity.getSum(), 0);
         }
 
         @Test
@@ -133,17 +138,17 @@ class ContentsRepositoryTest {
 
             List<ContentsInfo> entitiesContent = entities.getContent();
 
-            Assertions.assertEquals(entitiesContent.size(), mockContent.size());
+            assertEquals(entitiesContent.size(), mockContent.size());
 
             ContentsInfo entity = entitiesContent.get(0);
 
             ContentsInfo mock = mockContent.get(0);
 
-            Assertions.assertEquals(entity.getName(), mock.getName());
-            Assertions.assertEquals(entity.getAuthor(), mock.getAuthor());
-            Assertions.assertEquals(entity.getType(), mock.getType());
-            Assertions.assertEquals(entity.getCoin(), "0");
-            Assertions.assertEquals(
+            assertEquals(entity.getName(), mock.getName());
+            assertEquals(entity.getAuthor(), mock.getAuthor());
+            assertEquals(entity.getType(), mock.getType());
+            assertEquals(entity.getCoin(), "0");
+            assertEquals(
                     DateMock.changedFormatDate(entity.getOpenDate()),
                     DateMock.changedFormatDate(mock.getOpenDate()));
         }
@@ -162,17 +167,17 @@ class ContentsRepositoryTest {
 
             List<ContentsInfo> entitiesContent = entities.getContent();
 
-            Assertions.assertEquals(entitiesContent.size(), mockContent.size());
+            assertEquals(entitiesContent.size(), mockContent.size());
 
             ContentsInfo entity = entitiesContent.get(0);
 
             ContentsInfo mock = mockContent.get(0);
 
-            Assertions.assertEquals(entity.getName(), mock.getName());
-            Assertions.assertEquals(entity.getAuthor(), mock.getAuthor());
-            Assertions.assertEquals(entity.getType(), mock.getType());
-            Assertions.assertEquals(entity.getCoin(), "0");
-            Assertions.assertEquals(
+            assertEquals(entity.getName(), mock.getName());
+            assertEquals(entity.getAuthor(), mock.getAuthor());
+            assertEquals(entity.getType(), mock.getType());
+            assertEquals(entity.getCoin(), "0");
+            assertEquals(
                     DateMock.changedFormatDate(entity.getOpenDate()),
                     DateMock.changedFormatDate(mock.getOpenDate()));
         }
@@ -184,15 +189,15 @@ class ContentsRepositoryTest {
             Optional<ContentsInfo> entityOptional =
                     contentsRepository.findById(mock.getId(), ContentsInfo.class);
 
-            Assertions.assertTrue(entityOptional.isPresent());
+            assertTrue(entityOptional.isPresent());
 
             ContentsInfo entity = entityOptional.get();
 
-            Assertions.assertEquals(entity.getName(), mock.getName());
-            Assertions.assertEquals(entity.getAuthor(), mock.getAuthor());
-            Assertions.assertEquals(entity.getType(), mock.getType());
-            Assertions.assertEquals(entity.getCoin(), "0");
-            Assertions.assertEquals(
+            assertEquals(entity.getName(), mock.getName());
+            assertEquals(entity.getAuthor(), mock.getAuthor());
+            assertEquals(entity.getType(), mock.getType());
+            assertEquals(entity.getCoin(), "0");
+            assertEquals(
                     DateMock.changedFormatDate(entity.getOpenDate()),
                     DateMock.changedFormatDate(mock.getOpenDate()));
         }
@@ -216,52 +221,46 @@ class ContentsRepositoryTest {
             contentsRepository.flush();
         }
 
-//    @Test
-//    @DisplayName("무료 타입 컨텐츠 업데이트")
-//    void updateFreeType() {
-//
-//      Optional<Contents> entityOptional = contentsRepository.findById(mock.getId());
-//
-//      Assertions.assertTrue(entityOptional.isPresent());
-//
-//      Contents entity = entityOptional.get();
-//
-//      entity.changedFreeType();
-//
-//      contentsRepository.flush();
-//
-//      Assertions.assertEquals(entity.getName(), mock.getName());
-//      Assertions.assertEquals(entity.getAuthor(), mock.getAuthor());
-//      Assertions.assertEquals(entity.getType(), mock.getType());
-//      Assertions.assertEquals(entity.getCoin(), "0");
-//      Assertions.assertEquals(entity.getOpenDate(), mock.getOpenDate());
-//    }
-//
-//    @Test
-//    @DisplayName("유료 타입 컨텐츠 업데이트")
-//    void updatedPagar() {
-//
-//      final String mockCoin = "100";
-//
-//      Optional<Contents> entityOptional = contentsRepository.findById(mock.getId());
-//
-//      Assertions.assertTrue(entityOptional.isPresent());
-//
-//      Contents entity = entityOptional.get();
-//
-//      entity.changedPagar();
-//
-//      entity.setCoin(mockCoin);
-//
-//      contentsRepository.flush();
-//
-//      Assertions.assertEquals(entity.getId(), mock.getId());
-//      Assertions.assertEquals(entity.getName(), mock.getName());
-//      Assertions.assertEquals(entity.getAuthor(), mock.getAuthor());
-//      Assertions.assertEquals(entity.getType(), Policy.PAGAR);
-//      Assertions.assertEquals(entity.getCoin(), mockCoin);
-//      Assertions.assertEquals(entity.getOpenDate(), mock.getOpenDate());
-//    }
+        @Test
+        @DisplayName("무료 타입 컨텐츠 업데이트")
+        void updateFreeType() {
+
+            Optional<Contents> entityOptional = contentsRepository.findById(mock.getId());
+
+            Contents entity = entityOptional.get();
+
+            entity.changeDetail(contentsVerifier, PolicyCoin.of(Policy.FREE, ""));
+
+            contentsRepository.flush();
+
+            assertEquals(entity.getName(), mock.getName());
+            assertEquals(entity.getAuthor(), mock.getAuthor());
+            assertEquals(entity.getType(), mock.getType());
+            assertEquals(entity.getCoin(), "0");
+            assertEquals(entity.getOpenDate(), mock.getOpenDate());
+        }
+
+        @Test
+        @DisplayName("유료 타입 컨텐츠 업데이트")
+        void updatedPagar() {
+
+            final String mockCoin = "100";
+
+            Optional<Contents> entityOptional = contentsRepository.findById(mock.getId());
+
+            Contents entity = entityOptional.get();
+
+            entity.changeDetail(contentsVerifier, PolicyCoin.of(Policy.PAGAR, "100"));
+
+            contentsRepository.flush();
+
+            assertEquals(entity.getId(), mock.getId());
+            assertEquals(entity.getName(), mock.getName());
+            assertEquals(entity.getAuthor(), mock.getAuthor());
+            assertEquals(entity.getType(), Policy.PAGAR);
+            assertEquals(entity.getCoin(), mockCoin);
+            assertEquals(entity.getOpenDate(), mock.getOpenDate());
+        }
 
         @AfterEach
         void clear() {
