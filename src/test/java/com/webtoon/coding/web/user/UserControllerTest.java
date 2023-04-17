@@ -6,7 +6,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.BDDMockito;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
@@ -17,8 +16,8 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.filter.CharacterEncodingFilter;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -44,7 +43,7 @@ class UserControllerTest {
     @DisplayName("유저 삭제 API")
     void removeUser() throws Exception {
 
-        BDDMockito.willDoNothing().given(userService).removeUser(any());
+        doNothing().when(userService).removeUser(any());
 
         ResultActions action =
                 mockMvc
@@ -54,7 +53,7 @@ class UserControllerTest {
                                         .characterEncoding("UTF-8"))
                         .andDo(print());
 
-        BDDMockito.then(userService).should().removeUser(any());
+        verify(userService , times(1)).removeUser(any());
 
         action.andExpect(status().isOk());
     }

@@ -12,7 +12,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.BDDMockito;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
@@ -24,6 +23,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.filter.CharacterEncodingFilter;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -52,7 +52,7 @@ class CommentControllerTest {
 
         Comment mock = CommentMock.createdMock(UserMock.createdMock(), ContentsMock.createdMock());
 
-        BDDMockito.given(commentService.created(any())).willReturn(mock);
+        when(commentService.created(any())).thenReturn(mock);
 
         ContentsCommentRequest dto = CommentMock.createdStoreDTO();
 
@@ -65,7 +65,7 @@ class CommentControllerTest {
                                         .characterEncoding("UTF-8"))
                         .andDo(print());
 
-        BDDMockito.then(commentService).should().created(any());
+        verify(commentService , times(1)).created(any());
 
         action
                 .andExpect(status().isCreated())
