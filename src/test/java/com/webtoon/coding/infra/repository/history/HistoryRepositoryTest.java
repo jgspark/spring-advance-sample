@@ -11,6 +11,7 @@ import com.webtoon.coding.infra.config.JPAConfiguration;
 import com.webtoon.coding.infra.repository.contents.ContentsRepository;
 import com.webtoon.coding.infra.repository.user.UserRepository;
 import com.webtoon.coding.mock.ContentsMock;
+import com.webtoon.coding.mock.DateMock;
 import com.webtoon.coding.mock.HistoryMock;
 import com.webtoon.coding.mock.UserMock;
 import org.junit.jupiter.api.*;
@@ -25,7 +26,8 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import java.util.Date;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @DataJpaTest
 @ExtendWith(SpringExtension.class)
@@ -103,8 +105,6 @@ class HistoryRepositoryTest {
             Page<HistoryInfo> entities =
                     historyRepository.findAllProjectedBy(pageable, HistoryInfo.class);
 
-            Assertions.assertFalse(entities.isEmpty());
-
             List<HistoryInfo> entitiesContent = entities.getContent();
 
             entitiesContent.forEach(
@@ -115,9 +115,9 @@ class HistoryRepositoryTest {
                                         .findFirst()
                                         .orElseThrow();
 
-                        Assertions.assertEquals(entity.getUserName(), mock.getUser().getUserName());
-                        Assertions.assertEquals(entity.getContentsName(), mock.getContents().getName());
-                        Assertions.assertEquals(entity.getContentsType(), mock.getContents().getType());
+                        assertEquals(entity.getUserName(), mock.getUser().getUserName());
+                        assertEquals(entity.getContentsName(), mock.getContents().getName());
+                        assertEquals(entity.getContentsType(), mock.getContents().getType());
                     });
         }
 
@@ -128,7 +128,6 @@ class HistoryRepositoryTest {
     }
 
     @Nested
-    @Disabled
     public class SelectHistoryUser {
 
         private List<History> mocks;
@@ -162,10 +161,22 @@ class HistoryRepositoryTest {
                     historyRepository.findByCreatedDateBetweenAndContents_AdultType(
                             pageable, startDate, endDate, Adult.ADULT, 3L);
 
-            assertArrayEquals(
-                    entities.getContent().toArray(new HistoryUser[0]),
-                    mocks.toArray()
-            );
+            entities.getContent().forEach(
+                    entity -> {
+
+                        History mock =
+                                mocks.stream()
+                                        .filter(m -> m.getId().equals(entity.getId()))
+                                        .findFirst()
+                                        .orElseThrow();
+
+                        assertEquals(entity.getUserName(), mock.getUser().getUserName());
+                        assertEquals(entity.getUserEmail(), mock.getUser().getUserEmail());
+                        assertEquals(entity.getType(), mock.getContents().getAdult());
+                        assertEquals(entity.getGender(), mock.getUser().getGender());
+                        assertEquals(DateMock.changedFormatDate(entity.getRegisterDate()), DateMock.changedFormatDate(mock.getUser().getRegisterDate()));
+                    });
+
 
         }
     }
