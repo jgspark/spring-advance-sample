@@ -204,9 +204,9 @@ class ContentsRepositoryTest {
 
         @AfterEach
         void clear() {
-            userRepository.delete(user);
-            contentsRepository.delete(mock);
-            commentRepository.delete(comment);
+            userRepository.deleteAll();
+            contentsRepository.deleteAll();
+            commentRepository.deleteAll();
         }
     }
 

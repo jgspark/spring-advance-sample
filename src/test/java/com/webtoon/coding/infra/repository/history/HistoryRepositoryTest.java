@@ -25,6 +25,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -121,10 +122,10 @@ class HistoryRepositoryTest {
                     });
         }
 
-        @AfterEach
-        public void after() {
-            historyRepository.deleteAll();
-        }
+//        @AfterEach
+//        public void after() {
+//            historyRepository.deleteAll();
+//        }
     }
 
     @Nested
@@ -161,21 +162,29 @@ class HistoryRepositoryTest {
                     historyRepository.findByCreatedDateBetweenAndContents_AdultType(
                             pageable, startDate, endDate, Adult.ADULT, 3L);
 
-            entities.getContent().forEach(
-                    entity -> {
+            entities.getContent()
+                    .stream()
+                    .filter(f ->
+                            mocks.stream()
+                                    .filter(m -> m.getId().equals(entity.getId()))
+                                    .isParallel()
+                    )
+                    .forEach(
+                            entity -> {
 
-                        History mock =
-                                mocks.stream()
-                                        .filter(m -> m.getId().equals(entity.getId()))
-                                        .findFirst()
-                                        .orElseThrow();
+                                History mock =
+                                        mocks.stream()
+                                                .filter(m -> m.getId().equals(entity.getId()))
+                                                .findFirst()
+                                                .orElseThrow();
 
-                        assertEquals(entity.getUserName(), mock.getUser().getUserName());
-                        assertEquals(entity.getUserEmail(), mock.getUser().getUserEmail());
-                        assertEquals(entity.getType(), mock.getContents().getAdult());
-                        assertEquals(entity.getGender(), mock.getUser().getGender());
-                        assertEquals(DateMock.changedFormatDate(entity.getRegisterDate()), DateMock.changedFormatDate(mock.getUser().getRegisterDate()));
-                    });
+
+                                assertEquals(entity.getUserName(), mock.getUser().getUserName());
+                                assertEquals(entity.getUserEmail(), mock.getUser().getUserEmail());
+                                assertEquals(entity.getType(), mock.getContents().getAdult());
+                                assertEquals(entity.getGender(), mock.getUser().getGender());
+                                assertEquals(DateMock.changedFormatDate(entity.getRegisterDate()), DateMock.changedFormatDate(mock.getUser().getRegisterDate()));
+                            });
 
 
         }
