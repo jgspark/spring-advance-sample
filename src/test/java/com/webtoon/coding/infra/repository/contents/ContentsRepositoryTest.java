@@ -47,23 +47,29 @@ class ContentsRepositoryTest {
         contentsVerifier = new ContentsVerifier();
     }
 
-    @Test
-    @DisplayName("컨텐츠 저장 로직 테스트 케이스")
-    void save() {
+    @Nested
+    @DisplayName("저장을 한다면,")
+    class Save {
 
-        Contents mock = ContentsMock.createdMock();
+        @Test
+        @DisplayName("정상적으로 동작을 한다.")
+        void save() {
 
-        Contents entity = contentsRepository.save(mock);
+            Contents mock = ContentsMock.createdMock();
 
-        assertEquals(entity.getId(), mock.getId());
-        assertEquals(entity.getName(), mock.getName());
-        assertEquals(entity.getAuthor(), mock.getAuthor());
-        assertEquals(entity.getType(), mock.getType());
-        assertEquals(entity.getCoin(), "0");
-        assertEquals(entity.getOpenDate(), mock.getOpenDate());
+            Contents entity = contentsRepository.save(mock);
+
+            assertEquals(entity.getId(), mock.getId());
+            assertEquals(entity.getName(), mock.getName());
+            assertEquals(entity.getAuthor(), mock.getAuthor());
+            assertEquals(entity.getType(), mock.getType());
+            assertEquals(entity.getCoin(), "0");
+            assertEquals(entity.getOpenDate(), mock.getOpenDate());
+        }
     }
 
     @Nested
+    @DisplayName("조회를 한다면,")
     class Select {
 
         private User user;
@@ -81,7 +87,7 @@ class ContentsRepositoryTest {
         }
 
         @Test
-        @DisplayName("좋아요 top 3 로직 테스트 케이스")
+        @DisplayName("좋아요 top 3 로직 테스트 케이스는 정상적으로 동작을 한다.")
         void findTopByLimitAndType_goodComment() {
 
             List<TopContents> entities = contentsRepository.findTopByLimitAndType(3, Evaluation.GOOD);
@@ -95,14 +101,12 @@ class ContentsRepositoryTest {
             assertEquals(entity.getAuthor(), mock.getAuthor());
             assertEquals(entity.getType(), mock.getType());
             assertEquals(entity.getCoin(), mock.getCoin());
-            assertEquals(
-                    DateMock.changedFormatDate(entity.getOpenDate()),
-                    DateMock.changedFormatDate(mock.getOpenDate()));
+            assertEquals(DateMock.changedFormatDate(entity.getOpenDate()), DateMock.changedFormatDate(mock.getOpenDate()));
             assertEquals(entity.getSum(), 1);
         }
 
         @Test
-        @DisplayName("싫어요 top 3 로직 테스트 케이스")
+        @DisplayName("싫어요 top 3 로직 테스트 케이스는 정상적으로 동작을 한다.")
         void findTopByLimitAndType_badComment() {
 
             List<TopContents> entities = contentsRepository.findTopByLimitAndType(3, Evaluation.BAD);
@@ -116,23 +120,19 @@ class ContentsRepositoryTest {
             assertEquals(entity.getAuthor(), mock.getAuthor());
             assertEquals(entity.getType(), mock.getType());
             assertEquals(entity.getCoin(), mock.getCoin());
-            assertEquals(
-                    DateMock.changedFormatDate(entity.getOpenDate()),
-                    DateMock.changedFormatDate(mock.getOpenDate()));
+            assertEquals(DateMock.changedFormatDate(entity.getOpenDate()), DateMock.changedFormatDate(mock.getOpenDate()));
             assertEquals(entity.getSum(), 0);
         }
 
         @Test
-        @DisplayName("타입별 조회 로직 free type")
+        @DisplayName("타입별 조회 로직 free type은 정상적으로 동작을 한다.")
         void findByType_freeType() {
 
             Page<ContentsInfo> mocks = ContentsMock.getPageContentsInfo();
 
             PageContentsRequest dto = DtoMock.getSelectContentsStoreDTO();
 
-            Page<ContentsInfo> entities =
-                    contentsRepository.findByType(
-                            dto.getPageRequest(), Policy.FREE, ContentsInfo.class);
+            Page<ContentsInfo> entities = contentsRepository.findByType(dto.getPageRequest(), Policy.FREE, ContentsInfo.class);
 
             List<ContentsInfo> mockContent = mocks.getContent();
 
@@ -148,20 +148,17 @@ class ContentsRepositoryTest {
             assertEquals(entity.getAuthor(), mock.getAuthor());
             assertEquals(entity.getType(), mock.getType());
             assertEquals(entity.getCoin(), "0");
-            assertEquals(
-                    DateMock.changedFormatDate(entity.getOpenDate()),
-                    DateMock.changedFormatDate(mock.getOpenDate()));
+            assertEquals(DateMock.changedFormatDate(entity.getOpenDate()), DateMock.changedFormatDate(mock.getOpenDate()));
         }
 
         @Test
-        @DisplayName("전체 조회 로직 테스트 케이스")
+        @DisplayName("전체 조회 로직 테스트 케이스는 정상적으로 동작을 한다.")
         void findAllProjectedBy() {
             Page<ContentsInfo> mocks = ContentsMock.getPageContentsInfo();
 
             PageContentsRequest dto = DtoMock.getSelectContentsStoreDTO();
 
-            Page<ContentsInfo> entities =
-                    contentsRepository.findAllProjectedBy(dto.getPageRequest(), ContentsInfo.class);
+            Page<ContentsInfo> entities = contentsRepository.findAllProjectedBy(dto.getPageRequest(), ContentsInfo.class);
 
             List<ContentsInfo> mockContent = mocks.getContent();
 
@@ -177,17 +174,14 @@ class ContentsRepositoryTest {
             assertEquals(entity.getAuthor(), mock.getAuthor());
             assertEquals(entity.getType(), mock.getType());
             assertEquals(entity.getCoin(), "0");
-            assertEquals(
-                    DateMock.changedFormatDate(entity.getOpenDate()),
-                    DateMock.changedFormatDate(mock.getOpenDate()));
+            assertEquals(DateMock.changedFormatDate(entity.getOpenDate()), DateMock.changedFormatDate(mock.getOpenDate()));
         }
 
         @Test
-        @DisplayName("하나의 컨텐츠 조회")
+        @DisplayName("하나의 컨텐츠 조회를 정상적으로 동작을 한다.")
         void findById() {
 
-            Optional<ContentsInfo> entityOptional =
-                    contentsRepository.findById(mock.getId(), ContentsInfo.class);
+            Optional<ContentsInfo> entityOptional = contentsRepository.findById(mock.getId(), ContentsInfo.class);
 
             assertTrue(entityOptional.isPresent());
 
@@ -197,9 +191,7 @@ class ContentsRepositoryTest {
             assertEquals(entity.getAuthor(), mock.getAuthor());
             assertEquals(entity.getType(), mock.getType());
             assertEquals(entity.getCoin(), "0");
-            assertEquals(
-                    DateMock.changedFormatDate(entity.getOpenDate()),
-                    DateMock.changedFormatDate(mock.getOpenDate()));
+            assertEquals(DateMock.changedFormatDate(entity.getOpenDate()), DateMock.changedFormatDate(mock.getOpenDate()));
         }
 
         @AfterEach
@@ -207,6 +199,9 @@ class ContentsRepositoryTest {
             userRepository.deleteAll();
             contentsRepository.deleteAll();
             commentRepository.deleteAll();
+            userRepository.flush();
+            contentsRepository.flush();
+            commentRepository.flush();
         }
     }
 
@@ -222,7 +217,7 @@ class ContentsRepositoryTest {
         }
 
         @Test
-        @DisplayName("무료 타입 컨텐츠 업데이트")
+        @DisplayName("무료 타입 컨텐츠 업데이트는 정상적으로 동작을 한다.")
         void updateFreeType() {
 
             Optional<Contents> entityOptional = contentsRepository.findById(mock.getId());
@@ -241,7 +236,7 @@ class ContentsRepositoryTest {
         }
 
         @Test
-        @DisplayName("유료 타입 컨텐츠 업데이트")
+        @DisplayName("유료 타입 컨텐츠 업데이트은 정상적으로 동작을 한다.")
         void updatedPagar() {
 
             final String mockCoin = "100";
@@ -265,6 +260,7 @@ class ContentsRepositoryTest {
         @AfterEach
         void clear() {
             contentsRepository.delete(mock);
+            contentsRepository.flush();
         }
     }
 }

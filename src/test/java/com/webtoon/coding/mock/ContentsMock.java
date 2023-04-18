@@ -31,7 +31,6 @@ public class ContentsMock {
 
     public static Contents createdMock() {
         return Contents.builder()
-                .id(DEFAULT_ID)
                 .name(DEFAULT_NAME)
                 .author(DEFAULT_AUTHOR)
                 .type(DEFAULT_TYPE)
