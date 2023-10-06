@@ -1,12 +1,10 @@
 package com.webtoon.coding.dto.request;
 
 import com.webtoon.coding.domain.contents.Policy;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.apache.commons.lang3.ObjectUtils;
-
-import javax.validation.constraints.NotNull;
 
 @Getter
 @NoArgsConstructor

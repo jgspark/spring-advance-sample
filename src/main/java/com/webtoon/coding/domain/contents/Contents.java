@@ -2,10 +2,10 @@ package com.webtoon.coding.domain.contents;
 
 import com.webtoon.coding.domain.common.Verifier;
 import com.webtoon.coding.dto.entity.PolicyCoin;
+import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;
 
-import javax.persistence.*;
 import java.util.Date;
 
 @Entity

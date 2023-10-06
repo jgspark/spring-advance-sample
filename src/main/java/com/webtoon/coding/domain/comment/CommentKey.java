@@ -1,8 +1,8 @@
 package com.webtoon.coding.domain.comment;
 
+import jakarta.persistence.Embeddable;
 import lombok.*;
 
-import javax.persistence.Embeddable;
 import java.io.Serializable;
 
 @Getter

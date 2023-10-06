@@ -4,8 +4,7 @@ import com.webtoon.coding.domain.common.Verifier;
 import com.webtoon.coding.domain.contents.Contents;
 import com.webtoon.coding.domain.user.User;
 import lombok.*;
-
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Entity
 @Getter

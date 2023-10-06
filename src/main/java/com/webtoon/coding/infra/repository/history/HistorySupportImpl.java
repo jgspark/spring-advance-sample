@@ -14,9 +14,6 @@ import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport
 import java.util.Date;
 import java.util.List;
 
-import static com.webtoon.coding.domain.contents.QContents.contents;
-import static com.webtoon.coding.domain.history.QHistory.history;
-import static com.webtoon.coding.domain.user.QUser.user;
 
 
 public class HistorySupportImpl extends QuerydslRepositorySupport implements HistorySupport {

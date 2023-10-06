@@ -1,5 +1,5 @@
 plugins {
-    id 'org.springframework.boot' version '2.4.5'
+    id 'org.springframework.boot' version '3.1.4'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
     id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
@@ -8,7 +8,7 @@ plugins {
 
 group = 'com.webtoon'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '11'
+sourceCompatibility = '17'
 
 configurations {
     compileOnly {
@@ -23,6 +23,7 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.jetbrains:annotations:24.0.0'
     compileOnly 'org.projectlombok:lombok'
     implementation 'com.h2database:h2'
     annotationProcessor 'org.projectlombok:lombok'
@@ -69,8 +70,8 @@ test {
 jacocoTestReport {
     dependsOn test
     reports {
-        xml.enabled true
-        html.enabled false
+        xml.required = true
+        html.required = true
     }
 
     afterEvaluate {

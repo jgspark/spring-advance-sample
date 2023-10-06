@@ -5,6 +5,7 @@ import com.webtoon.coding.domain.common.Writer;
 import com.webtoon.coding.domain.contents.Contents;
 import com.webtoon.coding.domain.history.History;
 import com.webtoon.coding.domain.user.User;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -13,8 +14,6 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-
-import javax.servlet.http.HttpServletRequest;
 
 @Aspect
 @Component
