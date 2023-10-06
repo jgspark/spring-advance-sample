@@ -1,19 +1,20 @@
 package com.webtoon.coding.infra.repository.history;
 
+import com.querydsl.core.types.Projections;
+import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.webtoon.coding.domain.contents.Adult;
 import com.webtoon.coding.domain.history.History;
 import com.webtoon.coding.dto.view.HistoryUser;
-import com.querydsl.core.QueryResults;
-import com.querydsl.core.types.Projections;
-import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
 
 import java.util.Date;
-import java.util.List;
 
+import static com.webtoon.coding.domain.contents.QContents.contents;
+import static com.webtoon.coding.domain.history.QHistory.history;
+import static com.webtoon.coding.domain.user.QUser.user;
 
 
 public class HistorySupportImpl extends QuerydslRepositorySupport implements HistorySupport {
@@ -34,7 +35,7 @@ public class HistorySupportImpl extends QuerydslRepositorySupport implements His
             Long count
     ) {
 
-        QueryResults<HistoryUser> query =
+        var query =
                 jpaQueryFactory
                         .select(
                                 Projections.fields(
@@ -57,10 +58,8 @@ public class HistorySupportImpl extends QuerydslRepositorySupport implements His
                         .limit(pageable.getPageSize())
                         .fetchResults();
 
-        long total = query.getTotal();
-
-        List<HistoryUser> results = query.getResults();
-
+        var total = query.getTotal();
+        var results = query.getResults();
         return new PageImpl<>(results, pageable, total);
     }
 }

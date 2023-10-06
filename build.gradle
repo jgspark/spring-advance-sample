@@ -1,8 +1,8 @@
 plugins {
     id 'org.springframework.boot' version '3.1.4'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+//    id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
     id 'java'
-    id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
     id 'jacoco'
 }
 
@@ -28,11 +28,14 @@ dependencies {
     implementation 'com.h2database:h2'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    implementation "com.querydsl:querydsl-jpa:5.0.0"
-    implementation "com.querydsl:querydsl-apt:5.0.0"
-    implementation "com.querydsl:querydsl-core:5.0.0"
     implementation "org.springframework.boot:spring-boot-starter-aop"
     implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+    compileOnly 'com.querydsl:querydsl-apt:5.0.0:jakarta'
+    implementation 'com.querydsl:querydsl-jpa:5.0.0:jakarta'
+    annotationProcessor 'com.querydsl:querydsl-apt:5.0.0:jakarta'
+    annotationProcessor 'jakarta.persistence:jakarta.persistence-api'
+
 
     // https://mvnrepository.com/artifact/org.apache.commons/commons-lang3
     implementation 'org.apache.commons:commons-lang3:3.12.0'
@@ -45,16 +48,19 @@ tasks.named('test') {
 
 def querydslDir = "$buildDir/generated/querydsl"
 
-querydsl {
-    jpa = true
-    querydslSourcesDir = querydslDir
-}
+//querydsl {
+//    jpa = true
+//    querydslSourcesDir = querydslDir
+//}
+
 sourceSets {
     main.java.srcDir querydslDir
 }
-compileQuerydsl {
-    options.annotationProcessorPath = configurations.querydsl
-}
+
+//compileQuerydsl {
+//    options.annotationProcessorPath = configurations.querydsl
+//}
+
 configurations {
     compileOnly {
         extendsFrom annotationProcessor
@@ -62,7 +68,9 @@ configurations {
     querydsl.extendsFrom compileClasspath
 }
 
-// jacoco add
+/**
+ * jacoco
+ */
 test {
     finalizedBy jacocoTestReport
 }

@@ -9,7 +9,7 @@ import jakarta.persistence.*;
 import java.util.Date;
 
 @Getter
-@Entity
+@Entity(name = "USERS")
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
