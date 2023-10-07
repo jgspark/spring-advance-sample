@@ -4,6 +4,12 @@ plugins {
 //    id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
     id 'java'
     id 'jacoco'
+    // spring restdocs
+    id "org.asciidoctor.jvm.convert" version "3.3.2"
+}
+
+ext {
+    snippetsDir = file('build/generated-snippets')
 }
 
 group = 'com.webtoon'
@@ -18,6 +24,10 @@ configurations {
 
 repositories {
     mavenCentral()
+}
+
+configurations {
+    asciidoctorExt
 }
 
 dependencies {
@@ -39,12 +49,14 @@ dependencies {
 
     // https://mvnrepository.com/artifact/org.apache.commons/commons-lang3
     implementation 'org.apache.commons:commons-lang3:3.12.0'
+
+    asciidoctorExt 'org.springframework.restdocs:spring-restdocs-asciidoctor:3.0.0'
+    testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc:3.0.0'
 }
 
 tasks.named('test') {
     useJUnitPlatform()
 }
-
 
 def querydslDir = "$buildDir/generated/querydsl"
 
@@ -68,11 +80,21 @@ configurations {
     querydsl.extendsFrom compileClasspath
 }
 
+
+// spring restdocs
+
+asciidoctor {
+    inputs.dir snippetsDir
+    configurations 'asciidoctorExt'
+    dependsOn test
+}
+
 /**
  * jacoco
  */
 test {
     finalizedBy jacocoTestReport
+    outputs.dir snippetsDir
 }
 
 jacocoTestReport {
@@ -92,3 +114,5 @@ jacocoTestReport {
         }))
     }
 }
+
+
