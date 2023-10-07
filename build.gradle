@@ -6,6 +6,9 @@ plugins {
     id 'jacoco'
     // spring restdocs
     id "org.asciidoctor.jvm.convert" version "3.3.2"
+
+    // fixtures
+    id "java-test-fixtures"
 }
 
 ext {
