@@ -1,4 +1,4 @@
-=== Remove a User
+=== Secession a User
 
 ==== Description
 
@@ -26,16 +26,16 @@ None
 
 ====== Information
 
-include::{snippets}/user-controller-test/test_remove_user_200/http-request.adoc[]
-include::{snippets}/user-controller-test/test_remove_user_200/request-body.adoc[]
+include::{snippets}/user-controller-test/test_secession_user_200/http-request.adoc[]
+include::{snippets}/user-controller-test/test_secession_user_200/request-body.adoc[]
 
 ====== Request Examples
 
 .cURL
-include::{snippets}/user-controller-test/test_remove_user_200/curl-request.adoc[]
+include::{snippets}/user-controller-test/test_secession_user_200/curl-request.adoc[]
 
 .HTTPie
-include::{snippets}/user-controller-test/test_remove_user_200/httpie-request.adoc[]
+include::{snippets}/user-controller-test/test_secession_user_200/httpie-request.adoc[]
 
 ===== Response Documentation
 
@@ -49,5 +49,5 @@ None
 
 ====== Information
 
-include::{snippets}/user-controller-test/test_remove_user_200/http-response.adoc[]
-include::{snippets}/user-controller-test/test_remove_user_200/response-body.adoc[]
+include::{snippets}/user-controller-test/test_secession_user_200/http-response.adoc[]
+include::{snippets}/user-controller-test/test_secession_user_200/response-body.adoc[]

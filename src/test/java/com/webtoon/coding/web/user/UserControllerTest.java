@@ -8,10 +8,10 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.ResultActions;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -23,14 +23,14 @@ class UserControllerTest extends BaseTestController {
 
     @Test
     @DisplayName("유저 삭제 API - 200")
-    void test_remove_user_200() throws Exception {
+    void test_secession_user_200() throws Exception {
 
         doNothing().when(userService).removeUser(any());
 
         ResultActions action =
                 mockMvc
                         .perform(
-                                MockMvcRequestBuilders.delete("/user/" + 1)
+                                post("/user/secession")
                                         .contentType(MediaType.APPLICATION_JSON)
                                         .characterEncoding("UTF-8"))
                         .andDo(print());
