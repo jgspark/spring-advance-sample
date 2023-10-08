@@ -13,11 +13,16 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.restdocs.mockmvc.MockMvcRestDocumentation;
+import org.springframework.restdocs.payload.JsonFieldType;
+import org.springframework.restdocs.payload.PayloadDocumentation;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
+import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
+import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -55,6 +60,18 @@ class CommentControllerTest extends BaseTestController {
                 .andExpect(jsonPath("$['id']['userId']").value(mock.getId().getUserId()))
                 .andExpect(jsonPath("$['id']['contentsId']").value(mock.getId().getContentsId()))
                 .andExpect(jsonPath("$['type']").value(mock.getType().name()))
-                .andExpect(jsonPath("$['comment']").value(mock.getComment()));
+                .andExpect(jsonPath("$['comment']").value(mock.getComment()))
+//                .andDo(
+//                        restDocs.document(
+//                                responseFields(
+//                                        fieldWithPath("id").type(JsonFieldType.OBJECT).description("아이디 값"),
+//                                        fieldWithPath("id.userId").description("유저의 아이디"),
+//                                        fieldWithPath("id.contentId").description("만화 아이디").optional(),
+//                                        fieldWithPath("type").description("리뷰 타입"),
+//                                        fieldWithPath("comment").description("리뷰 컨텐츠")
+//                                )
+//                        )
+//                )
+        ;
     }
 }
