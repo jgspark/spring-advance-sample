@@ -1,0 +1,53 @@
+=== Update a Content Type
+
+==== Description
+
+None
+
+==== Endpoint
+
+None
+
+==== API Docs
+
+===== Request Documentation
+
+====== Headers
+
+None
+
+====== Query Parameters
+
+None
+
+====== Payload Fields
+
+None
+
+====== Information
+
+include::{snippets}/contents-controller-test/test_patch_contents_200/http-request.adoc[]
+include::{snippets}/contents-controller-test/test_patch_contents_200/request-body.adoc[]
+
+====== Request Examples
+
+.cURL
+include::{snippets}/contents-controller-test/test_patch_contents_200/curl-request.adoc[]
+
+.HTTPie
+include::{snippets}/contents-controller-test/test_patch_contents_200/httpie-request.adoc[]
+
+===== Response Documentation
+
+====== Headers
+
+None
+
+====== Payload Fields
+
+None
+
+====== Information
+
+include::{snippets}/contents-controller-test/test_patch_contents_200/http-response.adoc[]
+include::{snippets}/contents-controller-test/test_patch_contents_200/response-body.adoc[]

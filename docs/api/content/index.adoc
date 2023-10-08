@@ -1,0 +1,7 @@
+[[contents]]
+== Contents API
+
+include::./get-contents.adoc[]
+include::./get-content_one.adoc[]
+include::./get-top-contents.adoc[]
+include::./update_content_type.adoc[]

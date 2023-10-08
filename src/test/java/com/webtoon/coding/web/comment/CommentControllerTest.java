@@ -13,16 +13,11 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.restdocs.mockmvc.MockMvcRestDocumentation;
-import org.springframework.restdocs.payload.JsonFieldType;
-import org.springframework.restdocs.payload.PayloadDocumentation;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
-import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
-import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -36,7 +31,7 @@ class CommentControllerTest extends BaseTestController {
 
     @Test
     @DisplayName("특정 사용자가 해댱 작품에 대한 평가를 할 수 있는 API 테스트 케이스")
-    void writeComment() throws Exception {
+    void test_write_comment_200() throws Exception {
 
         Comment mock = CommentMock.createdMock(UserMock.createdMock(), ContentsMock.createdMock());
 
@@ -61,17 +56,6 @@ class CommentControllerTest extends BaseTestController {
                 .andExpect(jsonPath("$['id']['contentsId']").value(mock.getId().getContentsId()))
                 .andExpect(jsonPath("$['type']").value(mock.getType().name()))
                 .andExpect(jsonPath("$['comment']").value(mock.getComment()))
-//                .andDo(
-//                        restDocs.document(
-//                                responseFields(
-//                                        fieldWithPath("id").type(JsonFieldType.OBJECT).description("아이디 값"),
-//                                        fieldWithPath("id.userId").description("유저의 아이디"),
-//                                        fieldWithPath("id.contentId").description("만화 아이디").optional(),
-//                                        fieldWithPath("type").description("리뷰 타입"),
-//                                        fieldWithPath("comment").description("리뷰 컨텐츠")
-//                                )
-//                        )
-//                )
         ;
     }
 }

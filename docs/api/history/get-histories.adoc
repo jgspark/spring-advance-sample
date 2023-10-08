@@ -1,0 +1,52 @@
+=== Get All Histories
+
+==== Description
+
+None
+
+==== Endpoint
+
+None
+
+==== API Docs
+
+===== Request Documentation
+
+====== Headers
+
+None
+
+====== Query Parameters
+
+None
+
+====== Payload Fields
+
+None
+
+====== Information
+
+include::{snippets}/history-controller-test/test_get_histories_200/http-request.adoc[]
+
+====== Request Examples
+
+.cURL
+include::{snippets}/history-controller-test/test_get_histories_200/curl-request.adoc[]
+
+.HTTPie
+include::{snippets}/history-controller-test/test_get_histories_200/httpie-request.adoc[]
+
+===== Response Documentation
+
+====== Headers
+
+None
+
+====== Payload Fields
+
+None
+
+====== Information
+
+include::{snippets}/history-controller-test/test_get_histories_200/http-response.adoc[]
+include::{snippets}/history-controller-test/test_get_histories_200/response-body.adoc[]

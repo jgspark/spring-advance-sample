@@ -1,0 +1,53 @@
+=== Add Review
+
+==== Description
+
+None
+
+==== Endpoint
+
+None
+
+==== API Docs
+
+===== Request Documentation
+
+====== Headers
+
+None
+
+====== Query Parameters
+
+None
+
+====== Payload Fields
+
+None
+
+====== Information
+
+include::{snippets}/comment-controller-test/test_write_comment_200/http-request.adoc[]
+include::{snippets}/comment-controller-test/test_write_comment_200/request-body.adoc[]
+
+====== Request Examples
+
+.cURL
+include::{snippets}/comment-controller-test/test_write_comment_200/curl-request.adoc[]
+
+.HTTPie
+include::{snippets}/comment-controller-test/test_write_comment_200/httpie-request.adoc[]
+
+===== Response Documentation
+
+====== Headers
+
+None
+
+====== Payload Fields
+
+None
+
+====== Information
+
+include::{snippets}/comment-controller-test/test_write_comment_200/http-response.adoc[]
+include::{snippets}/comment-controller-test/test_write_comment_200/response-body.adoc[]

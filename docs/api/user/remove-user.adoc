@@ -1,0 +1,53 @@
+=== Remove a User
+
+==== Description
+
+None
+
+==== Endpoint
+
+None
+
+==== API Docs
+
+===== Request Documentation
+
+====== Headers
+
+None
+
+====== Query Parameters
+
+None
+
+====== Payload Fields
+
+None
+
+====== Information
+
+include::{snippets}/user-controller-test/test_remove_user_200/http-request.adoc[]
+include::{snippets}/user-controller-test/test_remove_user_200/request-body.adoc[]
+
+====== Request Examples
+
+.cURL
+include::{snippets}/user-controller-test/test_remove_user_200/curl-request.adoc[]
+
+.HTTPie
+include::{snippets}/user-controller-test/test_remove_user_200/httpie-request.adoc[]
+
+===== Response Documentation
+
+====== Headers
+
+None
+
+====== Payload Fields
+
+None
+
+====== Information
+
+include::{snippets}/user-controller-test/test_remove_user_200/http-response.adoc[]
+include::{snippets}/user-controller-test/test_remove_user_200/response-body.adoc[]

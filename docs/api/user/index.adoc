@@ -1,0 +1,6 @@
+
+[[user]]
+== User API
+
+include::./remove-user.adoc[]
+

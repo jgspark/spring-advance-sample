@@ -1,0 +1,4 @@
+[[history]]
+== Contents History API
+
+include::./get-histories.adoc[]

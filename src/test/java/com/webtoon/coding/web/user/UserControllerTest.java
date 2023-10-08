@@ -22,8 +22,8 @@ class UserControllerTest extends BaseTestController {
     private UserService userService;
 
     @Test
-    @DisplayName("유저 삭제 API")
-    void removeUser() throws Exception {
+    @DisplayName("유저 삭제 API - 200")
+    void test_remove_user_200() throws Exception {
 
         doNothing().when(userService).removeUser(any());
 

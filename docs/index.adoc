@@ -1,11 +1,15 @@
-= REST Docs 문서 만들기 (글의 제목)
-backtony.github.io(부제)
+= Comic Service API Docs
 :doctype: book
 :icons: font
 :source-highlighter: highlightjs
 :toc: left
 :toclevels: 2
+:sectnums:
 :sectlinks:
 :docinfo: shared-head
 
-include::./comment.adoc[]
+include::./introduction.adoc[]
+include::./api/comment/index.adoc[]
+include::./api/content/index.adoc[]
+include::./api/history/index.adoc[]
+include::./api/user/index.adoc[]
