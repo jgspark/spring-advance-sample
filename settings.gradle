@@ -9,3 +9,4 @@ pluginManagement {
 
 rootProject.name = 'webtoon'
 include("service")
+include(":tests:api-docs")

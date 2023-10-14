@@ -1,7 +1,3 @@
-plugins {
-    id 'org.asciidoctor.jvm.convert'
-}
-
 bootJar.enabled = true
 jar.enabled = false
 
@@ -29,9 +25,8 @@ dependencies {
     // https://mvnrepository.com/artifact/org.apache.commons/commons-lang3
     implementation 'org.apache.commons:commons-lang3:3.12.0'
 
-    asciidoctorExt 'org.springframework.restdocs:spring-restdocs-asciidoctor:3.0.0'
-    testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc:3.0.0'
-
+    // 테스트 모듈 추가
+    testImplementation project(":tests:api-docs")
 }
 
 def querydslDir = "$buildDir/generated/querydsl"
@@ -39,27 +34,3 @@ def querydslDir = "$buildDir/generated/querydsl"
 sourceSets {
     main.java.srcDir querydslDir
 }
-
-
-//test {
-//    finalizedBy jacocoTestReport
-//    outputs.dir snippetsDir
-//}
-//
-//jacocoTestReport {
-//    dependsOn test
-//    reports {
-//        xml.required = true
-//        html.required = true
-//    }
-//
-//    afterEvaluate {
-//        classDirectories.setFrom(files(classDirectories.files.collect {
-//            fileTree(dir: it, exclude: [
-//                    "com/webtoon/coding/infra/config/*",
-//                    "com/webtoon/coding/core/exception/*",
-//                    "com/webtoon/coding/WebtoonApplication.class",
-//            ])
-//        }))
-//    }
-//}
