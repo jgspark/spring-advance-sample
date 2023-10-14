@@ -30,12 +30,8 @@ public class HistoryReader implements HistoryCustomReader {
 
     @Override
     public Page<HistoryUser> getHistories(PageHistoryUser dto) {
-        return historyRepository.findByCreatedDateBetweenAndContents_AdultType(
-                dto.getPageable(),
-                dto.getStartDate(),
-                dto.getEndDate(),
-                dto.getAdult(),
-                dto.getCount());
+        return historyRepository.findByCreatedDateBetweenAndContents_AdultType(dto.getPageable(), dto.getStartDate(),
+                dto.getEndDate(), dto.getAdult(), dto.getCount());
     }
 
 }

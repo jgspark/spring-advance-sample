@@ -16,4 +16,5 @@ public class UserController {
     public void secession(UserIdentifier identifier) {
         userService.removeUser(identifier.userId());
     }
+
 }

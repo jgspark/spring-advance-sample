@@ -31,26 +31,20 @@ public class ContentsMock {
 
     public static Contents createdMock() {
         return Contents.builder()
-                .name(DEFAULT_NAME)
-                .author(DEFAULT_AUTHOR)
-                .type(DEFAULT_TYPE)
-                .coin(DEFAULT_COIN)
-                .adult(adult)
-                .coin("0")
-                .openDate(DateMock.getMockDate())
-                .build();
+            .name(DEFAULT_NAME)
+            .author(DEFAULT_AUTHOR)
+            .type(DEFAULT_TYPE)
+            .coin(DEFAULT_COIN)
+            .adult(adult)
+            .coin("0")
+            .openDate(DateMock.getMockDate())
+            .build();
     }
 
     public static TopContents createdTopContents() {
         Contents mock = createdMock();
-        return new TopContents(
-                mock.getId(),
-                mock.getName(),
-                mock.getAuthor(),
-                mock.getType(),
-                mock.getCoin(),
-                mock.getOpenDate(),
-                1);
+        return new TopContents(mock.getId(), mock.getName(), mock.getAuthor(), mock.getType(), mock.getCoin(),
+                mock.getOpenDate(), 1);
     }
 
     public static List<TopContents> createdTopContentsList() {
@@ -103,5 +97,7 @@ public class ContentsMock {
         public Date getOpenDate() {
             return contents.getOpenDate();
         }
+
     }
+
 }

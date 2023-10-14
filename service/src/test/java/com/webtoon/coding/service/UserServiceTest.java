@@ -40,4 +40,5 @@ class UserServiceTest {
         verify(userRemover, times(1)).remove(any());
 
     }
+
 }

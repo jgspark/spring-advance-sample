@@ -35,7 +35,8 @@ public class HistoryAspect {
     @Around("com.webtoon.coding.core.aspect.HistoryAspect.onRequest()")
     public Object doLogging(ProceedingJoinPoint pjp) throws Throwable {
 
-        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes())
+            .getRequest();
 
         String uri = request.getRequestURI();
 
@@ -51,7 +52,8 @@ public class HistoryAspect {
 
             userId = Long.parseLong(request.getHeader(USER_ID));
 
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             throw new RuntimeException("Error To Passer");
         }
 
@@ -65,4 +67,5 @@ public class HistoryAspect {
 
         return pjp.proceed(pjp.getArgs());
     }
+
 }

@@ -26,8 +26,7 @@ public class UserRemover {
 
     public void remove(Long id) {
 
-        User user = userRepository.findById(id)
-                .orElseThrow(() -> new NoDataException(MsgType.NoUserData));
+        User user = userRepository.findById(id).orElseThrow(() -> new NoDataException(MsgType.NoUserData));
 
         List<Comment> comments = commentRepository.findByUser(user);
 
@@ -43,4 +42,5 @@ public class UserRemover {
 
         userRepository.delete(user);
     }
+
 }

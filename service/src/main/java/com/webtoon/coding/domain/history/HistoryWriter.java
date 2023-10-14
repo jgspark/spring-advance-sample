@@ -17,4 +17,5 @@ public class HistoryWriter implements Writer<History> {
     public History save(History history) {
         return historyRepository.save(history);
     }
+
 }

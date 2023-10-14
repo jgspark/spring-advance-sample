@@ -32,6 +32,7 @@ class CommentRepositoryTest {
 
     @Autowired
     private ContentsRepository contentsRepository;
+
     @Autowired
     private CommentRepository commentRepository;
 
@@ -96,5 +97,7 @@ class CommentRepositoryTest {
             commentRepository.deleteById_UserId(user.getId());
             commentRepository.flush();
         }
+
     }
+
 }

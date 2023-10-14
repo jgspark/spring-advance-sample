@@ -16,4 +16,5 @@ public class UserServiceImpl implements UserService {
     public void removeUser(Long id) {
         userRemover.remove(id);
     }
+
 }

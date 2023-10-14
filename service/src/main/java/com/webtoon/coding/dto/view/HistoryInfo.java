@@ -7,16 +7,17 @@ import java.util.Date;
 
 public interface HistoryInfo {
 
-  Long getId();
+    Long getId();
 
-  @Value("#{target.user.userName}")
-  String getUserName();
+    @Value("#{target.user.userName}")
+    String getUserName();
 
-  @Value("#{target.contents.name}")
-  String getContentsName();
+    @Value("#{target.contents.name}")
+    String getContentsName();
 
-  @Value("#{target.contents.type}")
-  Policy getContentsType();
+    @Value("#{target.contents.type}")
+    Policy getContentsType();
 
-  Date getCreatedDate();
+    Date getCreatedDate();
+
 }

@@ -34,10 +34,8 @@ class ErrorResponseTest {
     }
 
     private static Stream<Arguments> getArgs() {
-        return Stream.of(
-                Arguments.of(null, null),
-                Arguments.of(null, MsgType.ServerError.getMessage()),
-                Arguments.of(MsgType.ServerError.getCode(), null)
-        );
+        return Stream.of(Arguments.of(null, null), Arguments.of(null, MsgType.ServerError.getMessage()),
+                Arguments.of(MsgType.ServerError.getCode(), null));
     }
+
 }

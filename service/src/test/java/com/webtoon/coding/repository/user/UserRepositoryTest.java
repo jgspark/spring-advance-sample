@@ -35,5 +35,5 @@ class UserRepositoryTest {
         userRepository.deleteById(mock.getId());
         userRepository.flush();
     }
-}
 
+}

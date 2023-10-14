@@ -12,10 +12,8 @@ public class RestDocsTestConfiguration {
 
     @Bean
     public RestDocumentationResultHandler write() {
-        return MockMvcRestDocumentation.document(
-                "{class-name}/{method-name}",
-                preprocessRequest(prettyPrint()),
-                preprocessResponse(prettyPrint())
-        );
+        return MockMvcRestDocumentation.document("{class-name}/{method-name}", preprocessRequest(prettyPrint()),
+                preprocessResponse(prettyPrint()));
     }
+
 }

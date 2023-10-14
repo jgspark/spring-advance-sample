@@ -12,17 +12,18 @@ import java.util.Date;
 @NoArgsConstructor
 public class TopContents {
 
-  private Long id;
+    private Long id;
 
-  private String name;
+    private String name;
 
-  private String author;
+    private String author;
 
-  private Policy type;
+    private Policy type;
 
-  private String coin;
+    private String coin;
 
-  private Date openDate;
+    private Date openDate;
 
-  private Integer sum;
+    private Integer sum;
+
 }

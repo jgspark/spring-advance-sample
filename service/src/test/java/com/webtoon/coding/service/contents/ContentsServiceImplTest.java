@@ -33,7 +33,6 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.*;
 
-
 @ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.LENIENT)
 class ContentsServiceImplTest {
@@ -51,11 +50,7 @@ class ContentsServiceImplTest {
 
     @BeforeEach
     public void init() {
-        this.contentsService = new ContentsServiceImpl(
-                contentReader,
-                contentsCustomReader,
-                contentsVerifier
-        );
+        this.contentsService = new ContentsServiceImpl(contentReader, contentsCustomReader, contentsVerifier);
     }
 
     @Nested
@@ -68,21 +63,16 @@ class ContentsServiceImplTest {
 
             List<TopContents> mocks = ContentsMock.createdTopContentsList();
 
-            when(contentsCustomReader.getTopAllByType(anyInt(), any(Evaluation.class)))
-                    .thenReturn(mocks);
+            when(contentsCustomReader.getTopAllByType(anyInt(), any(Evaluation.class))).thenReturn(mocks);
 
             List<TopContents> entities = contentsService.getTopContents(Evaluation.GOOD);
 
-            verify(contentsCustomReader, times(1))
-                    .getTopAllByType(anyInt(), any(Evaluation.class));
+            verify(contentsCustomReader, times(1)).getTopAllByType(anyInt(), any(Evaluation.class));
 
-            assertArrayEquals(
-                    entities.toArray(),
-                    mocks.toArray()
-            );
+            assertArrayEquals(entities.toArray(), mocks.toArray());
         }
-    }
 
+    }
 
     @Nested
     @DisplayName("업데이트 하는 로직은")
@@ -101,8 +91,7 @@ class ContentsServiceImplTest {
 
             Optional<Contents> entityOptional = contentsService.updatedTypeAndCoin(id, request);
 
-            verify(contentReader, times(1))
-                    .get(any());
+            verify(contentReader, times(1)).get(any());
 
             Contents entity = entityOptional.get();
 
@@ -126,17 +115,16 @@ class ContentsServiceImplTest {
 
             Page<ContentsInfo> mocks = ContentsMock.getPageContentsInfo();
 
-            when(contentsCustomReader.getAll(any(), eq(ContentsInfo.class)))
-                    .thenReturn(mocks);
+            when(contentsCustomReader.getAll(any(), eq(ContentsInfo.class))).thenReturn(mocks);
 
             PageContentsRequest dto = DtoMock.getSelectContentsStoreDTO();
 
             Page<ContentsInfo> entities = contentsService.getContents(dto);
 
-            verify(contentsCustomReader, times(1))
-                    .getAll(any(), eq(ContentsInfo.class));
+            verify(contentsCustomReader, times(1)).getAll(any(), eq(ContentsInfo.class));
 
-            assertArrayEquals(entities.getContent().toArray(new ContentsInfo[0]), mocks.getContent().toArray(new ContentsInfo[0]));
+            assertArrayEquals(entities.getContent().toArray(new ContentsInfo[0]),
+                    mocks.getContent().toArray(new ContentsInfo[0]));
         }
 
     }
@@ -151,8 +139,7 @@ class ContentsServiceImplTest {
 
             Optional<ContentsInfo> mockOptional = Optional.of(ContentsMock.getContentsInfo());
 
-            when(contentsCustomReader.get(any(), eq(ContentsInfo.class)))
-                    .thenReturn(mockOptional);
+            when(contentsCustomReader.get(any(), eq(ContentsInfo.class))).thenReturn(mockOptional);
 
             Optional<ContentsInfo> entityOptional = contentsService.getContentsOne(1L);
 
@@ -166,10 +153,10 @@ class ContentsServiceImplTest {
             assertEquals(entity.getAuthor(), mock.getAuthor());
             assertEquals(entity.getType(), mock.getType());
             assertEquals(entity.getCoin(), mock.getCoin());
-            assertEquals(
-                    DateMock.changedFormatDate(entity.getOpenDate()),
+            assertEquals(DateMock.changedFormatDate(entity.getOpenDate()),
                     DateMock.changedFormatDate(mock.getOpenDate()));
         }
 
     }
+
 }

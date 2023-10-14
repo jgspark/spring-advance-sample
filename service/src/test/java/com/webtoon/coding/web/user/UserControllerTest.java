@@ -27,16 +27,13 @@ class UserControllerTest extends BaseTestController {
 
         doNothing().when(userService).removeUser(any());
 
-        ResultActions action =
-                mockMvc
-                        .perform(
-                                post("/user/secession")
-                                        .contentType(MediaType.APPLICATION_JSON)
-                                        .characterEncoding("UTF-8"))
-                        .andDo(print());
+        ResultActions action = mockMvc
+            .perform(post("/user/secession").contentType(MediaType.APPLICATION_JSON).characterEncoding("UTF-8"))
+            .andDo(print());
 
-        verify(userService , times(1)).removeUser(any());
+        verify(userService, times(1)).removeUser(any());
 
         action.andExpect(status().isOk());
     }
+
 }

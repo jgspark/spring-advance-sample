@@ -35,12 +35,8 @@ class CommentVerifierTest {
         @ArgumentsSource(CommentVerifyFailCommentArgs.class)
         public void testVerifyFailByCommentCase(String comment) {
 
-            Comment contentsComment = Comment.of(
-                    comment,
-                    Evaluation.BAD,
-                    User.builder().build(),
-                    Contents.builder().build()
-            );
+            Comment contentsComment = Comment.of(comment, Evaluation.BAD, User.builder().build(),
+                    Contents.builder().build());
 
             DomainException e = assertThrows(DomainException.class, () -> commentVerifier.verify(contentsComment));
 
@@ -53,12 +49,7 @@ class CommentVerifierTest {
         @ArgumentsSource(CommentVerifyFailTypeArgs.class)
         public void testVerifyFailByTypeCase(Evaluation type) {
 
-            Comment contentsComment = Comment.of(
-                    "하하핳",
-                    type,
-                    User.builder().build(),
-                    Contents.builder().build()
-            );
+            Comment contentsComment = Comment.of("하하핳", type, User.builder().build(), Contents.builder().build());
 
             DomainException e = assertThrows(DomainException.class, () -> commentVerifier.verify(contentsComment));
 
@@ -71,15 +62,12 @@ class CommentVerifierTest {
         @ArgumentsSource(CommentVerifySuccessArgs.class)
         public void testVerifySuccess(String comment) {
 
-            Comment contentsComment = Comment.of(
-                    comment,
-                    Evaluation.GOOD,
-                    User.builder().build(),
-                    Contents.builder().build()
-            );
+            Comment contentsComment = Comment.of(comment, Evaluation.GOOD, User.builder().build(),
+                    Contents.builder().build());
 
             assertDoesNotThrow(() -> commentVerifier.verify(contentsComment));
         }
+
     }
 
 }

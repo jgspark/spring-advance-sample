@@ -28,5 +28,7 @@ class PageContentsTest {
             assertEquals(type, entity.getType());
             assertEquals(pageRequest, entity.getPageRequest());
         }
+
     }
+
 }

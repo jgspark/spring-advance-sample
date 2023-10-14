@@ -20,4 +20,5 @@ public class BaseException extends RuntimeException {
     public MsgType getMsgType() {
         return msgType;
     }
+
 }

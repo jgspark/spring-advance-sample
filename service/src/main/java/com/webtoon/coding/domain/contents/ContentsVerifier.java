@@ -18,11 +18,13 @@ public class ContentsVerifier implements Verifier<Contents> {
 
         Policy type = contents.getType();
 
-        if (ObjectUtils.isEmpty(type)) throw new DomainException(MsgType.CoinDataException);
+        if (ObjectUtils.isEmpty(type))
+            throw new DomainException(MsgType.CoinDataException);
 
         if (Policy.FREE.equals(type) && !"0".equals(coin)) {
             throw new DomainException(MsgType.CoinDataException);
-        } else if (Policy.PAGAR.equals(type) && !Objects.isNull(coin)) {
+        }
+        else if (Policy.PAGAR.equals(type) && !Objects.isNull(coin)) {
 
             int coinNum = Integer.parseInt(coin);
 
@@ -33,4 +35,5 @@ public class ContentsVerifier implements Verifier<Contents> {
         }
 
     }
+
 }

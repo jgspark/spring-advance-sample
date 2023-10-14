@@ -6,4 +6,5 @@ import com.webtoon.coding.dto.request.ContentsCommentRequest;
 public interface CommentService {
 
     Comment created(ContentsCommentRequest dto);
+
 }

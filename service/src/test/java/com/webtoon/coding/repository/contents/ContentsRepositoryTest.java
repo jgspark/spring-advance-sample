@@ -37,10 +37,13 @@ class ContentsRepositoryTest {
 
     @Autowired
     private UserRepository userRepository;
+
     @Autowired
     private ContentsRepository contentsRepository;
+
     @Autowired
     private CommentRepository commentRepository;
+
     private Verifier<Contents> contentsVerifier;
 
     @BeforeEach
@@ -67,6 +70,7 @@ class ContentsRepositoryTest {
             assertEquals(entity.getCoin(), "0");
             assertEquals(entity.getOpenDate(), mock.getOpenDate());
         }
+
     }
 
     @Nested
@@ -102,7 +106,8 @@ class ContentsRepositoryTest {
             assertEquals(entity.getAuthor(), mock.getAuthor());
             assertEquals(entity.getType(), mock.getType());
             assertEquals(entity.getCoin(), mock.getCoin());
-            assertEquals(DateMock.changedFormatDate(entity.getOpenDate()), DateMock.changedFormatDate(mock.getOpenDate()));
+            assertEquals(DateMock.changedFormatDate(entity.getOpenDate()),
+                    DateMock.changedFormatDate(mock.getOpenDate()));
             assertEquals(entity.getSum(), 1);
         }
 
@@ -121,7 +126,8 @@ class ContentsRepositoryTest {
             assertEquals(entity.getAuthor(), mock.getAuthor());
             assertEquals(entity.getType(), mock.getType());
             assertEquals(entity.getCoin(), mock.getCoin());
-            assertEquals(DateMock.changedFormatDate(entity.getOpenDate()), DateMock.changedFormatDate(mock.getOpenDate()));
+            assertEquals(DateMock.changedFormatDate(entity.getOpenDate()),
+                    DateMock.changedFormatDate(mock.getOpenDate()));
             assertEquals(entity.getSum(), 0);
         }
 
@@ -133,7 +139,8 @@ class ContentsRepositoryTest {
 
             PageContentsRequest dto = DtoMock.getSelectContentsStoreDTO();
 
-            Page<ContentsInfo> entities = contentsRepository.findByType(dto.getPageRequest(), Policy.FREE, ContentsInfo.class);
+            Page<ContentsInfo> entities = contentsRepository.findByType(dto.getPageRequest(), Policy.FREE,
+                    ContentsInfo.class);
 
             List<ContentsInfo> mockContent = mocks.getContent();
 
@@ -149,7 +156,8 @@ class ContentsRepositoryTest {
             assertEquals(entity.getAuthor(), mock.getAuthor());
             assertEquals(entity.getType(), mock.getType());
             assertEquals(entity.getCoin(), "0");
-            assertEquals(DateMock.changedFormatDate(entity.getOpenDate()), DateMock.changedFormatDate(mock.getOpenDate()));
+            assertEquals(DateMock.changedFormatDate(entity.getOpenDate()),
+                    DateMock.changedFormatDate(mock.getOpenDate()));
         }
 
         @Test
@@ -159,7 +167,8 @@ class ContentsRepositoryTest {
 
             PageContentsRequest dto = DtoMock.getSelectContentsStoreDTO();
 
-            Page<ContentsInfo> entities = contentsRepository.findAllProjectedBy(dto.getPageRequest(), ContentsInfo.class);
+            Page<ContentsInfo> entities = contentsRepository.findAllProjectedBy(dto.getPageRequest(),
+                    ContentsInfo.class);
 
             List<ContentsInfo> mockContent = mocks.getContent();
 
@@ -175,7 +184,8 @@ class ContentsRepositoryTest {
             assertEquals(entity.getAuthor(), mock.getAuthor());
             assertEquals(entity.getType(), mock.getType());
             assertEquals(entity.getCoin(), "0");
-            assertEquals(DateMock.changedFormatDate(entity.getOpenDate()), DateMock.changedFormatDate(mock.getOpenDate()));
+            assertEquals(DateMock.changedFormatDate(entity.getOpenDate()),
+                    DateMock.changedFormatDate(mock.getOpenDate()));
         }
 
         @Test
@@ -192,7 +202,8 @@ class ContentsRepositoryTest {
             assertEquals(entity.getAuthor(), mock.getAuthor());
             assertEquals(entity.getType(), mock.getType());
             assertEquals(entity.getCoin(), "0");
-            assertEquals(DateMock.changedFormatDate(entity.getOpenDate()), DateMock.changedFormatDate(mock.getOpenDate()));
+            assertEquals(DateMock.changedFormatDate(entity.getOpenDate()),
+                    DateMock.changedFormatDate(mock.getOpenDate()));
         }
 
         @AfterEach
@@ -204,6 +215,7 @@ class ContentsRepositoryTest {
             contentsRepository.flush();
             commentRepository.flush();
         }
+
     }
 
     @Nested
@@ -263,5 +275,7 @@ class ContentsRepositoryTest {
             contentsRepository.delete(mock);
             contentsRepository.flush();
         }
+
     }
+
 }

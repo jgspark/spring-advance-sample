@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.data.domain.PageRequest;
 
-
 @Getter
 @AllArgsConstructor
 public class PagingRequest {
@@ -19,4 +18,5 @@ public class PagingRequest {
     public PageRequest getPageRequest() {
         return PageRequest.of(this.page, this.size);
     }
+
 }

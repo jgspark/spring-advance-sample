@@ -27,5 +27,7 @@ class PolicyCoinTest {
             assertEquals(entity.getType(), type);
             assertEquals(entity.getCoin(), coin);
         }
+
     }
+
 }

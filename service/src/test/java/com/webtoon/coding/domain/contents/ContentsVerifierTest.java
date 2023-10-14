@@ -48,25 +48,18 @@ class ContentsVerifierTest {
             assertEquals(e.getMsgType(), MsgType.CoinDataException);
             assertEquals(e.getMessage(), MsgType.CoinDataException.getMessage());
         }
+
     }
 
     public static Stream<Arguments> testVerifySuccessArgs() {
-        return Stream.of(
-                Arguments.of("100", Policy.PAGAR),
-                Arguments.of("200", Policy.PAGAR),
-                Arguments.of("300", Policy.PAGAR),
-                Arguments.of("400", Policy.PAGAR),
-                Arguments.of("500", Policy.PAGAR),
-                Arguments.of("0", Policy.FREE)
-        );
+        return Stream.of(Arguments.of("100", Policy.PAGAR), Arguments.of("200", Policy.PAGAR),
+                Arguments.of("300", Policy.PAGAR), Arguments.of("400", Policy.PAGAR), Arguments.of("500", Policy.PAGAR),
+                Arguments.of("0", Policy.FREE));
     }
 
     public static Stream<Arguments> testVerifyFailArgs() {
-        return Stream.of(
-                Arguments.of(null, null),
-                Arguments.of("100", Policy.FREE),
-                Arguments.of("99", Policy.PAGAR),
-                Arguments.of("501", Policy.PAGAR)
-        );
+        return Stream.of(Arguments.of(null, null), Arguments.of("100", Policy.FREE), Arguments.of("99", Policy.PAGAR),
+                Arguments.of("501", Policy.PAGAR));
     }
+
 }

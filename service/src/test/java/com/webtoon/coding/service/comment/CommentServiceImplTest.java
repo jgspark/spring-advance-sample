@@ -47,12 +47,7 @@ class CommentServiceImplTest {
 
     @BeforeEach
     void init() {
-        this.commentService = new CommentServiceImpl(
-                commentVerifier,
-                contentsReader,
-                userReader,
-                commentWriter
-        );
+        this.commentService = new CommentServiceImpl(commentVerifier, contentsReader, userReader, commentWriter);
     }
 
     @Nested
@@ -87,10 +82,8 @@ class CommentServiceImplTest {
 
             org.assertj.core.api.Assertions.assertThat(entity).isEqualTo(mock);
 
-            assertEquals(
-                    entity.getId().getUserId(), mock.getUser().getId());
-            assertEquals(
-                    entity.getId().getContentsId(), mock.getId().getContentsId());
+            assertEquals(entity.getId().getUserId(), mock.getUser().getId());
+            assertEquals(entity.getId().getContentsId(), mock.getId().getContentsId());
             assertEquals(entity.getComment(), mock.getComment());
         }
 
@@ -142,8 +135,6 @@ class CommentServiceImplTest {
             assertEquals(e.getMessage(), MsgType.NoContentsData.getMessage());
         }
 
-
     }
 
 }
-

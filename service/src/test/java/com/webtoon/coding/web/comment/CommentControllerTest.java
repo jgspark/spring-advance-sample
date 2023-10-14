@@ -22,7 +22,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-
 @WebMvcTest(CommentController.class)
 class CommentControllerTest extends BaseTestController {
 
@@ -39,23 +38,20 @@ class CommentControllerTest extends BaseTestController {
 
         ContentsCommentRequest dto = CommentMock.createdStoreDTO();
 
-        ResultActions action =
-                mockMvc
-                        .perform(
-                                MockMvcRequestBuilders.post("/comment")
-                                        .content(JsonUtil.convertObjectToJson(dto))
-                                        .contentType(MediaType.APPLICATION_JSON)
-                                        .characterEncoding("UTF-8"))
-                        .andDo(print());
+        ResultActions action = mockMvc
+            .perform(MockMvcRequestBuilders.post("/comment")
+                .content(JsonUtil.convertObjectToJson(dto))
+                .contentType(MediaType.APPLICATION_JSON)
+                .characterEncoding("UTF-8"))
+            .andDo(print());
 
         verify(commentService, times(1)).created(any());
 
-        action
-                .andExpect(status().isCreated())
-                .andExpect(jsonPath("$['id']['userId']").value(mock.getId().getUserId()))
-                .andExpect(jsonPath("$['id']['contentsId']").value(mock.getId().getContentsId()))
-                .andExpect(jsonPath("$['type']").value(mock.getType().name()))
-                .andExpect(jsonPath("$['comment']").value(mock.getComment()))
-        ;
+        action.andExpect(status().isCreated())
+            .andExpect(jsonPath("$['id']['userId']").value(mock.getId().getUserId()))
+            .andExpect(jsonPath("$['id']['contentsId']").value(mock.getId().getContentsId()))
+            .andExpect(jsonPath("$['type']").value(mock.getType().name()))
+            .andExpect(jsonPath("$['comment']").value(mock.getComment()));
     }
+
 }

@@ -20,7 +20,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
-
 @DisplayName("유저 리더 클레스에서")
 @ExtendWith(MockitoExtension.class)
 class UserReaderTest {
@@ -34,7 +33,6 @@ class UserReaderTest {
     public void init() {
         userReader = new UserReader(userRepository);
     }
-
 
     @Nested
     @DisplayName("단일 조회 메소드에서는")
@@ -79,5 +77,7 @@ class UserReaderTest {
             assertEquals(e.getMsgType(), MsgType.NoUserData);
             assertEquals(e.getMessage(), MsgType.NoUserData.getMessage());
         }
+
     }
+
 }

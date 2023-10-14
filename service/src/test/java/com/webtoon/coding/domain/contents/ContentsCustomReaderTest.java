@@ -24,7 +24,6 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
 
-
 @DisplayName("커스텀 컨텐츠 리더 클레스에서")
 @ExtendWith(MockitoExtension.class)
 class ContentsCustomReaderTest {
@@ -99,7 +98,8 @@ class ContentsCustomReaderTest {
 
             verify(contentsRepository, times(1)).findAllProjectedBy(any(), eq(ContentsInfo.class));
 
-            assertArrayEquals(pageEntities.getContent().toArray(new ContentsInfo[0]), mocks.getContent().toArray(new ContentsInfo[0]));
+            assertArrayEquals(pageEntities.getContent().toArray(new ContentsInfo[0]),
+                    mocks.getContent().toArray(new ContentsInfo[0]));
 
         }
 
@@ -153,4 +153,5 @@ class ContentsCustomReaderTest {
     private static int getTop() {
         return 3;
     }
+
 }

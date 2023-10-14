@@ -11,9 +11,11 @@ import java.util.Optional;
 
 @Repository
 public interface ContentsRepository extends JpaRepository<Contents, Long>, ContentsSupport {
-  <T> Page<T> findByType(Pageable pageable, Policy type, Class<T> classType);
 
-  <T> Page<T> findAllProjectedBy(Pageable pageable, Class<T> classType);
+    <T> Page<T> findByType(Pageable pageable, Policy type, Class<T> classType);
 
-  <T> Optional<T> findById(Long id, Class<T> classType);
+    <T> Page<T> findAllProjectedBy(Pageable pageable, Class<T> classType);
+
+    <T> Optional<T> findById(Long id, Class<T> classType);
+
 }

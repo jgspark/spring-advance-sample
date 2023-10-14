@@ -23,4 +23,5 @@ public class CommentMock {
     public static ContentsCommentRequest createdStoreDTO() {
         return new ContentsCommentRequest(userId, contentsId, type, DEFAULT_COMMENT);
     }
+
 }

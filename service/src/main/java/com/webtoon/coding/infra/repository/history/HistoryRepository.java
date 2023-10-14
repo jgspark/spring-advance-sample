@@ -11,10 +11,11 @@ import java.util.List;
 
 @Repository
 public interface HistoryRepository extends JpaRepository<History, Long>, HistorySupport {
-    <T> Page<T> findAllProjectedBy(Pageable pageable, Class<T> classType);
 
+    <T> Page<T> findAllProjectedBy(Pageable pageable, Class<T> classType);
 
     List<History> findByUser(User user);
 
     void deleteByUser_Id(Long userId);
+
 }

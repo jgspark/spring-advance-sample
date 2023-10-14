@@ -57,4 +57,5 @@ public class ContentsServiceImpl implements ContentsService {
     public Optional<ContentsInfo> getContentsOne(Long id) {
         return contentsCustomReader.get(id, ContentsInfo.class);
     }
+
 }

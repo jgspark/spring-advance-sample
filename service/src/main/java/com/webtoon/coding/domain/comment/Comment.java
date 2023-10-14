@@ -10,8 +10,8 @@ import lombok.*;
 @Getter
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@EqualsAndHashCode(of = {"id"})
-@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"user_id", "contents_id"}))
+@EqualsAndHashCode(of = { "id" })
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = { "user_id", "contents_id" }))
 public class Comment {
 
     @EmbeddedId
@@ -41,4 +41,5 @@ public class Comment {
         CommentKey id = CommentKey.of(user.getId(), contents.getId());
         return new Comment(id, type, comment, user, contents);
     }
+
 }

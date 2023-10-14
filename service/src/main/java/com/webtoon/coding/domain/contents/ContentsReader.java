@@ -50,4 +50,5 @@ public class ContentsReader implements Reader<Contents>, ContentsCustomReader {
     public List<TopContents> getTopAllByType(int top, Evaluation type) {
         return contentsRepository.findTopByLimitAndType(top, type);
     }
+
 }

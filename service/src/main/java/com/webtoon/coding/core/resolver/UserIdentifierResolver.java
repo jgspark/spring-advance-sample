@@ -17,11 +17,10 @@ public class UserIdentifierResolver implements HandlerMethodArgumentResolver {
     }
 
     @Override
-    public Object resolveArgument(MethodParameter parameter,
-                                  ModelAndViewContainer mavContainer,
-                                  NativeWebRequest webRequest,
-                                  WebDataBinderFactory binderFactory) throws Exception {
+    public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer,
+            NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
         var userId = Long.valueOf(MDC.get(HEADER_KEY));
         return UserIdentifier.of(userId);
     }
+
 }

@@ -50,5 +50,7 @@ class CommentWriterTest {
             assertEquals(entity.getUser(), mock.getUser());
             assertEquals(entity.getContents(), mock.getContents());
         }
+
     }
+
 }

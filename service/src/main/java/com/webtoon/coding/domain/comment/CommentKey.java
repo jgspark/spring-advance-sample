@@ -21,4 +21,5 @@ public class CommentKey implements Serializable {
     public static CommentKey of(Long userId, Long contentsId) {
         return new CommentKey(userId, contentsId);
     }
+
 }

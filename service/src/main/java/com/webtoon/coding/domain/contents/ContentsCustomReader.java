@@ -9,9 +9,11 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ContentsCustomReader {
+
     <T> Optional<T> get(Long id, Class<T> type);
 
     <T> Page<T> getAll(PageContents dto, Class<T> type);
 
     List<TopContents> getTopAllByType(int top, Evaluation type);
+
 }

@@ -11,16 +11,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-
 @RestController
 @RequiredArgsConstructor
 public class CommentController {
 
-  private final CommentService commentService;
+    private final CommentService commentService;
 
-  @PostMapping("comment")
-  @ResponseStatus(HttpStatus.CREATED)
-  public Comment writeComment(@RequestBody @Valid ContentsCommentRequest request) {
-    return commentService.created(request);
-  }
+    @PostMapping("comment")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Comment writeComment(@RequestBody @Valid ContentsCommentRequest request) {
+        return commentService.created(request);
+    }
+
 }

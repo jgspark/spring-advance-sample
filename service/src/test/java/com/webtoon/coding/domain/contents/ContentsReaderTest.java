@@ -77,5 +77,7 @@ class ContentsReaderTest {
             assertEquals(e.getMsgType(), MsgType.NoContentsData);
             assertEquals(e.getMsgType().getMessage(), MsgType.NoContentsData.getMessage());
         }
+
     }
+
 }

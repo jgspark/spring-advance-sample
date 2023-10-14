@@ -7,7 +7,8 @@ import org.springframework.data.domain.Page;
 
 public interface HistoryService {
 
-  Page<HistoryInfo> getHistories(PagingRequest dto);
+    Page<HistoryInfo> getHistories(PagingRequest dto);
 
-  Page<HistoryUser> getHistoriesByAdultUser(PagingRequest dto);
+    Page<HistoryUser> getHistoriesByAdultUser(PagingRequest dto);
+
 }

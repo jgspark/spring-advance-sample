@@ -16,22 +16,24 @@ import java.util.Date;
 @EntityListeners(AuditingEntityListener.class)
 public class User {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-  // 유저이름
-  private String userName;
+    // 유저이름
+    private String userName;
 
-  // 유저메일
-  private String userEmail;
+    // 유저메일
+    private String userEmail;
 
-  // 성별타입
-  private Gender gender;
+    // 성별타입
+    private Gender gender;
 
-  // 성인유무 (유형)
-  private Adult type;
+    // 성인유무 (유형)
+    private Adult type;
 
-  // 서비스 등록일
-  @CreatedDate private Date registerDate;
+    // 서비스 등록일
+    @CreatedDate
+    private Date registerDate;
+
 }

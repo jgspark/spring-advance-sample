@@ -13,14 +13,16 @@ public final class DateUtil {
 
     public static Date plus(Date date, int plusNum) {
 
-        if (plusNum < 1) throw new DateUtilException(MsgType.PlusNumberException);
+        if (plusNum < 1)
+            throw new DateUtilException(MsgType.PlusNumberException);
 
         return getTime(date, plusNum);
     }
 
     public static Date minus(Date date, int minusNum) {
 
-        if (minusNum > -1) throw new DateUtilException(MsgType.MinusNumberException);
+        if (minusNum > -1)
+            throw new DateUtilException(MsgType.MinusNumberException);
 
         return getTime(date, minusNum);
     }
@@ -31,4 +33,5 @@ public final class DateUtil {
         calendar.add(Calendar.DATE, number);
         return calendar.getTime();
     }
+
 }

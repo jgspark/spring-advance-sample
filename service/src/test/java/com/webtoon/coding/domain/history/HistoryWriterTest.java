@@ -57,5 +57,7 @@ class HistoryWriterTest {
             assertEquals(entity.getContents(), mock.getContents());
             assertEquals(entity.getCreatedDate(), mock.getCreatedDate());
         }
+
     }
+
 }

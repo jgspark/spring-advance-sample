@@ -38,4 +38,5 @@ public class CommentVerifier implements Verifier<Comment> {
 
         return pattern2.matcher(comment).find();
     }
+
 }

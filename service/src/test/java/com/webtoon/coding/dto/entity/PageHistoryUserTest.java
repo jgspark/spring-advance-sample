@@ -21,18 +21,13 @@ class PageHistoryUserTest {
 
         long count = 3L;
 
-        PageHistoryUser entity = PageHistoryUser.of(
-                PageRequest.of(0, 10),
-                now,
-                now,
-                adult,
-                count
-        );
+        PageHistoryUser entity = PageHistoryUser.of(PageRequest.of(0, 10), now, now, adult, count);
 
-        assertEquals(pagerequest , entity.getPageable());
-        assertEquals(now , entity.getStartDate());
-        assertEquals(now , entity.getEndDate());
-        assertEquals(adult , entity.getAdult());
-        assertEquals(count , entity.getCount());
+        assertEquals(pagerequest, entity.getPageable());
+        assertEquals(now, entity.getStartDate());
+        assertEquals(now, entity.getEndDate());
+        assertEquals(adult, entity.getAdult());
+        assertEquals(count, entity.getCount());
     }
+
 }

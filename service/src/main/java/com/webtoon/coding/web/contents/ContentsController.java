@@ -27,16 +27,18 @@ public class ContentsController {
     @GetMapping("top-contents")
     public ResponseEntity<List<TopContents>> getTopContents(@Valid @NotNull Evaluation type) {
         List<TopContents> data = contentsService.getTopContents(type);
-        return data.isEmpty() ? ResponseEntity.status(HttpStatus.NO_CONTENT).build() : ResponseEntity.status(HttpStatus.OK).body(data);
+        return data.isEmpty() ? ResponseEntity.status(HttpStatus.NO_CONTENT).build()
+                : ResponseEntity.status(HttpStatus.OK).body(data);
     }
 
     @PatchMapping("contents/{id}")
-    public ResponseEntity<Contents> patchContents(
-            @PathVariable Long id, @RequestBody @Valid UpdatedContentsRequest request) {
+    public ResponseEntity<Contents> patchContents(@PathVariable Long id,
+            @RequestBody @Valid UpdatedContentsRequest request) {
 
         Optional<Contents> data = contentsService.updatedTypeAndCoin(id, request);
 
-        return data.map(contents -> ResponseEntity.ok().body(contents)).orElseGet(() -> ResponseEntity.status(HttpStatus.ACCEPTED).build());
+        return data.map(contents -> ResponseEntity.ok().body(contents))
+            .orElseGet(() -> ResponseEntity.status(HttpStatus.ACCEPTED).build());
     }
 
     @GetMapping("contents")
@@ -50,4 +52,5 @@ public class ContentsController {
         Optional<ContentsInfo> data = contentsService.getContentsOne(id);
         return data.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.status(HttpStatus.NO_CONTENT).build());
     }
+
 }

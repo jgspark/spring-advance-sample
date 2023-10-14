@@ -13,5 +13,7 @@ import java.util.Date;
 @EntityListeners(AuditingEntityListener.class)
 public abstract class AbstractBaseDate {
 
-  @CreatedDate private Date createdDate;
+    @CreatedDate
+    private Date createdDate;
+
 }

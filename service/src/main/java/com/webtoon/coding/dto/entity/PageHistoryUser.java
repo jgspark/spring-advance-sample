@@ -13,12 +13,17 @@ import java.util.Date;
 public class PageHistoryUser {
 
     private Pageable pageable;
+
     private Date startDate;
+
     private Date endDate;
+
     private Adult adult;
+
     private Long count;
 
     public static PageHistoryUser of(Pageable pageable, Date startDate, Date endDate, Adult adult, Long count) {
         return new PageHistoryUser(pageable, startDate, endDate, adult, count);
     }
+
 }

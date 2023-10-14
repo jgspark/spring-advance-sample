@@ -13,7 +13,7 @@ import java.util.Date;
 @Builder
 @DynamicUpdate
 @AllArgsConstructor
-@EqualsAndHashCode(of = {"id"})
+@EqualsAndHashCode(of = { "id" })
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Contents {
 
@@ -44,7 +44,8 @@ public class Contents {
 
         if (Policy.FREE.equals(policyCoin.getType())) {
             freeType();
-        } else {
+        }
+        else {
             pagarType(policyCoin.getCoin());
         }
 

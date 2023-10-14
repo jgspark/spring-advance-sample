@@ -17,4 +17,5 @@ public class CommentWriter implements Writer<Comment> {
     public Comment save(Comment comment) {
         return commentRepository.save(comment);
     }
+
 }

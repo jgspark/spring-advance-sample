@@ -13,16 +13,16 @@ import java.util.Date;
 @NoArgsConstructor
 public class HistoryUser {
 
-  private Long id;
+    private Long id;
 
-  private String userName;
+    private String userName;
 
-  private String userEmail;
+    private String userEmail;
 
-  private Gender gender;
+    private Gender gender;
 
-  private Adult type;
+    private Adult type;
 
-  private Date registerDate;
+    private Date registerDate;
 
 }

@@ -64,12 +64,8 @@ class CommentTest {
         @ArgumentsSource(CommentVerifySuccessArgs.class)
         public void testWriteSuccess(String stringArgs) {
 
-            Comment comment = Comment.of(
-                    stringArgs,
-                    Evaluation.GOOD,
-                    User.builder().build(),
-                    Contents.builder().build()
-            );
+            Comment comment = Comment.of(stringArgs, Evaluation.GOOD, User.builder().build(),
+                    Contents.builder().build());
 
             doNothing().when(verifier).verify(any());
 
@@ -83,16 +79,10 @@ class CommentTest {
         @ArgumentsSource(CommentVerifyFailCommentArgs.class)
         public void testWriteFailByCommentArgs(String stringArgs) {
 
-            Comment comment = Comment.of(
-                    stringArgs,
-                    Evaluation.GOOD,
-                    User.builder().build(),
-                    Contents.builder().build()
-            );
+            Comment comment = Comment.of(stringArgs, Evaluation.GOOD, User.builder().build(),
+                    Contents.builder().build());
 
-            doThrow(new DomainException(MsgType.CommentDataException))
-                    .when(verifier)
-                    .verify(any());
+            doThrow(new DomainException(MsgType.CommentDataException)).when(verifier).verify(any());
 
             DomainException e = assertThrows(DomainException.class, () -> comment.write(verifier));
 
@@ -102,22 +92,14 @@ class CommentTest {
             assertEquals(e.getMessage(), MsgType.CommentDataException.getMessage());
         }
 
-
         @DisplayName("실패를 한다.")
         @ParameterizedTest(name = "평가는 {0} 이다.")
         @ArgumentsSource(CommentVerifyFailTypeArgs.class)
         public void testWriteFailByTypeArgs(Evaluation type) {
 
-            Comment comment = Comment.of(
-                    "test",
-                    type,
-                    User.builder().build(),
-                    Contents.builder().build()
-            );
+            Comment comment = Comment.of("test", type, User.builder().build(), Contents.builder().build());
 
-            doThrow(new DomainException(MsgType.EvaluationDataException))
-                    .when(verifier)
-                    .verify(any());
+            doThrow(new DomainException(MsgType.EvaluationDataException)).when(verifier).verify(any());
 
             DomainException e = assertThrows(DomainException.class, () -> comment.write(verifier));
 
@@ -126,6 +108,7 @@ class CommentTest {
             assertEquals(e.getMsgType(), MsgType.EvaluationDataException);
             assertEquals(e.getMessage(), MsgType.EvaluationDataException.getMessage());
         }
+
     }
 
 }

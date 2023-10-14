@@ -18,16 +18,17 @@ public class UserMock {
 
     public static User createdMock() {
         return User.builder()
-                .id(DEFAULT_ID)
-                .userName(DEFAULT_USERNAME)
-                .userEmail(DEFAULT_USEREMAIL)
-                .gender(DEFAULT_GENDER)
-                .type(DEFAULT_TYPE)
-                .registerDate(DateMock.getMockDate())
-                .build();
+            .id(DEFAULT_ID)
+            .userName(DEFAULT_USERNAME)
+            .userEmail(DEFAULT_USEREMAIL)
+            .gender(DEFAULT_GENDER)
+            .type(DEFAULT_TYPE)
+            .registerDate(DateMock.getMockDate())
+            .build();
     }
 
     public static User emptyOf() {
         return User.builder().build();
     }
+
 }

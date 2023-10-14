@@ -16,4 +16,5 @@ public class PolicyCoin {
     public static PolicyCoin of(Policy type, String coin) {
         return new PolicyCoin(type, coin);
     }
+
 }

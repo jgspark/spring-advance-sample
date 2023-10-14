@@ -44,6 +44,7 @@ class DateUtilTest {
             assertEquals(e.getMsgType(), MsgType.PlusNumberException);
             assertEquals(e.getMessage(), MsgType.PlusNumberException.getMessage());
         }
+
     }
 
     @Nested
@@ -81,8 +82,10 @@ class DateUtilTest {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         try {
             return formatter.parse(dateStr);
-        } catch (ParseException e) {
+        }
+        catch (ParseException e) {
             throw new RuntimeException(e);
         }
     }
+
 }

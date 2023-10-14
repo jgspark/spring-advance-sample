@@ -24,7 +24,6 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
 
-
 @ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.LENIENT)
 class HistoryServiceTest {
@@ -43,11 +42,9 @@ class HistoryServiceTest {
     @DisplayName("작품별 조회 이력 api")
     void getHistories() {
 
-        Page<HistoryInfo> mocks =
-                HistoryMock.createdPageList(UserMock.createdMock(), ContentsMock.createdMock());
+        Page<HistoryInfo> mocks = HistoryMock.createdPageList(UserMock.createdMock(), ContentsMock.createdMock());
 
-        when(historyCustomReader.getAll(any(), eq(HistoryInfo.class)))
-                .thenReturn(mocks);
+        when(historyCustomReader.getAll(any(), eq(HistoryInfo.class))).thenReturn(mocks);
 
         PagingRequest dto = new PagingRequest(0, 10);
 
@@ -55,15 +52,15 @@ class HistoryServiceTest {
 
         verify(historyCustomReader, times(1)).getAll(any(), eq(HistoryInfo.class));
 
-        assertArrayEquals(mocks.getContent().toArray(new HistoryInfo[0]), entities.getContent().toArray(new HistoryInfo[0]));
+        assertArrayEquals(mocks.getContent().toArray(new HistoryInfo[0]),
+                entities.getContent().toArray(new HistoryInfo[0]));
     }
 
     @Test
     @DisplayName("최근 1주일 등록된 사용자 중 성인 조회 api 테스트 케이스")
     void getHistoriesByAdultUser() {
 
-        Page<HistoryUser> mocks =
-                HistoryMock.createPageHistoryUser(UserMock.createdMock(), ContentsMock.createdMock());
+        Page<HistoryUser> mocks = HistoryMock.createPageHistoryUser(UserMock.createdMock(), ContentsMock.createdMock());
 
         when(historyCustomReader.getHistories(any())).thenReturn(mocks);
 
@@ -71,9 +68,10 @@ class HistoryServiceTest {
 
         Page<HistoryUser> entities = historyService.getHistoriesByAdultUser(dto);
 
-        verify(historyCustomReader, times(1))
-                .getHistories(any());
+        verify(historyCustomReader, times(1)).getHistories(any());
 
-        assertArrayEquals(mocks.getContent().toArray(new HistoryUser[0]), entities.getContent().toArray(new HistoryUser[0]));
+        assertArrayEquals(mocks.getContent().toArray(new HistoryUser[0]),
+                entities.getContent().toArray(new HistoryUser[0]));
     }
+
 }

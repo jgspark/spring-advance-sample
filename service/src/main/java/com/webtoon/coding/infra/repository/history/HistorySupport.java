@@ -9,5 +9,7 @@ import java.util.Date;
 
 public interface HistorySupport {
 
-    Page<HistoryUser> findByCreatedDateBetweenAndContents_AdultType(Pageable pageable, Date startDate, Date endDate, Adult adult, Long count);
+    Page<HistoryUser> findByCreatedDateBetweenAndContents_AdultType(Pageable pageable, Date startDate, Date endDate,
+            Adult adult, Long count);
+
 }

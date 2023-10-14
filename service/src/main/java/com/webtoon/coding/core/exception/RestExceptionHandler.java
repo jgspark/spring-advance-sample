@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.net.BindException;
 
-
 @Slf4j
 @RestControllerAdvice
 public class RestExceptionHandler {
@@ -44,4 +43,5 @@ public class RestExceptionHandler {
         log.error(e.getMessage(), e.getCause(), e);
         return ErrorResponse.of(msgType.getCode(), msgType.getMessage());
     }
+
 }

@@ -16,7 +16,6 @@ import static com.webtoon.coding.domain.contents.QContents.contents;
 import static com.webtoon.coding.domain.history.QHistory.history;
 import static com.webtoon.coding.domain.user.QUser.user;
 
-
 public class HistorySupportImpl extends QuerydslRepositorySupport implements HistorySupport {
 
     private final JPAQueryFactory jpaQueryFactory;
@@ -27,39 +26,25 @@ public class HistorySupportImpl extends QuerydslRepositorySupport implements His
     }
 
     @Override
-    public Page<HistoryUser> findByCreatedDateBetweenAndContents_AdultType(
-            Pageable pageable,
-            Date startDate,
-            Date endDate,
-            Adult adult,
-            Long count
-    ) {
+    public Page<HistoryUser> findByCreatedDateBetweenAndContents_AdultType(Pageable pageable, Date startDate,
+            Date endDate, Adult adult, Long count) {
 
-        var query =
-                jpaQueryFactory
-                        .select(
-                                Projections.fields(
-                                        HistoryUser.class,
-                                        user.id,
-                                        user.userName,
-                                        user.userEmail,
-                                        user.gender,
-                                        user.type,
-                                        user.registerDate))
-                        .from(history)
-                        .where(
-                                user.registerDate.between(startDate, endDate).and(contents.adult.eq(adult)))
-                        .join(history.user, user)
-                        .join(history.contents, contents)
-                        .groupBy(
-                                user.id, user.userName, user.userEmail, user.gender, user.type, user.registerDate)
-                        .having(contents.id.count().goe(count))
-                        .offset(pageable.getOffset())
-                        .limit(pageable.getPageSize())
-                        .fetchResults();
+        var query = jpaQueryFactory
+            .select(Projections.fields(HistoryUser.class, user.id, user.userName, user.userEmail, user.gender,
+                    user.type, user.registerDate))
+            .from(history)
+            .where(user.registerDate.between(startDate, endDate).and(contents.adult.eq(adult)))
+            .join(history.user, user)
+            .join(history.contents, contents)
+            .groupBy(user.id, user.userName, user.userEmail, user.gender, user.type, user.registerDate)
+            .having(contents.id.count().goe(count))
+            .offset(pageable.getOffset())
+            .limit(pageable.getPageSize())
+            .fetchResults();
 
         var total = query.getTotal();
         var results = query.getResults();
         return new PageImpl<>(results, pageable, total);
     }
+
 }

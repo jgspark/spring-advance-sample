@@ -31,6 +31,8 @@ public class HistoryServiceImpl implements HistoryService {
     public Page<HistoryUser> getHistoriesByAdultUser(PagingRequest dto) {
         Date startDate = DateUtil.minus(new Date(), -7);
         Date endDate = DateUtil.plus(new Date(), 1);
-        return historyCustomReader.getHistories(PageHistoryUser.of(dto.getPageRequest(), startDate, endDate, Adult.ADULT, 3L));
+        return historyCustomReader
+            .getHistories(PageHistoryUser.of(dto.getPageRequest(), startDate, endDate, Adult.ADULT, 3L));
     }
+
 }

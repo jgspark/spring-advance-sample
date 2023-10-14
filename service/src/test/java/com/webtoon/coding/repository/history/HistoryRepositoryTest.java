@@ -75,6 +75,7 @@ class HistoryRepositoryTest {
             assertEquals(entity.getContents(), mock.getContents());
             assertNotNull(entity.getCreatedDate());
         }
+
     }
 
     @Nested
@@ -85,15 +86,9 @@ class HistoryRepositoryTest {
         @BeforeEach
         public void init() {
 
-            mocks =
-                    historyRepository.saveAll(
-                            List.of(
-                                    HistoryMock.createdMock(user, contents),
-                                    HistoryMock.createdMock(user, contents),
-                                    HistoryMock.createdMock(user, contents),
-                                    HistoryMock.createdMock(user, contents),
-                                    HistoryMock.createdMock(user, contents)
-                            ));
+            mocks = historyRepository.saveAll(List.of(HistoryMock.createdMock(user, contents),
+                    HistoryMock.createdMock(user, contents), HistoryMock.createdMock(user, contents),
+                    HistoryMock.createdMock(user, contents), HistoryMock.createdMock(user, contents)));
 
             historyRepository.flush();
         }
@@ -106,23 +101,17 @@ class HistoryRepositoryTest {
 
             PageRequest pageable = PageRequest.of(0, 10);
 
-            Page<HistoryInfo> entities =
-                    historyRepository.findAllProjectedBy(pageable, HistoryInfo.class);
+            Page<HistoryInfo> entities = historyRepository.findAllProjectedBy(pageable, HistoryInfo.class);
 
             List<HistoryInfo> entitiesContent = entities.getContent();
 
-            entitiesContent.forEach(
-                    entity -> {
-                        History mock =
-                                mocks.stream()
-                                        .filter(m -> m.getId().equals(entity.getId()))
-                                        .findFirst()
-                                        .orElseThrow();
+            entitiesContent.forEach(entity -> {
+                History mock = mocks.stream().filter(m -> m.getId().equals(entity.getId())).findFirst().orElseThrow();
 
-                        assertEquals(entity.getUserName(), mock.getUser().getUserName());
-                        assertEquals(entity.getContentsName(), mock.getContents().getName());
-                        assertEquals(entity.getContentsType(), mock.getContents().getType());
-                    });
+                assertEquals(entity.getUserName(), mock.getUser().getUserName());
+                assertEquals(entity.getContentsName(), mock.getContents().getName());
+                assertEquals(entity.getContentsType(), mock.getContents().getType());
+            });
         }
 
     }
@@ -135,14 +124,9 @@ class HistoryRepositoryTest {
         @BeforeEach
         public void init() {
 
-            mocks =
-                    historyRepository.saveAll(
-                            List.of(
-                                    HistoryMock.createdMock(user, contents),
-                                    HistoryMock.createdMock(user, contents),
-                                    HistoryMock.createdMock(user, contents),
-                                    HistoryMock.createdMock(user, contents),
-                                    HistoryMock.createdMock(user, contents)));
+            mocks = historyRepository.saveAll(List.of(HistoryMock.createdMock(user, contents),
+                    HistoryMock.createdMock(user, contents), HistoryMock.createdMock(user, contents),
+                    HistoryMock.createdMock(user, contents), HistoryMock.createdMock(user, contents)));
 
             historyRepository.flush();
         }
@@ -159,36 +143,29 @@ class HistoryRepositoryTest {
 
             PageRequest pageable = PageRequest.of(0, 10);
 
-            Page<HistoryUser> entities =
-                    historyRepository.findByCreatedDateBetweenAndContents_AdultType(
-                            pageable, startDate, endDate, Adult.ADULT, 3L);
+            Page<HistoryUser> entities = historyRepository.findByCreatedDateBetweenAndContents_AdultType(pageable,
+                    startDate, endDate, Adult.ADULT, 3L);
 
             entities.getContent()
-                    .stream()
-                    .filter(f ->
-                            mocks.stream()
-                                    .filter(m -> m.getId().equals(entity.getId()))
-                                    .isParallel()
-                    )
-                    .forEach(
-                            entity -> {
+                .stream()
+                .filter(f -> mocks.stream().filter(m -> m.getId().equals(entity.getId())).isParallel())
+                .forEach(entity -> {
 
-                                History mock =
-                                        mocks.stream()
-                                                .filter(m -> m.getId().equals(entity.getId()))
-                                                .findFirst()
-                                                .orElseThrow();
+                    History mock = mocks.stream()
+                        .filter(m -> m.getId().equals(entity.getId()))
+                        .findFirst()
+                        .orElseThrow();
 
-
-                                assertEquals(entity.getUserName(), mock.getUser().getUserName());
-                                assertEquals(entity.getUserEmail(), mock.getUser().getUserEmail());
-                                assertEquals(entity.getType(), mock.getContents().getAdult());
-                                assertEquals(entity.getGender(), mock.getUser().getGender());
-                                assertEquals(DateMock.changedFormatDate(entity.getRegisterDate()), DateMock.changedFormatDate(mock.getUser().getRegisterDate()));
-                            });
-
+                    assertEquals(entity.getUserName(), mock.getUser().getUserName());
+                    assertEquals(entity.getUserEmail(), mock.getUser().getUserEmail());
+                    assertEquals(entity.getType(), mock.getContents().getAdult());
+                    assertEquals(entity.getGender(), mock.getUser().getGender());
+                    assertEquals(DateMock.changedFormatDate(entity.getRegisterDate()),
+                            DateMock.changedFormatDate(mock.getUser().getRegisterDate()));
+                });
 
         }
+
     }
 
     @Nested
@@ -207,6 +184,7 @@ class HistoryRepositoryTest {
             historyRepository.deleteByUser_Id(user.getId());
             historyRepository.flush();
         }
-    }
-}
 
+    }
+
+}

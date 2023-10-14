@@ -4,7 +4,6 @@ import com.webtoon.coding.domain.contents.Policy;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 
-
 @Getter
 public class PageContentsRequest extends PagingRequest {
 
@@ -15,4 +14,5 @@ public class PageContentsRequest extends PagingRequest {
         super(page, size);
         this.type = type;
     }
+
 }

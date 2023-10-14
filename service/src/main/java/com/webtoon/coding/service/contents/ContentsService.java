@@ -13,11 +13,12 @@ import java.util.Optional;
 
 public interface ContentsService {
 
-  List<TopContents> getTopContents(Evaluation type);
+    List<TopContents> getTopContents(Evaluation type);
 
-  Optional<Contents> updatedTypeAndCoin(Long id, UpdatedContentsRequest dto);
+    Optional<Contents> updatedTypeAndCoin(Long id, UpdatedContentsRequest dto);
 
-  Page<ContentsInfo> getContents(PageContentsRequest dto);
+    Page<ContentsInfo> getContents(PageContentsRequest dto);
 
-  Optional<ContentsInfo> getContentsOne(Long id);
+    Optional<ContentsInfo> getContentsOne(Long id);
+
 }

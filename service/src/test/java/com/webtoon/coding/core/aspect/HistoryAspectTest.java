@@ -56,7 +56,7 @@ class HistoryAspectTest {
         when(contentsReader.get(any())).thenReturn(contents);
 
         ProceedingJoinPoint pjp = mock(ProceedingJoinPoint.class);
-        Object[] args = new Object[]{1L};
+        Object[] args = new Object[] { 1L };
 
         when(pjp.getArgs()).thenReturn(args);
 

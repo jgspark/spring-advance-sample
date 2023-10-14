@@ -6,15 +6,16 @@ import java.util.Date;
 
 public interface ContentsInfo {
 
-  Long getId();
+    Long getId();
 
-  String getName();
+    String getName();
 
-  String getAuthor();
+    String getAuthor();
 
-  Policy getType();
+    Policy getType();
 
-  String getCoin();
+    String getCoin();
 
-  Date getOpenDate();
+    Date getOpenDate();
+
 }

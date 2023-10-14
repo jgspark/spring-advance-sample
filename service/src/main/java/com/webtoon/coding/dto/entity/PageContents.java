@@ -17,4 +17,5 @@ public class PageContents {
     public static PageContents of(Policy type, PageRequest pageRequest) {
         return new PageContents(type, pageRequest);
     }
+
 }

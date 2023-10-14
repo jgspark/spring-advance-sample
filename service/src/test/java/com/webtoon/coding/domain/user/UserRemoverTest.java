@@ -42,11 +42,7 @@ class UserRemoverTest {
 
     @BeforeEach
     public void init() {
-        this.userRemover = new UserRemover(
-                userRepository,
-                commentRepository,
-                historyRepository
-        );
+        this.userRemover = new UserRemover(userRepository, commentRepository, historyRepository);
     }
 
     @Test
@@ -97,7 +93,6 @@ class UserRemoverTest {
         assertEquals(e.getMsgType(), MsgType.NoUserData);
         assertEquals(e.getMsgType().getMessage(), MsgType.NoUserData.getMessage());
     }
-
 
     @Test
     public void testRemoveByCommentsEmpty() {
@@ -158,4 +153,5 @@ class UserRemoverTest {
 
         verify(userRepository, times(1)).delete(any());
     }
+
 }

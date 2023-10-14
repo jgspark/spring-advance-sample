@@ -38,4 +38,5 @@ public class HistoryInfoTemp implements HistoryInfo {
     public Date getCreatedDate() {
         return history.getCreatedDate();
     }
+
 }

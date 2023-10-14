@@ -45,21 +45,24 @@ class ContentsControllerTest extends BaseTestController {
 
         when(contentsService.getTopContents(any())).thenReturn(mocks);
 
-        ResultActions action = mockMvc.perform(MockMvcRequestBuilders.get("/top-contents").param("type", Evaluation.GOOD.name())
-                        .contentType(MediaType.APPLICATION_JSON).characterEncoding("UTF-8"))
-                .andDo(print());
+        ResultActions action = mockMvc
+            .perform(MockMvcRequestBuilders.get("/top-contents")
+                .param("type", Evaluation.GOOD.name())
+                .contentType(MediaType.APPLICATION_JSON)
+                .characterEncoding("UTF-8"))
+            .andDo(print());
 
         verify(contentsService, times(1)).getTopContents(any());
 
         action.andExpect(status().isOk())
-                .andExpect(jsonPath("$[0]['id']").value(mocks.get(0).getId()))
-                .andExpect(jsonPath("$[0]['name']").value(mocks.get(0).getName()))
-                .andExpect(jsonPath("$[0]['author']").value(mocks.get(0).getAuthor()))
-                .andExpect(jsonPath("$[0]['type']").value(mocks.get(0).getType().name()))
-                .andExpect(jsonPath("$[0]['coin']").value(mocks.get(0).getCoin()))
-                // fixme : 고칠것
-//                    .andExpect(jsonPath("$[0]['openDate']").value(mocks.get(0).getOpenDate()))
-                .andExpect(jsonPath("$[0]['sum']").value(mocks.get(0).getSum()));
+            .andExpect(jsonPath("$[0]['id']").value(mocks.get(0).getId()))
+            .andExpect(jsonPath("$[0]['name']").value(mocks.get(0).getName()))
+            .andExpect(jsonPath("$[0]['author']").value(mocks.get(0).getAuthor()))
+            .andExpect(jsonPath("$[0]['type']").value(mocks.get(0).getType().name()))
+            .andExpect(jsonPath("$[0]['coin']").value(mocks.get(0).getCoin()))
+            // fixme : 고칠것
+            // .andExpect(jsonPath("$[0]['openDate']").value(mocks.get(0).getOpenDate()))
+            .andExpect(jsonPath("$[0]['sum']").value(mocks.get(0).getSum()));
     }
 
     @Test
@@ -88,25 +91,26 @@ class ContentsControllerTest extends BaseTestController {
 
         when(contentsService.updatedTypeAndCoin(any(), any())).thenReturn(mockOptional);
 
-        ResultActions action = mockMvc.perform(MockMvcRequestBuilders.patch("/contents/" + 1)
+        ResultActions action = mockMvc
+            .perform(MockMvcRequestBuilders.patch("/contents/" + 1)
                 .content(JsonUtil.convertObjectToJson(dto))
                 .contentType(MediaType.APPLICATION_JSON)
-                .characterEncoding("UTF-8")).andDo(print());
+                .characterEncoding("UTF-8"))
+            .andDo(print());
 
-        verify(contentsService, times(1))
-                .updatedTypeAndCoin(any(), any());
+        verify(contentsService, times(1)).updatedTypeAndCoin(any(), any());
 
         Contents mock = mockOptional.get();
 
         action.andExpect(status().isOk())
-                .andExpect(jsonPath("$['id']").value(mock.getId()))
-                .andExpect(jsonPath("$['name']").value(mock.getName()))
-                .andExpect(jsonPath("$['author']").value(mock.getAuthor()))
-                .andExpect(jsonPath("$['type']").value(mock.getType().name()))
-                .andExpect(jsonPath("$['adult']").value(mock.getAdult().name()))
-                .andExpect(jsonPath("$['coin']").value(mock.getCoin()));
+            .andExpect(jsonPath("$['id']").value(mock.getId()))
+            .andExpect(jsonPath("$['name']").value(mock.getName()))
+            .andExpect(jsonPath("$['author']").value(mock.getAuthor()))
+            .andExpect(jsonPath("$['type']").value(mock.getType().name()))
+            .andExpect(jsonPath("$['adult']").value(mock.getAdult().name()))
+            .andExpect(jsonPath("$['coin']").value(mock.getCoin()));
         // FIXME : 고칠것
-//                    .andExpect(jsonPath("$['openDate']").value(mock.getOpenDate()));
+        // .andExpect(jsonPath("$['openDate']").value(mock.getOpenDate()));
 
     }
 
@@ -118,9 +122,12 @@ class ContentsControllerTest extends BaseTestController {
 
         when(contentsService.updatedTypeAndCoin(any(), any())).thenReturn(Optional.empty());
 
-        ResultActions action = mockMvc.perform(MockMvcRequestBuilders.patch("/contents/" + 1)
-                        .content(JsonUtil.convertObjectToJson(dto)).contentType(MediaType.APPLICATION_JSON).characterEncoding("UTF-8"))
-                .andDo(print());
+        ResultActions action = mockMvc
+            .perform(MockMvcRequestBuilders.patch("/contents/" + 1)
+                .content(JsonUtil.convertObjectToJson(dto))
+                .contentType(MediaType.APPLICATION_JSON)
+                .characterEncoding("UTF-8"))
+            .andDo(print());
 
         verify(contentsService, times(1)).updatedTypeAndCoin(any(), any());
 
@@ -137,24 +144,25 @@ class ContentsControllerTest extends BaseTestController {
 
         when(contentsService.getContents(any())).thenReturn(mocks);
 
-        ResultActions action = mockMvc.perform(MockMvcRequestBuilders.get("/contents")
-                        .param("type", dto.getType().name())
-                        .param("page", dto.getPage().toString())
-                        .param("size", dto.getSize().toString())
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .characterEncoding("UTF-8"))
-                .andDo(print());
+        ResultActions action = mockMvc
+            .perform(MockMvcRequestBuilders.get("/contents")
+                .param("type", dto.getType().name())
+                .param("page", dto.getPage().toString())
+                .param("size", dto.getSize().toString())
+                .contentType(MediaType.APPLICATION_JSON)
+                .characterEncoding("UTF-8"))
+            .andDo(print());
 
         verify(contentsService, times(1)).getContents(any());
 
         action.andExpect(status().isOk())
-                .andExpect(jsonPath("$['content'][0]['id']").value(mocks.getContent().get(0).getId()))
-                .andExpect(jsonPath("$['content'][0]['name']").value(mocks.getContent().get(0).getName()))
-                .andExpect(jsonPath("$['content'][0]['type']").value(mocks.getContent().get(0).getType().name()))
-                // fixme : 고칠것
-//                .andExpect(jsonPath("$['content'][0]['openDate']").value(mocks.getContent().get(0).getOpenDate()))
-                .andExpect(jsonPath("$['content'][0]['author']").value(mocks.getContent().get(0).getAuthor()))
-                .andExpect(jsonPath("$['content'][0]['coin']").value(mocks.getContent().get(0).getCoin()));
+            .andExpect(jsonPath("$['content'][0]['id']").value(mocks.getContent().get(0).getId()))
+            .andExpect(jsonPath("$['content'][0]['name']").value(mocks.getContent().get(0).getName()))
+            .andExpect(jsonPath("$['content'][0]['type']").value(mocks.getContent().get(0).getType().name()))
+            // fixme : 고칠것
+            // .andExpect(jsonPath("$['content'][0]['openDate']").value(mocks.getContent().get(0).getOpenDate()))
+            .andExpect(jsonPath("$['content'][0]['author']").value(mocks.getContent().get(0).getAuthor()))
+            .andExpect(jsonPath("$['content'][0]['coin']").value(mocks.getContent().get(0).getCoin()));
 
     }
 
@@ -166,13 +174,14 @@ class ContentsControllerTest extends BaseTestController {
 
         when(contentsService.getContents(any())).thenReturn(Page.empty());
 
-        ResultActions action = mockMvc.perform(MockMvcRequestBuilders.get("/contents")
-                        .param("type", dto.getType().name())
-                        .param("page", dto.getPage().toString())
-                        .param("size", dto.getSize().toString())
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .characterEncoding("UTF-8"))
-                .andDo(print());
+        ResultActions action = mockMvc
+            .perform(MockMvcRequestBuilders.get("/contents")
+                .param("type", dto.getType().name())
+                .param("page", dto.getPage().toString())
+                .param("size", dto.getSize().toString())
+                .contentType(MediaType.APPLICATION_JSON)
+                .characterEncoding("UTF-8"))
+            .andDo(print());
 
         verify(contentsService, times(1)).getContents(any());
 
@@ -187,23 +196,23 @@ class ContentsControllerTest extends BaseTestController {
 
         when(contentsService.getContentsOne(any())).thenReturn(mockOptional);
 
-        ResultActions action = mockMvc.perform(MockMvcRequestBuilders.get("/contents/" + 1)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .characterEncoding("UTF-8"))
-                .andDo(print());
-
+        ResultActions action = mockMvc
+            .perform(MockMvcRequestBuilders.get("/contents/" + 1)
+                .contentType(MediaType.APPLICATION_JSON)
+                .characterEncoding("UTF-8"))
+            .andDo(print());
 
         verify(contentsService, times(1)).getContentsOne(any());
 
         ContentsInfo mock = mockOptional.get();
 
         action.andExpect(status().isOk())
-                .andExpect(jsonPath("$['id']").value(mock.getId()))
-                .andExpect(jsonPath("$['name']").value(mock.getName()))
-                .andExpect(jsonPath("$['author']").value(mock.getAuthor()))
-                .andExpect(jsonPath("$['type']").value(mock.getType().name()));
+            .andExpect(jsonPath("$['id']").value(mock.getId()))
+            .andExpect(jsonPath("$['name']").value(mock.getName()))
+            .andExpect(jsonPath("$['author']").value(mock.getAuthor()))
+            .andExpect(jsonPath("$['type']").value(mock.getType().name()));
         // fixme : 고칠것
-//                    .andExpect(jsonPath("$['openDate']").value(mock.getOpenDate()));
+        // .andExpect(jsonPath("$['openDate']").value(mock.getOpenDate()));
     }
 
     @Test
@@ -214,11 +223,11 @@ class ContentsControllerTest extends BaseTestController {
 
         when(contentsService.getContentsOne(any())).thenReturn(Optional.empty());
 
-        ResultActions action = mockMvc.perform(MockMvcRequestBuilders.get("/contents/" + 1)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .characterEncoding("UTF-8"))
-                .andDo(print());
-
+        ResultActions action = mockMvc
+            .perform(MockMvcRequestBuilders.get("/contents/" + 1)
+                .contentType(MediaType.APPLICATION_JSON)
+                .characterEncoding("UTF-8"))
+            .andDo(print());
 
         verify(contentsService, times(1)).getContentsOne(any());
 
@@ -226,4 +235,5 @@ class ContentsControllerTest extends BaseTestController {
 
         action.andExpect(status().is2xxSuccessful());
     }
+
 }

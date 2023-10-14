@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@EqualsAndHashCode(of = {"id"}, callSuper = true)
+@EqualsAndHashCode(of = { "id" }, callSuper = true)
 public class History extends AbstractBaseDate {
 
     @Id
@@ -35,4 +35,5 @@ public class History extends AbstractBaseDate {
         this.user = user;
         this.contents = contents;
     }
+
 }
